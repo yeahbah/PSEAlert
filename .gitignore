@@ -1,0 +1,8 @@
+Common/YeahbahLib/__history/
+Common/__history/
+*.dcu
+Projects/Vcl/__history/
+Projects/Vcl/Win32/
+View/Vcl/__history/
+*.dll
+*.exe
