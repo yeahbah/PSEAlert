@@ -1,0 +1,65 @@
+object frmAlert: TfrmAlert
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu]
+  BorderStyle = ToolWindow
+  ClientHeight = 104
+  ClientWidth = 263
+  Position = Designed
+  FormStyle = StayOnTop
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop, iPhone, iPad]
+  OnClose = FormClose
+  DesignerMobile = False
+  DesignerWidth = 0
+  DesignerHeight = 0
+  DesignerDeviceName = ''
+  DesignerOrientation = 0
+  DesignerOSVersion = ''
+  object lblStockSymbol: TLabel
+    StyledSettings = [Family, Size, FontColor]
+    Height = 17.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 8.000000000000000000
+    TextSettings.Font.Style = [fsBold]
+    Text = 'Alert Triggered for %s!'
+    Width = 225.000000000000000000
+  end
+  object lblPriceTrigger: TLabel
+    AutoSize = True
+    Height = 16.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 32.000000000000000000
+    TextSettings.WordWrap = False
+    Text = 'lblPriceTrigger'
+    Width = 78.000000000000000000
+  end
+  object lblVolumeTrigger: TLabel
+    AutoSize = True
+    Height = 16.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 48.000000000000000000
+    TextSettings.WordWrap = False
+    Text = 'lblVolumeTrigger'
+    Width = 93.000000000000000000
+  end
+  object Button1: TButton
+    Height = 22.000000000000000000
+    Position.X = 56.000000000000000000
+    Position.Y = 72.000000000000000000
+    TabOrder = 4
+    Text = 'Dismiss'
+    Width = 80.000000000000000000
+    OnClick = Button1Click
+  end
+  object Button2: TButton
+    Height = 22.000000000000000000
+    Position.X = 144.000000000000000000
+    Position.Y = 72.000000000000000000
+    TabOrder = 5
+    Text = 'Ok'
+    Width = 80.000000000000000000
+    OnClick = Button2Click
+  end
+end

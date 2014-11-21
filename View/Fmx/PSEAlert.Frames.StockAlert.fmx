@@ -1,0 +1,91 @@
+object frameStockAlert: TframeStockAlert
+  Height = 64.000000000000000000
+  Padding.Left = 2.000000000000000000
+  Padding.Top = 2.000000000000000000
+  Padding.Right = 2.000000000000000000
+  Padding.Bottom = 2.000000000000000000
+  Width = 320.000000000000000000
+  TabOrder = 0
+  object Panel1: TPanel
+    Align = Client
+    Height = 60.000000000000000000
+    Width = 316.000000000000000000
+    TabOrder = 0
+    object btnAlertTriggered: TSpeedButton
+      Anchors = [akTop, akRight]
+      Height = 25.000000000000000000
+      Position.X = 240.000000000000000000
+      Position.Y = 5.000000000000000000
+      Width = 30.000000000000000000
+    end
+    object btnDelete: TSpeedButton
+      Anchors = [akTop, akRight]
+      Height = 25.000000000000000000
+      Padding.Left = 2.000000000000000000
+      Padding.Top = 2.000000000000000000
+      Padding.Right = 2.000000000000000000
+      Padding.Bottom = 2.000000000000000000
+      Position.X = 284.000000000000000000
+      Position.Y = 5.000000000000000000
+      Width = 25.000000000000000000
+      object Label1: TLabel
+        Align = Client
+        Height = 21.000000000000000000
+        TextSettings.HorzAlign = Center
+        Text = 'x'
+        Width = 21.000000000000000000
+      end
+    end
+    object lblAlertSymbol: TLabel
+      AutoSize = True
+      Height = 16.000000000000000000
+      Position.X = 8.000000000000000000
+      Position.Y = 5.000000000000000000
+      TextSettings.WordWrap = False
+      Text = 'lblAlertSymbol'
+      Width = 78.000000000000000000
+    end
+    object lblAlertDetails: TLabel
+      AutoSize = True
+      Height = 16.000000000000000000
+      Position.X = 8.000000000000000000
+      Position.Y = 21.000000000000000000
+      TextSettings.WordWrap = False
+      Text = 'lblAlertDetails'
+      Width = 75.000000000000000000
+    end
+    object lblVolumeAlert: TLabel
+      AutoSize = True
+      Height = 16.000000000000000000
+      Position.X = 8.000000000000000000
+      Position.Y = 37.000000000000000000
+      TextSettings.WordWrap = False
+      Text = 'lblVolumeAlert'
+      Width = 80.000000000000000000
+    end
+    object btnNotes: TSpeedButton
+      Anchors = [akTop, akRight]
+      Height = 25.000000000000000000
+      Position.X = 265.000000000000000000
+      Position.Y = 5.000000000000000000
+      Width = 25.000000000000000000
+      OnClick = btnNotesClick
+      object Label2: TLabel
+        Align = Client
+        Anchors = [akTop, akRight, akBottom]
+        Height = 25.000000000000000000
+        TextSettings.HorzAlign = Center
+        Text = 'n'
+        Width = 25.000000000000000000
+      end
+    end
+    object lblNote: TLabel
+      Height = 41.000000000000000000
+      Position.X = 8.000000000000000000
+      Position.Y = 59.000000000000000000
+      TextSettings.VertAlign = Leading
+      Text = 'lblNote'
+      Width = 305.000000000000000000
+    end
+  end
+end

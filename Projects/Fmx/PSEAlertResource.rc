@@ -1,0 +1,5 @@
+Refresh_Bmp RCDATA "..\\PSEAlertVcl\\Resources\\refresh.bmp"
+stock_down RCDATA "..\\PSEAlertVcl\\Resources\\stock_index_down.png"
+stock_up RCDATA "..\\PSEAlertVcl\\Resources\\stock_index_up.png"
+bell_alert RCDATA "..\\PSEAlertVcl\\Resources\\bell_error.png"
+notes RCDATA "..\\PSEAlertVcl\\Resources\\note.png"

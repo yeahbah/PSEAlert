@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2014/07/01 14:19:04.000.485,C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Unit1.dfm=C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Frames\PSEAlert.Frames.StockPrice.dfm</Transaction>
+    <Transaction>2014/07/01 16:32:03.000.144,C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Unit1.dfm=C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Frames\PSEAlert.Frames.StockAlert.dfm</Transaction>
+    <Transaction>2014/07/02 10:13:40.000.367,C:\qa\yeahbah\trunk\Delphi\Common\Common.ExceptionDialog.dfm=C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Unit2.dfm</Transaction>
+    <Transaction>2014/07/03 10:10:13.000.713,C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\PSEAlert.DataModule.dfm=C:\qa\yeahbah\trunk\Delphi\PSEStocks2\PSEStocks.DataModule.dfm</Transaction>
+    <Transaction>2014/07/03 10:10:49.000.952,C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Data\PSEAlert.Data.Downloader.pas=C:\qa\yeahbah\trunk\Delphi\PSEStocks2\PSEStocks.DownloadTask.pas</Transaction>
+    <Transaction>2014/07/03 11:33:48.000.193,C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Frames\PSEAlert.Frames.WatchList.dfm=C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Unit1.dfm</Transaction>
+    <Transaction>2014/07/07 13:20:16.000.683,C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Unit1.dfm=C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Frames\PSEAlert.Frames.Settings.dfm</Transaction>
+    <Transaction>2014/07/07 15:16:55.000.958,C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Unit1.dfm=C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Frames\PSEAlert.Frames.StockAlertEntry.dfm</Transaction>
+    <Transaction>2014/11/14 12:22:49.000.431,C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Frames\PSEAlert.Frames.Movers.dfm=C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Unit1.dfm</Transaction>
+    <Transaction>2014/11/21 11:04:40.316,=C:\qa\PSEAlert\View\Vcl\PSEAlert.Frames.Movers.pas</Transaction>
+    <Transaction>2014/11/21 11:04:40.394,=C:\qa\PSEAlert\View\Vcl\PSEAlert.Frames.Settings.pas</Transaction>
+    <Transaction>2014/11/21 11:04:41.068,=C:\qa\PSEAlert\View\Vcl\PSEAlert.Frames.StockAlert.pas</Transaction>
+    <Transaction>2014/11/21 11:04:41.135,=C:\qa\PSEAlert\View\Vcl\PSEAlert.Frames.StockAlertEntry.pas</Transaction>
+    <Transaction>2014/11/21 11:04:41.204,=C:\qa\PSEAlert\View\Vcl\PSEAlert.Frames.StockPrice.pas</Transaction>
+    <Transaction>2014/11/21 11:04:59.332,=C:\qa\PSEAlert\Data\PSE.Data.Downloader.pas</Transaction>
+    <Transaction>2014/11/21 11:04:59.363,=C:\qa\PSEAlert\Data\PSE.Data.Model.pas</Transaction>
+    <Transaction>2014/11/21 11:04:59.391,=C:\qa\PSEAlert\Data\PSE.Data.pas</Transaction>
+    <Transaction>2014/11/21 11:04:59.404,=C:\qa\PSEAlert\Data\PSE.Data.Repository.pas</Transaction>
+    <Transaction>2014/11/21 11:05:13.322,=C:\qa\PSEAlert\Controller\PSEAlert.Controller.MainForm.pas</Transaction>
+    <Transaction>2014/11/21 11:05:13.357,=C:\qa\PSEAlert\Controller\PSEAlert.Controller.Settings.pas</Transaction>
+    <Transaction>2014/11/21 11:05:13.374,=C:\qa\PSEAlert\Controller\PSEAlert.Controller.StockAlert.pas</Transaction>
+    <Transaction>2014/11/21 11:05:13.403,=C:\qa\PSEAlert\Controller\PSEAlert.Controller.StockAlertEntry.pas</Transaction>
+    <Transaction>2014/11/21 11:05:13.418,=C:\qa\PSEAlert\Controller\PSEAlert.Controller.StockPrice.pas</Transaction>
+    <Transaction>2014/11/21 11:05:40.868,=C:\qa\PSEAlert\Common\Common.ExceptionDialog.pas</Transaction>
+    <Transaction>2014/11/21 11:05:50.854,=C:\qa\PSEAlert\Common\YeahbahLib\Yeahbah.GenericQuery.pas</Transaction>
+    <Transaction>2014/11/21 11:05:50.881,=C:\qa\PSEAlert\Common\YeahbahLib\Yeahbah.GenericQueryTypes.pas</Transaction>
+    <Transaction>2014/11/21 11:05:50.905,=C:\qa\PSEAlert\Common\YeahbahLib\Yeahbah.Messaging.pas</Transaction>
+    <Transaction>2014/11/21 11:05:50.919,=C:\qa\PSEAlert\Common\YeahbahLib\Yeahbah.ObjectClone.pas</Transaction>
+    <Transaction>2014/11/21 11:07:34.319,C:\qa\PSEAlert\View\Vcl\PSEAlert.AlertForm.dfm=C:\qa\PSEAlert\Projects\Vcl\PSEAlert.AlertForm.dfm</Transaction>
+    <Transaction>2014/11/21 11:07:34.319,C:\qa\PSEAlert\View\Vcl\PSEAlert.AlertForm.pas=C:\qa\PSEAlert\Projects\Vcl\PSEAlert.AlertForm.pas</Transaction>
+    <Transaction>2014/11/21 11:08:05.740,C:\qa\PSEAlert\View\Vcl\PSEAlert.MainForm.pas=C:\qa\PSEAlert\Projects\Vcl\PSEAlert.MainForm.pas</Transaction>
+    <Transaction>2014/11/21 11:08:05.740,C:\qa\PSEAlert\View\Vcl\PSEAlert.MainForm.dfm=C:\qa\PSEAlert\Projects\Vcl\PSEAlert.MainForm.dfm</Transaction>
+    <Transaction>2014/11/21 11:10:48.733,=C:\qa\PSEAlert\View\Vcl\Common.ExceptionDialog.pas</Transaction>
+    <Transaction>2014/11/21 11:11:15.999,C:\qa\PSEAlert\View\Vcl\PSEAlert.View.ExceptionDialog.dfm=C:\qa\PSEAlert\View\Vcl\Common.ExceptionDialog.dfm</Transaction>
+    <Transaction>2014/11/21 11:11:15.999,C:\qa\PSEAlert\View\Vcl\PSEAlert.View.ExceptionDialog.pas=C:\qa\PSEAlert\View\Vcl\Common.ExceptionDialog.pas</Transaction>
+    <Transaction>2014/11/21 11:11:47.922,C:\qa\PSEAlert\Projects\Vcl\PSEAlert.AlertFormManager.pas=</Transaction>
+    <Transaction>2014/11/21 11:11:47.936,C:\qa\PSEAlert\Projects\Vcl\PSEAlert.Messages.pas=</Transaction>
+    <Transaction>2014/11/21 11:11:47.948,C:\qa\PSEAlert\Projects\Vcl\PSEAlert.Settings.pas=</Transaction>
+    <Transaction>2014/11/21 11:11:47.955,C:\qa\PSEAlert\Projects\Vcl\PSEAlert.Utils.pas=</Transaction>
+    <Transaction>2014/11/21 11:12:11.315,=C:\qa\PSEAlert\Common\PSEAlert.Messages.pas</Transaction>
+    <Transaction>2014/11/21 11:12:11.328,=C:\qa\PSEAlert\Common\PSEAlert.Settings.pas</Transaction>
+    <Transaction>2014/11/21 11:12:11.342,=C:\qa\PSEAlert\Common\PSEAlert.Utils.pas</Transaction>
+  </Transactions>
+</BorlandProject>

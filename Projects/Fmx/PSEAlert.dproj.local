@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2014/07/07 22:01:30.000.048,=C:\Users\Arnold\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2014/07/07 22:02:54.000.776,C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\PSEAlert.FMX.MainForm.fmx=C:\Users\Arnold\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
+    <Transaction>2014/07/07 22:02:54.000.776,C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\PSEAlert.FMX.MainForm.pas=C:\Users\Arnold\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2014/07/07 22:03:04.000.540,C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\PSEAlert.dproj=C:\Users\Arnold\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2014/07/07 22:18:36.000.496,=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Unit1.pas</Transaction>
+    <Transaction>2014/07/07 22:19:24.000.831,C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\PSEAlert.DataModule.dfm=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Unit1.dfm</Transaction>
+    <Transaction>2014/07/07 22:19:24.000.831,C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\PSEAlert.DataModule.pas=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Unit1.pas</Transaction>
+    <Transaction>2014/07/07 22:25:19.000.085,=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertVcl\Controllers\PSEAlert.Controller.MainForm.pas</Transaction>
+    <Transaction>2014/07/07 22:26:58.000.931,=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\YeahbahLib\Yeahbah.Messaging.pas</Transaction>
+    <Transaction>2014/07/07 22:28:44.000.586,=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertVcl\PSEAlert.Settings.pas</Transaction>
+    <Transaction>2014/07/07 22:28:52.000.869,=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertVcl\Data\PSE.Data.Model.pas</Transaction>
+    <Transaction>2014/07/07 22:29:07.000.719,=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertVcl\Data\PSE.Data.Downloader.pas</Transaction>
+    <Transaction>2014/07/07 22:31:57.000.976,=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertVcl\Controllers\PSEAlert.Controller.Settings.pas</Transaction>
+    <Transaction>2014/07/07 22:31:59.000.751,=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertVcl\Controllers\PSEAlert.Controller.StockAlert.pas</Transaction>
+    <Transaction>2014/07/07 22:32:00.000.802,=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertVcl\Controllers\PSEAlert.Controller.StockAlertEntry.pas</Transaction>
+    <Transaction>2014/07/07 22:32:01.000.547,=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertVcl\Controllers\PSEAlert.Controller.StockPrice.pas</Transaction>
+    <Transaction>2014/07/07 22:32:21.000.464,=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Unit1.pas</Transaction>
+    <Transaction>2014/07/07 22:32:51.000.669,C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Frames\PSEAlert.Frames.Settings.fmx=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Unit1.fmx</Transaction>
+    <Transaction>2014/07/07 22:32:51.000.669,C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Frames\PSEAlert.Frames.Settings.pas=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Unit1.pas</Transaction>
+    <Transaction>2014/07/07 22:33:05.000.202,=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Unit2.pas</Transaction>
+    <Transaction>2014/07/07 22:33:22.000.246,C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Frames\PSEAlert.Frames.StockAlert.fmx=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Unit2.fmx</Transaction>
+    <Transaction>2014/07/07 22:33:22.000.246,C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Frames\PSEAlert.Frames.StockAlert.pas=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Unit2.pas</Transaction>
+    <Transaction>2014/07/07 22:33:30.000.260,=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Unit3.pas</Transaction>
+    <Transaction>2014/07/07 22:33:48.000.934,C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Frames\PSEAlert.Frames.StockAlertEntry.fmx=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Unit3.fmx</Transaction>
+    <Transaction>2014/07/07 22:33:48.000.934,C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Frames\PSEAlert.Frames.StockAlertEntry.pas=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Unit3.pas</Transaction>
+    <Transaction>2014/07/07 22:33:58.000.603,=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Unit4.pas</Transaction>
+    <Transaction>2014/07/07 22:34:11.000.376,C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Frames\PSEAlert.Frames.StockPrice.pas=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Unit4.pas</Transaction>
+    <Transaction>2014/07/07 22:34:11.000.376,C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Frames\PSEAlert.Frames.StockPrice.fmx=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Unit4.fmx</Transaction>
+    <Transaction>2014/07/07 22:34:29.000.749,=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\YeahbahLib\Yeahbah.ObjectClone.pas</Transaction>
+    <Transaction>2014/07/07 22:37:15.000.982,=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertVcl\PSEAlert.Utils.pas</Transaction>
+    <Transaction>2014/07/07 22:37:28.000.024,=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertVcl\PSEAlert.Messages.pas</Transaction>
+    <Transaction>2014/07/08 10:55:31.000.985,=C:\qa\yeahbah\trunk\Delphi\YeahbahLib\Yeahbah.GenericQueryTypes.pas</Transaction>
+    <Transaction>2014/07/08 10:55:31.000.971,=C:\qa\yeahbah\trunk\Delphi\YeahbahLib\Yeahbah.GenericQuery.pas</Transaction>
+    <Transaction>2014/07/08 10:55:50.000.602,=C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Data\PSE.Data.pas</Transaction>
+    <Transaction>2014/07/08 14:31:54.000.792,C:\qa\yeahbah\trunk\Delphi\PSEAlertFMX\PSEAlert.DataModule.pas=</Transaction>
+    <Transaction>2014/07/08 14:32:04.000.006,=C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\PSEAlert.DataModule.pas</Transaction>
+    <Transaction>2014/07/09 09:52:46.000.680,=C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Controllers\PSEAlert.Controller.MainForm.pas</Transaction>
+    <Transaction>2014/07/09 10:54:25.000.599,=C:\Users\arnolddiaz\Downloads\refresh (1).bmp</Transaction>
+    <Transaction>2014/07/09 10:55:13.000.548,C:\Users\arnolddiaz\Downloads\refresh (1).bmp=</Transaction>
+    <Transaction>2014/07/09 10:55:53.000.772,=C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Resources\refresh.bmp</Transaction>
+    <Transaction>2014/07/09 12:15:18.000.954,=C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Resources\stock_index_down.png</Transaction>
+    <Transaction>2014/07/09 12:15:18.000.974,=C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Resources\stock_index_up.png</Transaction>
+    <Transaction>2014/07/09 12:27:16.000.683,=C:\qa\yeahbah\trunk\Delphi\PSEAlertFMX\Unit1.pas</Transaction>
+    <Transaction>2014/07/09 12:27:29.000.291,C:\qa\yeahbah\trunk\Delphi\PSEAlertFMX\Unit1.pas=C:\qa\yeahbah\trunk\Delphi\PSEAlertFMX\PSEAlert.FMX.AlertForm.pas</Transaction>
+    <Transaction>2014/07/09 12:27:29.000.291,C:\qa\yeahbah\trunk\Delphi\PSEAlertFMX\Unit1.fmx=C:\qa\yeahbah\trunk\Delphi\PSEAlertFMX\PSEAlert.FMX.AlertForm.fmx</Transaction>
+    <Transaction>2014/07/09 12:32:05.000.685,=C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\PSEAlert.AlertFormManager.pas</Transaction>
+    <Transaction>2014/07/09 12:47:45.000.147,=C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Resources\bell_error.png</Transaction>
+    <Transaction>2014/07/09 15:57:35.000.576,=C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Resources\note.png</Transaction>
+    <Transaction>2014/07/09 19:32:14.000.532,=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Unit1.pas</Transaction>
+    <Transaction>2014/07/09 19:32:27.000.942,C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\PSEAlert.FMX.AlertForm.fmx=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Unit1.fmx</Transaction>
+    <Transaction>2014/07/09 19:32:27.000.942,C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\PSEAlert.FMX.AlertForm.pas=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Unit1.pas</Transaction>
+    <Transaction>2014/07/10 20:10:43.000.050,C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Views\PSEAlert.FMX.View.MainForm.fmx=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\PSEAlert.FMX.MainForm.fmx</Transaction>
+    <Transaction>2014/07/10 20:10:43.000.050,C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\Views\PSEAlert.FMX.View.MainForm.pas=C:\Users\Arnold\Documents\Projects\YeahbahProjects\trunk\Delphi\PSEAlertFMX\PSEAlert.FMX.MainForm.pas</Transaction>
+    <Transaction>2014/07/25 12:13:06.000.035,=C:\qa\yeahbah\trunk\Delphi\PSEAlertFMX\PSEAlert.FMX.MainForm.pas</Transaction>
+    <Transaction>2014/07/25 12:53:45.000.157,C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Controllers\PSEAlert.Controller.MainForm.pas=</Transaction>
+    <Transaction>2014/07/25 12:53:56.000.629,C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Controllers\PSEAlert.Controller.StockPrice.pas=</Transaction>
+    <Transaction>2014/07/25 14:24:37.487,C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Controllers\PSEAlert.Controller.StockAlert.pas=</Transaction>
+    <Transaction>2014/07/25 14:24:40.357,C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Controllers\PSEAlert.Controller.StockAlertEntry.pas=</Transaction>
+    <Transaction>2014/07/25 14:31:55.366,C:\qa\yeahbah\trunk\Delphi\PSEAlertVcl\Controllers\PSEAlert.Controller.Settings.pas=</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -1,0 +1,74 @@
+object frameStockPrice: TframeStockPrice
+  Height = 45.000000000000000000
+  Padding.Left = 2.000000000000000000
+  Padding.Top = 2.000000000000000000
+  Padding.Right = 2.000000000000000000
+  Padding.Bottom = 2.000000000000000000
+  Width = 320.000000000000000000
+  TabOrder = 0
+  object Panel1: TPanel
+    Align = Client
+    Height = 41.000000000000000000
+    Width = 316.000000000000000000
+    TabOrder = 0
+    object lblStockPrice: TLabel
+      Anchors = [akTop, akRight]
+      Height = 16.000000000000000000
+      Position.X = 176.000000000000000000
+      Position.Y = 3.000000000000000000
+      TextSettings.HorzAlign = Trailing
+      TextSettings.WordWrap = False
+      Text = 'lblStockSymbol'
+      Width = 113.000000000000000000
+    end
+    object lblStockVolume: TLabel
+      Anchors = [akTop, akRight]
+      Height = 16.000000000000000000
+      Position.X = 176.000000000000000000
+      Position.Y = 19.000000000000000000
+      TextSettings.HorzAlign = Trailing
+      TextSettings.WordWrap = False
+      Text = 'lblStockSymbol'
+      Width = 114.000000000000000000
+    end
+    object lblStockName: TLabel
+      AutoSize = True
+      Height = 16.000000000000000000
+      Position.X = 30.000000000000000000
+      Position.Y = 19.000000000000000000
+      TextSettings.WordWrap = False
+      Text = 'lblStockSymbol'
+      Width = 82.000000000000000000
+    end
+    object lblStockSymbol: TLabel
+      AutoSize = True
+      Height = 16.000000000000000000
+      Position.X = 30.000000000000000000
+      Position.Y = 3.000000000000000000
+      TextSettings.WordWrap = False
+      Text = 'lblStockSymbol'
+      Width = 82.000000000000000000
+    end
+    object btnClose: TSpeedButton
+      Anchors = [akTop, akRight]
+      Height = 22.000000000000000000
+      Position.X = 293.000000000000000000
+      Position.Y = 2.000000000000000000
+      Width = 22.000000000000000000
+      object Label1: TLabel
+        Align = Client
+        Anchors = [akTop, akRight]
+        Height = 22.000000000000000000
+        TextSettings.HorzAlign = Center
+        Text = 'x'
+        Width = 22.000000000000000000
+      end
+    end
+    object btnAlert: TSpeedButton
+      Height = 22.000000000000000000
+      Position.X = 293.000000000000000000
+      Position.Y = 19.000000000000000000
+      Width = 22.000000000000000000
+    end
+  end
+end
