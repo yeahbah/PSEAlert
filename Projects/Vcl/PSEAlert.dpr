@@ -8,7 +8,6 @@ uses
   Vcl.Themes,
   Vcl.Styles,
   PSEAlert.AlertForm in '..\..\View\Vcl\PSEAlert.AlertForm.pas' {frmAlert},
-  PSEAlert.Frames.Movers in '..\..\View\Vcl\PSEAlert.Frames.Movers.pas' {frameMovers: TFrame},
   PSEAlert.Frames.Settings in '..\..\View\Vcl\PSEAlert.Frames.Settings.pas' {frameSettings: TFrame},
   PSEAlert.Frames.StockAlert in '..\..\View\Vcl\PSEAlert.Frames.StockAlert.pas' {frameStockAlert: TFrame},
   PSEAlert.Frames.StockAlertEntry in '..\..\View\Vcl\PSEAlert.Frames.StockAlertEntry.pas' {frameStockAlertEntry: TFrame},
@@ -29,7 +28,8 @@ uses
   PSEAlert.View.ExceptionDialog in '..\..\View\Vcl\PSEAlert.View.ExceptionDialog.pas' {frmException},
   PSEAlert.Messages in '..\..\Common\PSEAlert.Messages.pas',
   PSEAlert.Settings in '..\..\Common\PSEAlert.Settings.pas',
-  PSEAlert.Utils in '..\..\Common\PSEAlert.Utils.pas';
+  PSEAlert.Utils in '..\..\Common\PSEAlert.Utils.pas',
+  PSEAlert.AlertFormManager in 'PSEAlert.AlertFormManager.pas';
 
 {$R *.res}
 

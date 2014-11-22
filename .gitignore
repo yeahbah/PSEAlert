@@ -6,3 +6,5 @@ Projects/Vcl/Win32/
 View/Vcl/__history/
 *.dll
 *.exe
+*.local
+*.identcache
