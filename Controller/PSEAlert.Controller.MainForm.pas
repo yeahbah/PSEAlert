@@ -97,6 +97,7 @@ uses {$IFDEF FMXAPP}PSEAlert.FMX.MainForm{$ELSE}PSEAlert.MainForm{$ENDIF},
   PSEAlert.Controller.StockPrice, PSE.Data.Downloader, PSEAlert.Utils,
   Spring.Collections, PSE.Data,
   Spring.Persistence.Core.Interfaces,
+  Spring.Persistence.Criteria.Interfaces,
   Spring.Persistence.Criteria.Restrictions,
   Spring.Persistence.Criteria.Properties, PSE.Data.Repository;
 
@@ -144,8 +145,6 @@ begin
   if stock <> nil then
   begin
     stockRepository.MakeFavorite(aSymbol.ToUpper);
-    //PSEAlertDb.Session.Execute(
-    //  'UPDATE STOCKS SET ISFAVORITE = ''1'' WHERE SYMBOL = :SYMBOL', [QuotedStr(aSymbol.ToUpper)]);
 {$IFDEF FMXAPP}
     if scrollMyStocks.FindComponent(aSymbol.ToUpper) = nil then
 {$ELSE}
@@ -156,19 +155,6 @@ begin
   else
     MessageDlg('Unable to find ' + aSymbol.ToUpper, TMsgDlgType.mtError, [TMsgDlgBtn.mbOk], 0);
 
-//  //PSEStocksData.sqlStocks.Open;
-//  if PSEStocksData.sqlStocks.Locate('SYMBOL', aSymbol.ToUpper, [loCaseInsensitive]) then
-//  begin
-//    PSEStocksData.PSEStocksConnection.ExecSQL('UPDATE STOCKS SET ISFAVORITE = ''1'' WHERE SYMBOL = ' + QuotedStr(aSymbol.ToUpper));
-//{$IFDEF FMXAPP}
-//    if scrollMyStocks.FindComponent(aSymbol.ToUpper) = nil then
-//{$ELSE}
-//    if scrollMyStocks.FindChildControl(aSymbol.ToUpper) = nil then
-//{$ENDIF}
-//      CreateStockPriceFrame(scrollMyStocks, aSymbol.ToUpper, PSEStocksData.sqlStocks.FieldByName('DESCRIPTION').AsString);
-//  end
-//  else
-//    MessageDlg('Unable to find ' + aSymbol.ToUpper, TMsgDlgType.mtError, [TMsgDlgBtn.mbOk], 0);
 end;
 
 procedure TMainFormController.CreateStockPriceFrame(
@@ -348,13 +334,15 @@ begin
 
   ReloadComboStockList(cmbAddStock);
 
-  stocks := PSEAlertDb.Session.GetList<TStockModel>('SELECT * FROM STOCKS WHERE ISFAVORITE = :0', [1]);
+  //stocks := PSEAlertDb.Session.GetList<TStockModel>('SELECT * FROM STOCKS WHERE ISFAVORITE = :0', [1]);
+  stocks := stockRepository.GetFavoriteStocks;
   for stock in stocks do
   begin
     CreateStockPriceFrame(scrollMyStocks, stock.Symbol, stock.description);
   end;
 
-  stocks := PSEAlertDb.Session.GetList<TStockModel>('SELECT * FROM STOCKS WHERE SYMBOL LIKE :0', ['^%']);
+  //stocks := PSEAlertDb.Session.GetList<TStockModel>('SELECT * FROM STOCKS WHERE SYMBOL LIKE :0', ['^%']);
+  stocks := stockRepository.GetAllStocks(true);
   for stock in stocks do
   begin
     CreateStockPriceFrame(scrollIndeces, stock.Symbol, stock.description);

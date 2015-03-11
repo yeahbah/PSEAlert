@@ -65,7 +65,7 @@ implementation
 uses
   PSEAlert.Utils, PSEAlert.Messages, OtlTask, OtlTaskControl,
   PSEAlert.Settings, IOUtils, MMSystem,
-  StrUtils, PSE.Data;
+  StrUtils, PSE.Data, PSE.Data.Repository;
 
 {$R PSEAlert.res PSEAlertResource.rc}
 
@@ -108,7 +108,8 @@ begin
     p.Parent.RemoveControl(p);
 {$ENDIF}
     stockSymbol := ReplaceStr(p.Name, 'alert', string.Empty).Trim;
-    PSEAlertDb.Session.Execute('DELETE FROM ALERTS WHERE SYMBOL = :0', [stockSymbol]);
+    //PSEAlertDb.Session.Execute('DELETE FROM ALERTS WHERE SYMBOL = :0', [stockSymbol]);
+    stockAlertRepository.DeleteStockAlert(stockSymbol);
     MessengerInstance.UnRegisterReceiver(Self);
     MessengerInstance.SendMessage(TDismissAlertMessage.Create(Model));
   finally
@@ -171,9 +172,13 @@ begin
     if alertModel.StockSymbol = Model.StockSymbol then
     begin
       //PSEStocksData.PSEStocksConnection.Close;
-      Model.AlertCount := alertModel.AlertCount + 1;
-      PSEAlertDb.Session.Execute('UPDATE ALERTS SET ALERT_COUNT = :0 WHERE SYMBOL = :1',
-        [alertModel.StockSymbol, Model.AlertCount.ToString]);
+      alertModel.AlertCount := alertModel.AlertCount + 1;
+      Model.AlertCount := alertModel.AlertCount;
+      stockAlertRepository.AcknowledgeAlert(alertModel);
+
+//      Model.AlertCount := alertModel.AlertCount + 1;
+//      PSEAlertDb.Session.Execute('UPDATE ALERTS SET ALERT_COUNT = :0 WHERE SYMBOL = :1',
+//        [alertModel.StockSymbol, Model.AlertCount.ToString]);
 //      PSEStocksData.PSEStocksConnection.ExecSQL('UPDATE ALERTS SET ALERT_COUNT = ' + Model.AlertCount.ToString +' WHERE SYMBOL = ' + QuotedStr(alertModel.StockSymbol));
     end;
   end

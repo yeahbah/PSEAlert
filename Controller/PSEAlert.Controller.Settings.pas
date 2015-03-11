@@ -17,6 +17,7 @@ uses
   , FMX.ActnList
   {$ENDIF},
   Spring.Persistence.Core.Interfaces,
+  Spring.Persistence.Criteria.Interfaces,
   Spring.Persistence.Criteria.Restrictions,
   Spring.Collections;
 

@@ -63,7 +63,7 @@ function CreateStockPriceController(aStockModel: TStockModel;
 implementation
 
 uses
-  PSEAlert.Utils, PSEAlert.Messages, PSE.Data;
+  PSEAlert.Utils, PSEAlert.Messages, PSE.Data, PSE.Data.Repository;
 
 {$R PSEAlert.res PSEAlertResource.rc}
 
@@ -112,7 +112,9 @@ begin
     p.Parent.RemoveControl(p);
 {$ENDIF}
     MessengerInstance.UnRegisterReceiver(self);
-    PSEAlertDb.Session.Execute('UPDATE STOCKS SET ISFAVORITE = null WHERE SYMBOL = :0', [p.Name]);
+    stockRepository.Unfavorite(p.Name);
+    //PSEAlertDb.Session.Execute('UPDATE STOCKS SET ISFAVORITE = null WHERE SYMBOL = :0', [p.Name]);
+
 //    PSEStocksData.PSEStocksConnection.ExecSQL('UPDATE STOCKS SET ISFAVORITE = null WHERE SYMBOL = ' + QuotedStr(p.Name));
   finally
     p.Free;
