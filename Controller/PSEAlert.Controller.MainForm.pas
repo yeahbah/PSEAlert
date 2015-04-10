@@ -220,13 +220,13 @@ var
   asc, desc: TDelegatedComparer<TFrame>;
   f: TFrame;
 begin
-  asc := TDelegatedComparer<TFrame>.Create(
+  desc := TDelegatedComparer<TFrame>.Create(
     function (const l, r: TFrame): integer
     begin
       result := CompareStr(r.Name, l.Name);
     end);
 
-  desc := TDelegatedComparer<TFrame>.Create(
+  asc := TDelegatedComparer<TFrame>.Create(
     function (const l, r: TFrame): integer
     begin
       result := CompareStr(l.Name, r.Name);
