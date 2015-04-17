@@ -15,7 +15,8 @@ type
     Bevel1: TBevel;
     btnDelete: TSpeedButton;
     btnAlertTriggered: TSpeedButton;
-    BalloonHint1: TBalloonHint;
+    Label1: TLabel;
+    lblNote: TLabel;
   private
     { Private declarations }
     actDelete: TAction;

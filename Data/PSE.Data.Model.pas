@@ -129,7 +129,8 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    property ID: Integer read FId;
+
+    property ID: Integer read FId write FId;
     [Column('SYMBOL', [cpNotNull])]
     property StockSymbol: string read fStock write SetStock;
     property CreatedDateTime: TDateTime read fCreatedDateTime write fCreatedDateTime;
@@ -138,14 +139,10 @@ type
     property Price: single read FPrice write SetPrice;
     [Column('PRICELEVEL')]
     property PriceTriggerType: TPriceTriggerType read FPriceTriggerType write SetPriceTriggerType;
-
     [Column('VOLUME')]
     property Volume: single read FVolume write SetVolume;
     [Column('VOL_CONJUNCT')]
     property Logic: TLogicType read FLogic write SetLogic;
-
-//    property PriceTrigger: TPriceTrigger read FPriceTrigger write SetPriceTrigger;
-//    property VolumeTrigger: TVolumeTrigger read FVolumeTrigger write SetVolumeTrigger;
     [Column('ALERT_COUNT')]
     property AlertCount: integer read FAlertCount write SetAlertCount;
     [Column('MAX_ALERT')]

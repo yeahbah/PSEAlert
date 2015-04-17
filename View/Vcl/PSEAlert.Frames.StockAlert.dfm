@@ -2,8 +2,7 @@ object frameStockAlert: TframeStockAlert
   Left = 0
   Top = 0
   Width = 338
-  Height = 64
-  CustomHint = BalloonHint1
+  Height = 80
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -15,22 +14,20 @@ object frameStockAlert: TframeStockAlert
   TabOrder = 0
   DesignSize = (
     338
-    64)
+    80)
   object Bevel1: TBevel
     Left = 3
     Top = 3
     Width = 332
-    Height = 58
-    CustomHint = BalloonHint1
+    Height = 74
     Anchors = [akLeft, akTop, akRight, akBottom]
-    ExplicitHeight = 53
+    ExplicitHeight = 90
   end
   object lblAlertSymbol: TLabel
     Left = 10
     Top = 0
     Width = 23
     Height = 28
-    CustomHint = BalloonHint1
     Caption = 'PX'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -44,7 +41,6 @@ object frameStockAlert: TframeStockAlert
     Top = 22
     Width = 219
     Height = 20
-    CustomHint = BalloonHint1
     Caption = 'Trigger alert when the price is %s'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -58,7 +54,6 @@ object frameStockAlert: TframeStockAlert
     Top = 39
     Width = 219
     Height = 20
-    CustomHint = BalloonHint1
     Caption = 'Trigger alert when the price is %s'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -72,7 +67,6 @@ object frameStockAlert: TframeStockAlert
     Top = 6
     Width = 16
     Height = 16
-    CustomHint = BalloonHint1
     Anchors = [akTop, akRight]
     Flat = True
     Glyph.Data = {
@@ -108,7 +102,6 @@ object frameStockAlert: TframeStockAlert
     Top = 6
     Width = 16
     Height = 16
-    CustomHint = BalloonHint1
     Anchors = [akTop, akRight]
     Flat = True
     Glyph.Data = {
@@ -140,9 +133,32 @@ object frameStockAlert: TframeStockAlert
       00000000000000001647601B3F512D6B8B73D6F76ACEF9000000}
     Visible = False
   end
-  object BalloonHint1: TBalloonHint
-    Delay = 0
-    Left = 208
-    Top = 8
+  object Label1: TLabel
+    Left = 10
+    Top = 56
+    Width = 40
+    Height = 20
+    AutoSize = False
+    Caption = 'Note:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+  end
+  object lblNote: TLabel
+    Left = 49
+    Top = 56
+    Width = 270
+    Height = 20
+    AutoSize = False
+    Caption = 'Note:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
   end
 end

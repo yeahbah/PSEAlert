@@ -188,7 +188,7 @@ begin
       c1: ICriteria<TStockModel>;
       //c2: ICriteria<TIntradayModel>;
       //intradayObj: TIntradayModel;
-      trans: IDBTransaction;
+      //trans: IDBTransaction;
       l: IList<TStockModel>;
     begin
       if stock = nil then

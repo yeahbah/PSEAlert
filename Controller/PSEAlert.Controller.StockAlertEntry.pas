@@ -56,7 +56,7 @@ type
     edMaxAlert: {$IFDEF FMXAPP}TSpinBox{$ELSE}TSpinEdit{$ENDIF};
 
     [Bind]
-    memNotes: TMemo;
+    edtNotes: TEdit;
 {$IFDEF FMXAPP}
     [Bind]
     actAddAlert: TAction;
@@ -87,10 +87,14 @@ function CreateStockAlertEntryController(aAlertModel: IList<TAlertModel>;
 implementation
 
 uses
-  PSEAlert.Frames.StockAlertEntry, Yeahbah.ObjectClone,
-  PSEAlert.Controller.StockAlert, PSEAlert.Messages, Yeahbah.Messaging,
+  PSEAlert.Frames.StockAlertEntry,
+  Yeahbah.ObjectClone,
+  PSEAlert.Controller.StockAlert,
+  PSEAlert.Messages,
+  Yeahbah.Messaging,
   PSE.Data,
-  Spring.Persistence.Core.Interfaces, PSE.Data.Repository;
+  Spring.Persistence.Core.Interfaces,
+  PSE.Data.Repository;
 
 function CreateStockAlertEntryController(aAlertModel: IList<TAlertModel>;
   aParent: {$IFDEF FMXAPP}TFMXObject{$ELSE}TWinControl{$ENDIF}): IController<TList<TAlertModel>>;
@@ -122,10 +126,8 @@ var
   alertModel: TAlertModel;
   controller: IController<TAlertModel>;
 begin
-
   alertModel := TObjectClone.From(aAlertModel);
-//  alertModel.PriceTrigger := TObjectClone.From(aAlertModel.PriceTrigger);
-//  alertModel.VolumeTrigger := TObjectClone.From(aAlertModel.VolumeTrigger);
+  //ShowMessage(alertModel.ID.ToString);
   controller := CreateStockAlertController(alertModel, scrollAlerts);
 end;
 
@@ -137,15 +139,15 @@ var
 begin
 {$IFDEF FMXAPP}
   selectedText := comboSymbol.Text.Trim.ToUpper;
-  if scrollAlerts.FindComponent('alert' + selectedText) <> nil then
+//  if scrollAlerts.FindComponent('alert' + selectedText) <> nil then
 {$ELSE}
   selectedText := comboSymbol.Text;
-  if scrollAlerts.FindChildControl('alert' + selectedText) <> nil then
+//  if scrollAlerts.FindChildControl('alert' + selectedText) <> nil then
 {$ENDIF}
-  begin
-    MessageDlg('Alert for stock '+ selectedText +' already exist.', TMsgDlgType.mtError, [TMsgDlgBtn.mbOk], 0);
-    Exit;
-  end;
+//  begin
+//    MessageDlg('Alert for stock '+ selectedText +' already exist.', TMsgDlgType.mtError, [TMsgDlgBtn.mbOk], 0);
+//    Exit;
+//  end;
 
   if selectedText = '' then
   begin
@@ -179,15 +181,11 @@ begin
     end;
 
     stockAlertModel.AlertCount := 0;
-    stockAlertModel.Notes := memNotes.Lines.Text;
-    CreateStockAlertRow(stockAlertModel);
-
-    //PSEStocksData.PSEStocksConnection.Close;
-    //trans := PSEAlertDb.Session.BeginTransaction;
+    stockAlertModel.Notes := edtNotes.Text;
 
     PSEAlertDb.Session.Save(stockAlertModel);
 
-    //trans.Commit;
+    CreateStockAlertRow(stockAlertModel);
 
   finally
     stockAlertModel.Free;
@@ -195,34 +193,6 @@ begin
 
   if edMaxAlert.Text = '' then
     edMaxAlert.Value := 10;
-
-//    PSEStocksData.fdInsertAlertCmd.ParamByName('SYMBOL').AsString := selectedText;
-//    PSEStocksData.fdInsertAlertCmd.ParamByName('PRICE').AsString := edPrice.Text;
-//    PSEStocksData.fdInsertAlertCmd.ParamByName('PRICELEVEL').AsInteger := cmbPriceLevel.ItemIndex;
-//
-//  {$IFDEF FMXAPP}
-//    if cmbLogic.ItemIndex > 0 then
-//    begin
-//      PSEStocksData.fdInsertAlertCmd.ParamByName('VOL_CONJUNCT').AsString := cmbLogic.Selected.Text;
-//      PSEStocksData.fdInsertAlertCmd.ParamByName('VOLUME').AsString := edVolume.Text;
-//    end;
-//  {$ELSE}
-//    PSEStocksData.fdInsertAlertCmd.ParamByName('VOL_CONJUNCT').AsString := cmbLogic.Text;
-//    PSEStocksData.fdInsertAlertCmd.ParamByName('VOLUME').AsString := edVolume.Text;
-//  {$ENDIF}
-//
-//    PSEStocksData.fdInsertAlertCmd.ParamByName('MAX_ALERT').AsString := edMaxAlert.Text;
-//    PSEStocksData.fdInsertAlertCmd.ParamByName('NOTES').AsString := memNotes.Lines.Text;
-//
-//    try
-//      PSEStocksData.fdInsertAlertCmd.Execute;
-//    except
-//      on e: Exception do
-//      begin
-//        MessageDlg(e.Message, TMsgDlgType.mtError, [TMsgDlgBtn.mbOk], 0);
-//        raise;
-//      end;
-//    end;
 
 
 {$IFDEF FMXAPP}
@@ -252,7 +222,7 @@ begin
   chkAddToMyStocks.Checked := false;
 {$ENDIF}
   edMaxAlert.Text := '10';
-  memNotes.Lines.Clear;
+  edtNotes.Text := '';
 end;
 
 procedure TStockAlertEntryController.Initialize;

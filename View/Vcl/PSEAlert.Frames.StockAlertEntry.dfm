@@ -234,20 +234,6 @@ object frameStockAlertEntry: TframeStockAlertEntry
     TabOrder = 6
     Value = 10
   end
-  object memNotes: TMemo
-    Left = 63
-    Top = 146
-    Width = 257
-    Height = 40
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -15
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-    ScrollBars = ssVertical
-    TabOrder = 7
-  end
   object btnAddAlert: TButton
     Left = 110
     Top = 199
@@ -260,7 +246,7 @@ object frameStockAlertEntry: TframeStockAlertEntry
     Font.Name = 'Segoe UI'
     Font.Style = []
     ParentFont = False
-    TabOrder = 8
+    TabOrder = 7
   end
   object btnReset: TButton
     Left = 186
@@ -274,7 +260,7 @@ object frameStockAlertEntry: TframeStockAlertEntry
     Font.Name = 'Segoe UI'
     Font.Style = []
     ParentFont = False
-    TabOrder = 9
+    TabOrder = 8
   end
   object scrollAlerts: TScrollBox
     Left = 3
@@ -282,6 +268,24 @@ object frameStockAlertEntry: TframeStockAlertEntry
     Width = 361
     Height = 190
     Anchors = [akLeft, akTop, akRight, akBottom]
+    TabOrder = 9
+  end
+  object edtNotes: TEdit
+    Left = 60
+    Top = 145
+    Width = 260
+    Height = 28
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    MaxLength = 35
+    ParentFont = False
     TabOrder = 10
   end
 end

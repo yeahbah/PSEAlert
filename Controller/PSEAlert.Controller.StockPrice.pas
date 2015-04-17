@@ -63,7 +63,7 @@ function CreateStockPriceController(aStockModel: TStockModel;
 implementation
 
 uses
-  PSEAlert.Utils, PSEAlert.Messages, PSE.Data, PSE.Data.Repository;
+  PSEAlert.Utils, PSEAlert.Messages, PSE.Data, PSE.Data.Repository, System.UITypes;
 
 {$R PSEAlert.res PSEAlertResource.rc}
 
@@ -132,6 +132,7 @@ begin
     btnClose.OnClick := DoCloseView
   else
     btnClose.Visible := false;
+  lblStockSymbol.Font.Style := [TFontStyle.fsBold];
   lblStockSymbol.Font.Size := 12;
   lblStockName.Font.Size := 9;
   lblStockPrice.Font.Size := 11;

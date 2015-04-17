@@ -20,12 +20,12 @@ type
     cmbLogic: TComboBox;
     Label5: TLabel;
     edMaxAlert: TSpinEdit;
-    memNotes: TMemo;
     Label6: TLabel;
     Bevel1: TBevel;
     btnAddAlert: TButton;
     btnReset: TButton;
     scrollAlerts: TScrollBox;
+    edtNotes: TEdit;
   private
     { Private declarations }
   public

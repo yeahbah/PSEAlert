@@ -22,7 +22,8 @@ type
   TStockAlertRepository = class(TSimpleRepository<TAlertModel, string>)
   public
     procedure AcknowledgeAlert(const aAlertModel: TAlertModel);
-    procedure DeleteStockAlert(const aStockSymbol: string);
+    procedure DeleteStockAlert(const aStockSymbol: string); overload;
+    procedure DeleteStockAlert(const aId: integer); overload;
   end;
 
 var
@@ -76,6 +77,11 @@ end;
 procedure TStockAlertRepository.DeleteStockAlert(const aStockSymbol: string);
 begin
   PSEAlertDb.Session.Execute('DELETE FROM ALERTS WHERE SYMBOL = :0', [aStockSymbol]);
+end;
+
+procedure TStockAlertRepository.DeleteStockAlert(const aId: integer);
+begin
+  PSEAlertDb.Session.Execute('DELETE FROM ALERTS WHERE ID = :0', [aId]);
 end;
 
 initialization

@@ -36,11 +36,11 @@ type
     [Bind('Notes', 'Text')]
     lblNote: TLabel;
 {$ELSE}
-//    [Bind]
-//    btnDelete: TSpeedButton;
-    [Bind('Notes', 'Hint')]
-    Bevel1: TBevel;
+    [Bind('Notes', 'Caption')]
+    lblNote: TLabel;
 {$ENDIF}
+    [Bind]
+    Label1: TLabel;
     [Bind('StockSymbol', {$IFDEF FMXAPP}'Text'{$ELSE}'Caption'{$ENDIF})]
     lblAlertSymbol: TLabel;
     [Bind('PriceTriggerDescription', {$IFDEF FMXAPP}'Text'{$ELSE}'Caption'{$ENDIF})]
@@ -80,7 +80,7 @@ begin
       frm := TframeStockAlert.Create(Application);
       frm.Parent := aParent;
       frm.Align := {$IFDEF FMXAPP}TAlignLayout.Top;{$ELSE}alTop{$ENDIF};
-      frm.Name := 'alert' + GenerateControlName(aAlertModel.StockSymbol);
+      frm.Name := 'alert' + GenerateControlName(aAlertModel.StockSymbol) + '_' + aAlertModel.ID.ToString;
       result := TStockAlertController.Create(aAlertModel, frm);
       frm.Visible := true;
     end);
@@ -107,9 +107,8 @@ begin
 {$ELSE}
     p.Parent.RemoveControl(p);
 {$ENDIF}
-    stockSymbol := ReplaceStr(p.Name, 'alert', string.Empty).Trim;
-    //PSEAlertDb.Session.Execute('DELETE FROM ALERTS WHERE SYMBOL = :0', [stockSymbol]);
-    stockAlertRepository.DeleteStockAlert(stockSymbol);
+    //stockSymbol := ReplaceStr(p.Name, 'alert', string.Empty).Trim;
+    stockAlertRepository.DeleteStockAlert(Model.ID);
     MessengerInstance.UnRegisterReceiver(Self);
     MessengerInstance.SendMessage(TDismissAlertMessage.Create(Model));
   finally
@@ -133,8 +132,12 @@ begin
   actDelete.OnExecute := DoCloseView;
 
   lblAlertSymbol.Font.Size := 12;
+  lblAlertSymbol.Font.Style := [TFontStyle.fsBold];
   lblAlertDetails.Font.Size := 9;
   lblVolumeAlert.Font.Size := 9;
+  lblNote.Font.Size := 9;
+  Label1.Font.Size := 9;
+
   btnAlertTriggered.Visible := Model.AlertCount > 0;
 
 {$IFDEF FMXAPP}
@@ -171,21 +174,15 @@ begin
     alertModel := (aMessage as TAcknoledgeAlertMessage).Data;
     if alertModel.StockSymbol = Model.StockSymbol then
     begin
-      //PSEStocksData.PSEStocksConnection.Close;
       alertModel.AlertCount := alertModel.AlertCount + 1;
       Model.AlertCount := alertModel.AlertCount;
       stockAlertRepository.AcknowledgeAlert(alertModel);
-
-//      Model.AlertCount := alertModel.AlertCount + 1;
-//      PSEAlertDb.Session.Execute('UPDATE ALERTS SET ALERT_COUNT = :0 WHERE SYMBOL = :1',
-//        [alertModel.StockSymbol, Model.AlertCount.ToString]);
-//      PSEStocksData.PSEStocksConnection.ExecSQL('UPDATE ALERTS SET ALERT_COUNT = ' + Model.AlertCount.ToString +' WHERE SYMBOL = ' + QuotedStr(alertModel.StockSymbol));
     end;
   end
   else
   if aMessage is TDismissAlertMessage then
   begin
-    if (aMessage as TDismissAlertMessage).Data.StockSymbol = Model.StockSymbol then
+    if (aMessage as TDismissAlertMessage).Data.ID = Model.ID then
     begin
       actDelete.Execute;
     end;

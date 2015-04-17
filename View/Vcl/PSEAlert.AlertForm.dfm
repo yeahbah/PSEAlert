@@ -3,7 +3,7 @@ object frmAlert: TfrmAlert
   Top = 0
   AlphaBlend = True
   BorderStyle = bsDialog
-  ClientHeight = 88
+  ClientHeight = 99
   ClientWidth = 205
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -45,7 +45,17 @@ object frmAlert: TfrmAlert
   end
   object lblVolumeTrigger: TLabel
     Left = 6
-    Top = 42
+    Top = 40
+    Width = 74
+    Height = 12
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Caption = 'lblVolumeTrigger'
+  end
+  object lblNote: TLabel
+    Left = 6
+    Top = 55
     Width = 74
     Height = 12
     Margins.Left = 2
@@ -54,8 +64,8 @@ object frmAlert: TfrmAlert
     Caption = 'lblVolumeTrigger'
   end
   object BitBtn1: TBitBtn
-    Left = 45
-    Top = 64
+    Left = 51
+    Top = 76
     Width = 53
     Height = 18
     Margins.Left = 2
@@ -67,8 +77,8 @@ object frmAlert: TfrmAlert
     OnClick = BitBtn1Click
   end
   object btnOk: TButton
-    Left = 102
-    Top = 64
+    Left = 108
+    Top = 76
     Width = 53
     Height = 18
     Margins.Left = 2

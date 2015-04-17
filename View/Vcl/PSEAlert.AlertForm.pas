@@ -16,6 +16,7 @@ type
     btnOk: TButton;
     Timer1: TTimer;
     Timer2: TTimer;
+    lblNote: TLabel;
     procedure Timer1Timer(Sender: TObject);
     procedure Timer2Timer(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -77,13 +78,14 @@ end;
 
 procedure TfrmAlert.WMWindowposChanging(var msg: TWMWindowposChanging);
 begin
-  With msg.Windowpos^ Do
-  Begin
-      If (flags and SWP_NOZORDER) = 0 Then Begin
-        hwndInsertAfter := HWND_TOPMOST;
-       flags := flags or SWP_NOACTIVATE;
-      End;
-  End;
+  with msg.Windowpos^ Do
+  begin
+    if (flags and SWP_NOZORDER) = 0 then
+    begin
+      hwndInsertAfter := HWND_TOPMOST;
+     flags := flags or SWP_NOACTIVATE;
+    end;
+  end;
   inherited;
 end;
 
