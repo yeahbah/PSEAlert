@@ -24,6 +24,7 @@ type
     procedure AcknowledgeAlert(const aAlertModel: TAlertModel);
     procedure DeleteStockAlert(const aStockSymbol: string); overload;
     procedure DeleteStockAlert(const aId: integer); overload;
+    function GetStockAlerts: IList<TAlertModel>;
   end;
 
 var
@@ -82,6 +83,11 @@ end;
 procedure TStockAlertRepository.DeleteStockAlert(const aId: integer);
 begin
   PSEAlertDb.Session.Execute('DELETE FROM ALERTS WHERE ID = :0', [aId]);
+end;
+
+function TStockAlertRepository.GetStockAlerts: IList<TAlertModel>;
+begin
+  result := PSEAlertDb.Session.GetList<TAlertModel>('SELECT * FROM ALERTS', []);
 end;
 
 initialization

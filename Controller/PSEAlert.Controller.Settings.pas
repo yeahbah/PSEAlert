@@ -186,9 +186,6 @@ begin
     procedure (stock: TStockModel)
     var
       c1: ICriteria<TStockModel>;
-      //c2: ICriteria<TIntradayModel>;
-      //intradayObj: TIntradayModel;
-      //trans: IDBTransaction;
       l: IList<TStockModel>;
     begin
       if stock = nil then
@@ -204,34 +201,6 @@ begin
         PSEAlertDb.Session.Update(stock)
       else
         PSEAlertDb.Session.Insert(stock);
-
-//      PSEStocksData.STOCKSInsert.ParamByName('SYMBOL').AsString := stock.Symbol;
-//      PSEStocksData.STOCKSInsert.ParamByName('DESCRIPTION').AsString := stock.Description;
-//      PSEStocksData.STOCKSInsert.Execute;
-//      intradayObj := TIntradayModel.Create;
-//      try
-//        intradayObj.Symbol := stock.Symbol;
-//        intradayObj.Price := stock.LastTradedPrice;
-//        intradayObj.PercentChange := stock.PercentChange;
-//        intradayObj.Volume := stock.Volume;
-//        intradayObj.Status := stock.Status;
-//
-//        c2 := PSEAlertDb.Session.CreateCriteria<TIntradayModel>;
-//        if c2.Add(TRestrictions.Eq('Symbol', stock.Symbol)).Count > 0 then
-//          PSEAlertDb.Session.Update(intradayObj)
-//        else
-//          PSEAlertDb.Session.Insert(intradayObj);
-//      finally
-//        intradayObj.Free;
-//      end;
-      //trans.Commit;
-//      PSEStocksData.IntradayInsert.ParamByName('SYMBOL').AsString := stock.Symbol;
-//      PSEStocksdata.IntradayInsert.ParamByName('PRICE').AsString := FloatToStr(stock.LastTradedPrice);
-//      PSEStocksdata.IntradayInsert.ParamByName('PCTCHANGE').AsString := FloatToStr(stock.PercentChange);
-//      PSEStocksdata.IntradayInsert.ParamByName('VOLUME').AsString := FloatToStr(stock.Volume);
-//      PSEStocksdata.IntradayInsert.ParamByName('STATUS').AsString := GetEnumName(TypeInfo(TStockStatus),
-//            integer(stock.Status));
-//      PSEStocksdata.IntradayInsert.Execute;
 
     end);
 end;

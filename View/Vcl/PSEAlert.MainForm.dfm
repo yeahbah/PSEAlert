@@ -22,7 +22,7 @@ object frmMain: TfrmMain
     Margins.Top = 2
     Margins.Right = 2
     Margins.Bottom = 2
-    ActivePage = tabWatchList
+    ActivePage = tabAbout
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -105,6 +105,10 @@ object frmMain: TfrmMain
       Font.Style = []
       ImageIndex = -1
       ParentFont = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       DesignSize = (
         257
         416)
@@ -152,10 +156,6 @@ object frmMain: TfrmMain
       Font.Style = []
       ImageIndex = -1
       ParentFont = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
     end
   end
   object StatusBar1: TStatusBar
@@ -183,7 +183,7 @@ object frmMain: TfrmMain
     Left = 54
     Top = 47
     Bitmap = {
-      494C010104000800680018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101040008006C0018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000003000000001002000000000000048
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

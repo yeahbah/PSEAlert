@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ImgList, Vcl.StdCtrls,
-  Vcl.ExtCtrls;
+  Vcl.ExtCtrls, System.ImageList;
 
 type
   TframeSettings = class(TFrame)
@@ -19,6 +19,9 @@ type
     StaticText3: TStaticText;
     ImageList1: TImageList;
     StaticText4: TStaticText;
+    Label2: TLabel;
+    cmbSkin: TComboBox;
+    procedure cmbSkinChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -30,7 +33,16 @@ implementation
 
 {$R *.dfm}
 
+uses
+  Vcl.Themes, PSEAlert.Settings;
+
 { TframeSettings }
+
+procedure TframeSettings.cmbSkinChange(Sender: TObject);
+begin
+  TStyleManager.TrySetStyle(cmbSkin.Text);
+  PSEAlertSettings.Skin := cmbSkin.Text;
+end;
 
 constructor TframeSettings.Create(aOwner: TComponent);
 var
@@ -60,6 +72,7 @@ begin
   end;
 
   Font.Size := 9;
+  cmbSkin.ItemIndex := cmbSkin.Items.IndexOf(PSEAlertSettings.Skin);
 end;
 
 end.

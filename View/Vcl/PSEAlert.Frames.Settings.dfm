@@ -26,6 +26,19 @@ object frameSettings: TframeSettings
     Font.Style = []
     ParentFont = False
   end
+  object Label2: TLabel
+    Left = 18
+    Top = 280
+    Width = 27
+    Height = 20
+    Caption = 'Skin'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+  end
   object StaticText1: TStaticText
     Left = 18
     Top = 14
@@ -164,13 +177,38 @@ object frameSettings: TframeSettings
     ParentFont = False
     TabOrder = 7
   end
+  object cmbSkin: TComboBox
+    Left = 65
+    Top = 277
+    Width = 143
+    Height = 28
+    Style = csDropDownList
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 8
+    OnChange = cmbSkinChange
+    Items.Strings = (
+      'Aqua Light Slate'
+      'Carbon'
+      'Cyan Dusk'
+      'Cyan Night'
+      'Lavender Classico'
+      'Metropolis UI Blue'
+      'Metropolis UI Dark'
+      'Sapphire Kamri'
+      'Amakrits')
+  end
   object ImageList1: TImageList
     Height = 20
     Width = 20
     Left = 68
     Top = 232
     Bitmap = {
-      494C010101004C00680014001400FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010101004C006C0014001400FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000500000001400000001002000000000000019
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

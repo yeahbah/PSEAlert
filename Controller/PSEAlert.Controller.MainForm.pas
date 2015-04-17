@@ -334,90 +334,19 @@ begin
 
   ReloadComboStockList(cmbAddStock);
 
-  //stocks := PSEAlertDb.Session.GetList<TStockModel>('SELECT * FROM STOCKS WHERE ISFAVORITE = :0', [1]);
   stocks := stockRepository.GetFavoriteStocks;
   for stock in stocks do
   begin
     CreateStockPriceFrame(scrollMyStocks, stock.Symbol, stock.description);
   end;
 
-  //stocks := PSEAlertDb.Session.GetList<TStockModel>('SELECT * FROM STOCKS WHERE SYMBOL LIKE :0', ['^%']);
   stocks := stockRepository.GetAllStocks(true);
   for stock in stocks do
   begin
     CreateStockPriceFrame(scrollIndeces, stock.Symbol, stock.description);
   end;
 
-
-//  PSEStocksData.sqlStockFavorites.Active := true;
-//  try
-//    PSEStocksData.cdsAppMemTable.CloneCursor(PSEStocksData.sqlStockFavorites);
-//    PSEStocksData.cdsAppMemTable.Active := true;
-//    while not PSEStocksData.cdsAppMemTable.Eof do
-//    begin
-//      CreateStockPriceFrame(scrollMyStocks, PSEStocksData.cdsAppMemTable.FieldByName('SYMBOL').AsString,
-//        PSEStocksData.cdsAppMemTable.FieldByName('DESCRIPTION').AsString);
-//      PSEStocksData.cdsAppMemTable.Next;
-//    end;
-//    PSEStocksData.cdsAppMemTable.Active := false;
-//  finally
-//    PSEStocksData.sqlStockFavorites.Active := false;
-//  end;
-
-//  PSEStocksData.sqlIndeces.Active := true;
-//  try
-//    PSEStocksData.cdsAppMemTable.CloneCursor(PSEStocksData.sqlIndeces);
-//    PSEStocksData.cdsAppMemTable.Active := true;
-//    while not PSEStocksData.cdsAppMemTable.Eof do
-//    begin
-//      CreateStockPriceFrame(scrollIndeces,
-//        PSEStocksData.cdsAppMemTable.FieldByName('SYMBOL').AsString,
-//        PSEStocksData.cdsAppMemTable.FieldByName('DESCRIPTION').AsString);
-//      PSEStocksData.cdsAppMemTable.Next;
-//    end;
-//    PSEStocksData.cdsAppMemTable.Active := false;
-//  finally
-//    PSEStocksData.sqlIndeces.Active := false;
-//  end;
-
-  alertModels := TCollections.CreateObjectList<TAlertModel>(false);
-  alertModels := PSEAlertDb.Session.GetList<TAlertModel>('SELECT * FROM ALERTS', []);
-//  for alertModel in alertModels do
-//  begin
-//
-//  end;
-
-//  PSEStocksData.sqlAlerts.Active := true;
-//  try
-//    PSEStocksData.cdsAppMemTable.CloneCursor(PSEStocksData.sqlAlerts);
-//    PSEStocksData.cdsAppMemTable.Active := true;
-//    while not PSEStocksData.cdsAppMemTable.Eof do
-//    begin
-//      stockAlertModel := TAlertModel.Create;
-//
-//      stockAlertModel.StockSymbol := PSEStocksData.cdsAppMemTable.FieldByName('SYMBOL').AsString;
-//      stockAlertModel.PriceTriggerType := TPriceTriggerType(PSEStocksData.cdsAppMemTable.FieldByName('PRICELEVEL').AsInteger);
-//      stockAlertModel.Price := PSEStocksData.cdsAppMemTable.FieldByName('PRICE').AsFloat;
-//      tmp := PSEStocksData.cdsAppMemTable.FieldByName('VOL_CONJUNCT').AsString;
-//      if tmp <> string.Empty then
-//      begin
-//        if tmp = 'OR' then
-//          stockAlertModel.Logic := TLogicType.LogicOr;
-//        if tmp = 'AND' then
-//          stockAlertModel.Logic := TLogicType.LogicAND;
-//        stockAlertModel.Volume := PSEStocksData.cdsAppMemTable.FieldByName('VOLUME').AsInteger;
-//      end;
-//      stockAlertModel.AlertCount := PSEStocksData.cdsAppMemTable.FieldByName('ALERT_COUNT').AsInteger;
-//      stockAlertModel.MaxAlertCount := PSEStocksData.cdsAppMemTable.FieldByName('MAX_ALERT').AsInteger;
-//      stockAlertModel.Notes := PSEStocksData.cdsAppMemTable.FieldByName('NOTES').AsString;
-//      alertModels.Add(stockAlertModel);
-//
-//      PSEStocksData.cdsAppMemTable.Next;
-//    end;
-//    PSEStocksData.cdsAppMemTable.Active := false;
-//  finally
-//    PSEStocksData.sqlAlerts.Active := false;
-//  end;
+  alertModels := stockAlertRepository.GetStockAlerts;
 
   mainView := View as TfrmMain;
   fAlertEntryController := CreateStockAlertEntryController(alertModels, mainView.tabAlerts);
@@ -508,13 +437,6 @@ begin
       aComboBox.Items.Add(stock.Symbol);
   end;
 
-//  PSEStocksData.sqlStocks.Open;
-//  PSEStocksData.sqlStocks.First;
-//  while not PSEStocksData.sqlStocks.Eof do
-//  begin
-//    aComboBox.Items.Add(PSEStocksData.sqlStocks.FieldByName('SYMBOL').AsString);
-//    PSEStocksData.sqlStocks.Next;
-//  end;
   aComboBox.ItemIndex := 0;
 end;
 

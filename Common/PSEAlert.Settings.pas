@@ -12,6 +12,7 @@ type
     fFormHeight: integer;
     fFormLeft: integer;
     fFormWidth: integer;
+    FSkin: string;
     procedure SetPlaySound(const Value: boolean);
     procedure SetAlertSoundFile(const Value: string);
     procedure SetFormHeight(const Value: integer);
@@ -26,6 +27,7 @@ type
     property FormTop: integer read FFormTop write SetFormTop;
     property FormHeight: integer read FFormHeight write SetFormHeight;
     property FormWidth: integer read FFormWidth write SetFormWidth;
+    property Skin: string read FSkin write FSkin;
     procedure LoadSettings;
     procedure SaveSettings;
   end;
@@ -72,6 +74,7 @@ begin
     tmpInt := ini.ReadInteger('Default', 'FormWidth', 0);
     fFormWidth := GetProperInt(tmpInt, 281, {$IFDEF FMXAPP}Screen.Size.Width{$ELSE}Screen.Width{$ENDIF});
 
+    fSkin := ini.ReadString('Default', 'Skin', 'Metropolis UI Blue');
   finally
     ini.Free;
   end;
@@ -90,6 +93,7 @@ begin
     ini.WriteInteger('Default', 'FormTop', fFormTop);
     ini.WriteInteger('Default', 'FormHeight', fFormHeight);
     ini.WriteInteger('Default', 'FormWidth', fFormWidth);
+    ini.WriteString('Default', 'Skin', fSkin);
   finally
     ini.Free;
   end;

@@ -9,7 +9,7 @@ uses
   Vcl.ExtCtrls,
   Vcl.ImgList, System.UITypes, IOUtils, Vcl.Samples.Spin,
   PSE.Data.Model, Vcl.AppEvnts, Vcl.Buttons, System.Actions,
-  Vcl.ActnList;
+  Vcl.ActnList, System.ImageList;
 
 type
   TfrmMain = class(TForm)

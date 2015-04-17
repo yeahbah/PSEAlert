@@ -36,7 +36,7 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  TStyleManager.TrySetStyle('Metropolis UI Blue');
+  TStyleManager.TrySetStyle(PSEAlertSettings.Skin);
   //Application.CreateForm(TfrmMain, frmMain);
   CreateMainFormController(TObject.Create);
 
