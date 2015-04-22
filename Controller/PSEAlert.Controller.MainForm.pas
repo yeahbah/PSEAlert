@@ -428,7 +428,7 @@ var
 begin
   aComboBox.Clear;
 
-  stocks := PSEAlertDb.Session.FindAll<TStockModel>;
+//  stocks := PSEAlertDb.Session.FindAll<TStockModel>;
 
   stocks := PSEAlertDb.Session.FindAll<TStockModel>();
   for stock in stocks do
