@@ -191,9 +191,9 @@ end;
 
 procedure TMainFormController.ExecuteRefreshAction(Sender: TObject);
 var
-  downloadTask: TDownloadTask;
+  downloadTask: TIntradayDownloader;
 begin
-  downloadTask := TDownloadTask.Create;
+  downloadTask := TIntradayDownloader.Create;
   downloadTask.Execute(
     procedure
     begin

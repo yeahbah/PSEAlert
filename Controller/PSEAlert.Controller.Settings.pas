@@ -160,10 +160,10 @@ end;
 
 procedure TPSEAlertSettingsController.ReloadStockData;
 var
-  downloadTask: TDownloadTask;
+  downloadTask: TIntradayDownloader;
 begin
 
-  downloadTask := TDownloadTask.Create;
+  downloadTask := TIntradayDownloader.Create;
   downloadTask.Execute(
     procedure
     begin
@@ -193,9 +193,7 @@ begin
         Exit;
       end;
       c1 := PSEAlertDb.Session.CreateCriteria<TStockModel>;
-      //PSEStocksData.PSEStocksConnection.Close;
 
-      //trans := PSEAlertDb.Session.BeginTransaction;
       l := c1.Add(TRestrictions.eq('Symbol', stock.Symbol)).ToList;
       if l.Any  then
         PSEAlertDb.Session.Update(stock)

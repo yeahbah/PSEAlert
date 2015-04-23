@@ -29,7 +29,8 @@ uses
   PSEAlert.Messages in '..\..\Common\PSEAlert.Messages.pas',
   PSEAlert.Settings in '..\..\Common\PSEAlert.Settings.pas',
   PSEAlert.Utils in '..\..\Common\PSEAlert.Utils.pas',
-  PSEAlert.AlertFormManager in 'PSEAlert.AlertFormManager.pas';
+  PSEAlert.AlertFormManager in 'PSEAlert.AlertFormManager.pas',
+  PSE.Data.Model.JSON in '..\..\Data\PSE.Data.Model.JSON.pas';
 
 {$R *.res}
 
