@@ -1,0 +1,6 @@
+index name list
+http://www.pse.com.ph/stockMarket/marketInfo-marketActivity-indicesComposition.html?method=getMarketIndices&ajax=true
+
+
+query
+http://www.pse.com.ph/stockMarket/marketInfo-marketActivity-indicesComposition.html?method=getMarketIndices&ajax=true
