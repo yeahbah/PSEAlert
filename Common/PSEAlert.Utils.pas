@@ -7,6 +7,7 @@ uses
 
 function GenerateControlName(const aSuggestedName: string): string;
 function GetPollIntervalValue(const aIndex: integer): integer;
+function ConvertStringDateToSystem(const aDate: string): TDateTime;
 
 implementation
 
@@ -33,6 +34,16 @@ begin
     7: result := OneMinute * 20;
     8: result := OneMinute * 25;
   end;
+end;
+
+function ConvertStringDateToSystem(const aDate: string): TDateTime;
+var
+  f: TFormatSettings;
+begin
+  f := TFormatSettings.Create;
+  f.DateSeparator := '-';
+  f.ShortDateFormat := 'yyyy-mm-dd';
+  result := StrToDateTime(aDate, f);
 end;
 
 end.

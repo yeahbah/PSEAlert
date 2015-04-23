@@ -160,10 +160,10 @@ end;
 
 procedure TPSEAlertSettingsController.ReloadStockData;
 var
-  downloadTask: TIntradayDownloader;
+  downloadTask: TStockDataDownloader;
 begin
 
-  downloadTask := TIntradayDownloader.Create;
+  downloadTask := TStockDataDownloader.Create;
   downloadTask.Execute(
     procedure
     begin

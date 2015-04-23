@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{00637035-F3F5-4F17-B4F6-02DAC4BEE608}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Vcl\PSEAlert.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\Tests\PSEAlertTest.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="PSEAlert">
+        <MSBuild Projects="Vcl\PSEAlert.dproj"/>
+    </Target>
+    <Target Name="PSEAlert:Clean">
+        <MSBuild Projects="Vcl\PSEAlert.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PSEAlert:Make">
+        <MSBuild Projects="Vcl\PSEAlert.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="PSEAlertTest">
+        <MSBuild Projects="..\Tests\PSEAlertTest.dproj"/>
+    </Target>
+    <Target Name="PSEAlertTest:Clean">
+        <MSBuild Projects="..\Tests\PSEAlertTest.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PSEAlertTest:Make">
+        <MSBuild Projects="..\Tests\PSEAlertTest.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="PSEAlert;PSEAlertTest"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="PSEAlert:Clean;PSEAlertTest:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="PSEAlert:Make;PSEAlertTest:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

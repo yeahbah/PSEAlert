@@ -3,10 +3,10 @@ unit PSEAlert.Messages;
 interface
 
 uses
-  Yeahbah.Messaging, PSE.Data.Model, Forms;
+  Yeahbah.Messaging, PSE.Data.Model, Vcl.Forms;
 
 type
-  TStockUpdateMessage = class(TGenericMessage<TStockModel>)
+  TStockUpdateMessage = class(TGenericMessage<TIntradayModel>)
   end;
 
   TAlertTriggeredMessage = class(TGenericMessage<TAlertModel>)

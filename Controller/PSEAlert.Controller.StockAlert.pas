@@ -51,7 +51,7 @@ type
   protected
     procedure Initialize; override;
     procedure DoCloseView(Sender: TObject);
-    procedure TriggerAlert(aStock: TStockModel);
+    procedure TriggerAlert(aStock: TIntradayModel);
   public
     destructor Destroy; override;
     procedure Receive(const aMessage: IMessage);
@@ -155,7 +155,7 @@ end;
 
 procedure TStockAlertController.Receive(const aMessage: IMessage);
 var
-  stock: TStockModel;
+  stock: TIntradayModel;
   alertModel: TAlertModel;
 begin
   if aMessage is TStockUpdateMessage then
@@ -189,7 +189,7 @@ begin
   end;
 end;
 
-procedure TStockAlertController.TriggerAlert(aStock: TStockModel);
+procedure TStockAlertController.TriggerAlert(aStock: TIntradayModel);
 var
   task: IOmniTaskControl;
   priceTriggered: boolean;

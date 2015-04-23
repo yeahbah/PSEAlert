@@ -97,6 +97,7 @@ type
     ffreeFloatLevel: string;
     foutstandingShares: string;
     flastTradeDate: string;
+    fsecuritySymbol: string;
   public
     property totalMarketCapitalization: string read ftotalMarketCapitalization write ftotalMarketCapitalization;
     property freeFloatLevel: string read ffreeFloatLevel write ffreeFloatLevel;
@@ -105,10 +106,25 @@ type
     property percentWeight: string read fpercentWeight write fpercentWeight;
     property securityID: string read fsecurityID write fsecurityID;
     property marketCapitilization: string read fmarketCapitilization write fmarketCapitilization;
-    property securitySymbol: string read fmarketCapitilization write fmarketCapitilization;
+    property securitySymbol: string read fsecuritySymbol write fsecuritySymbol;
     property securityName: string read fsecurityName write fsecurityName;
     property companyId: string read fcompanyId write fcompanyId;
     property outstandingShares: string read foutstandingShares write foutstandingShares;
+  end;
+
+  TJSONIndexModel = class
+  private
+    findexId: string;
+    findexAbb: string;
+    fisSectoral: string;
+    findexName: string;
+    fsortOrder: string;
+  public
+    property indexId: string read findexId write findexId;
+    property isSectoral: string read fisSectoral write fisSectoral;
+    property sortOrder: string read fsortOrder write fsortOrder;
+    property indexName: string read findexName write findexName;
+    property indexAbb: string read findexAbb write findexAbb;
   end;
 
 implementation

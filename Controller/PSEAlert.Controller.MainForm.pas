@@ -205,7 +205,7 @@ begin
       actRefresh.Enabled := true;
     end,
 
-    procedure (stock: TStockModel)
+    procedure (stock: TIntradayModel)
     begin
       if stock <> nil then
         MessengerInstance.SendMessage(TStockUpdateMessage.Create(stock));
@@ -428,13 +428,11 @@ var
 begin
   aComboBox.Clear;
 
-//  stocks := PSEAlertDb.Session.FindAll<TStockModel>;
-
   stocks := PSEAlertDb.Session.FindAll<TStockModel>();
   for stock in stocks do
   begin
-    if stock.Symbol[1] <> '^' then
-      aComboBox.Items.Add(stock.Symbol);
+//    if stock.Symbol[1] <> '^' then
+    aComboBox.Items.Add(stock.Symbol);
   end;
 
   aComboBox.ItemIndex := 0;

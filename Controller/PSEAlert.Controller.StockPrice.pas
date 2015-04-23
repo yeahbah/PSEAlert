@@ -141,7 +141,7 @@ end;
 
 procedure TStockPriceController.Receive(const aMessage: IMessage);
 var
-  stock: TStockModel;
+  stock: TIntradayModel;
   alertModel: TAlertModel;
   isIndex: boolean;
   priceText, volumeText: string;
