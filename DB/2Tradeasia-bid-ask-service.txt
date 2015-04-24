@@ -1,0 +1,4 @@
+Bid/ask
+https://www.2tradeasia.com/quotes/mb/xmlparse.asp?page=quotes.asp&tns=N&bna=Y&min=Y5&code=AC&boxNum=1
+
+https://www.2tradeasia.com/quotes/mb/script_min.js

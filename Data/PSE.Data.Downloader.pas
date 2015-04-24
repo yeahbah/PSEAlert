@@ -38,6 +38,11 @@ type
     constructor Create;
   end;
 
+  TStockDetail_HeaderDownloader = class sealed(TPSEDownloader<TJSONStockHeaderModel>)
+  public
+    constructor Create(const aStockId: integer);
+  end;
+
   TPSEHeaderData = class
   private
     fRecordCount: integer;
@@ -340,7 +345,7 @@ begin
 //  try
 //    stream := TStringStream.Create;
 //    try
-//      url := 'http://http://pse.com.ph/stockMarket/companyInfo.html?method=fetchHeaderData&ajax=true&security=' + getStockId(aSymbol).ToString;
+//      url := 'http://pse.com.ph/stockMarket/companyInfo.html?method=fetchHeaderData&ajax=true&security=' + getStockId(aSymbol).ToString;
 //      httpGet.Get(url, stream);
 //      Deserialize(stream.DataString);
 //      result := fRecordCount > 0;
@@ -441,6 +446,14 @@ begin
     Advance: fUrl := 'http://www.pse.com.ph/stockMarket/dailySummary.html?method=getAdvancedSecurity&ajax=true';
     Decline: fUrl := 'http://www.pse.com.ph/stockMarket/dailySummary.html?method=getDeclinesSecurity&ajax=true';
   end;
+end;
+
+{ TStockDetail_HeaderDownloader }
+
+constructor TStockDetail_HeaderDownloader.Create(const aStockId: integer);
+begin
+  inherited Create;
+  fUrl := 'http://pse.com.ph/stockMarket/companyInfo.html?method=fetchHeaderData&ajax=true&security=' + aStockId.ToString;
 end;
 
 end.

@@ -15,3 +15,7 @@
 			"headerSqPrevious":"12.2800000000","securitySymbol":"PX","headerCurrentPe":"177.3913043478","headerSqOpen":"12.2600000000","headerAvgPrice":"12.1661100000","headerTotalVolume":"17,863,300.0000000000"}
 	]
 }
+
+companyInfoSecurityInformation.html?ajax=true&method=viewSecurityInformation&company=57&security=180
+
+companyInfoSecurityProfile.html?ajax=true&method=viewCompanyProfile&company=57&security=180

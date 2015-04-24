@@ -13,13 +13,14 @@ type
     lblStockName: TLabel;
     lblStockPrice: TLabel;
     lblStockVolume: TLabel;
-    Bevel1: TBevel;
     btnClose: TSpeedButton;
     imgStatus: TImage;
     ImageList1: TImageList;
     PopupMenu1: TPopupMenu;
     NewAlert1: TMenuItem;
     btnAlert: TSpeedButton;
+    Panel1: TPanel;
+    procedure Panel1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -52,5 +53,10 @@ begin
   inherited;
 end;
 
+
+procedure TframeStockPrice.Panel1Click(Sender: TObject);
+begin
+  ShowMessage('hello');
+end;
 
 end.

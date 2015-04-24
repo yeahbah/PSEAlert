@@ -1,3 +1,36 @@
 www.pse.com.ph/stockMarket/dailySummary.html?method=getTopActiveStocks&ajax=true
 
-{"percChangeClose":-0.2518949,"SMSpercentChange":"","SMSchange":"","securityId":"293","class":"class ph.com.headway.dto.MostActiveSecurityRecord","number":1,"changeClose":-0.1000023,"totalValue":1.08887283E9,"totalVolume":2.74818E7,"companyLink":"companyInfo.html?id=180&security=293&tab=0","lastTradePrice":39.6,"MKT":0.010103840077139397,"securitySymbol":"ALI","securityName":"AYALA LAND, INC.","companyId":"180","marketStatus":null,"totalValueInK":""}
+{"percChangeClose":-0.2518949,
+"SMSpercentChange":"",
+"SMSchange":"",
+"securityId":"293",
+"class":"class ph.com.headway.dto.MostActiveSecurityRecord",
+"number":1,
+"changeClose":-0.1000023,
+"totalValue":1.08887283E9,
+"totalVolume":2.74818E7,
+"companyLink":"companyInfo.html?id=180&security=293&tab=0",
+"lastTradePrice":39.6,
+"MKT":0.010103840077139397,
+"securitySymbol":"ALI",
+"securityName":"AYALA LAND, INC.",
+"companyId":"180",
+"marketStatus":null,
+"totalValueInK":""}
+
+dailySummary.html?method=getAdvancedSecurity&ajax=true
+
+dailySummary.html?method=getDeclinesSecurity&ajax=true
+
+{"totalVolume":1000,
+"percChangeClose":-36.97749,
+"companyLink":"companyInfo.html?id=165&security=455&tab=0",
+"sqClose":1.96,
+"lastTradePrice":1.96,
+"securitySymbol":"SFIP",
+"number":1,
+"securityName":"SWIFT FOODS, INC. - CONVERTIBLE PREFERRED",
+"changeClose":-1.15,
+"marketStatus":"CLOSED",
+"totalValue":1960,
+"sqPrevious":3.11}

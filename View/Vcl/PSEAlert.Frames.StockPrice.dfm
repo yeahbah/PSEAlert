@@ -14,13 +14,6 @@ object frameStockPrice: TframeStockPrice
   DesignSize = (
     309
     50)
-  object Bevel1: TBevel
-    Left = 3
-    Top = 3
-    Width = 303
-    Height = 45
-    Anchors = [akLeft, akTop, akRight, akBottom]
-  end
   object lblStockSymbol: TLabel
     Left = 27
     Top = -1
@@ -156,6 +149,17 @@ object frameStockPrice: TframeStockPrice
       FF46ABD471E5FF03060800000000000000000000000000000000000000000000
       00000000000000001647601B3F512D6B8B73D6F76ACEF9000000}
     Visible = False
+  end
+  object Panel1: TPanel
+    Left = 3
+    Top = 2
+    Width = 303
+    Height = 45
+    Cursor = crHandPoint
+    Anchors = [akLeft, akTop, akRight, akBottom]
+    BevelOuter = bvLowered
+    TabOrder = 0
+    OnClick = Panel1Click
   end
   object ImageList1: TImageList
     Left = 136
