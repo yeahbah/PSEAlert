@@ -14,25 +14,37 @@ uses
 type
   TfrmMain = class(TForm)
     PageControl: TPageControl;
-    tabWatchList: TTabSheet;
+    tabMarket: TTabSheet;
     tabIndeces: TTabSheet;
     tabAlerts: TTabSheet;
     StatusBar1: TStatusBar;
-    scrollMyStocks: TScrollBox;
     tabAbout: TTabSheet;
-    scrollIndeces: TScrollBox;
     ApplicationEvents1: TApplicationEvents;
-    cmbAddStock: TComboBox;
     ImageList2: TImageList;
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
     ActionList: TActionList;
     actRefresh: TAction;
     actAdd: TAction;
-    btnAddStock: TButton;
-    btnSort: TSpeedButton;
     actSortAsc: TAction;
     actSortDesc: TAction;
+    pageStocks: TPageControl;
+    tabWatchList: TTabSheet;
+    tabMostActive: TTabSheet;
+    cmbAddStock: TComboBox;
+    btnAddStock: TButton;
+    scrollMyStocks: TScrollBox;
+    SpeedButton2: TSpeedButton;
+    scrollIndeces: TScrollBox;
+    btnSort: TSpeedButton;
+    SpeedButton1: TSpeedButton;
+    tabTopGainers: TTabSheet;
+    scrollBoxMostActive: TScrollBox;
+    btnRefreshMostActive: TSpeedButton;
+    actRefreshMostActive: TAction;
+    btnRefreshGainers: TSpeedButton;
+    scrollBoxGainers: TScrollBox;
+    tabTopLosers: TTabSheet;
+    SpeedButton3: TSpeedButton;
+    scrollBoxLosers: TScrollBox;
     procedure ApplicationEvents1Exception(Sender: TObject; E: Exception);
   private
     { Private declarations }

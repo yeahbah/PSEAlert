@@ -87,29 +87,29 @@ type
 
   TJSONStockModel = class
   private
-    fsecurityID: string;
-    fmarketCapitilization: string;
-    flastTradePrice: string;
-    fpercentWeight: string;
+    fsecurityID: integer;
+    fmarketCapitilization: single;
+    flastTradePrice: single;
+    fpercentWeight: single;
     fsecurityName: string;
-    fcompanyId: string;
-    ftotalMarketCapitalization: string;
-    ffreeFloatLevel: string;
-    foutstandingShares: string;
+    fcompanyId: integer;
+    ftotalMarketCapitalization: single;
+    ffreeFloatLevel: single;
+    foutstandingShares: single;
     flastTradeDate: string;
     fsecuritySymbol: string;
   public
-    property totalMarketCapitalization: string read ftotalMarketCapitalization write ftotalMarketCapitalization;
-    property freeFloatLevel: string read ffreeFloatLevel write ffreeFloatLevel;
+    property totalMarketCapitalization: single read ftotalMarketCapitalization write ftotalMarketCapitalization;
+    property freeFloatLevel: single read ffreeFloatLevel write ffreeFloatLevel;
     property lastTradeDate: string read flastTradeDate write flastTradeDate;
-    property lastTradePrice: string read flastTradePrice write flastTradePrice;
-    property percentWeight: string read fpercentWeight write fpercentWeight;
-    property securityID: string read fsecurityID write fsecurityID;
-    property marketCapitilization: string read fmarketCapitilization write fmarketCapitilization;
+    property lastTradePrice: single read flastTradePrice write flastTradePrice;
+    property percentWeight: single read fpercentWeight write fpercentWeight;
+    property securityID: integer read fsecurityID write fsecurityID;
+    property marketCapitilization: single read fmarketCapitilization write fmarketCapitilization;
     property securitySymbol: string read fsecuritySymbol write fsecuritySymbol;
     property securityName: string read fsecurityName write fsecurityName;
-    property companyId: string read fcompanyId write fcompanyId;
-    property outstandingShares: string read foutstandingShares write foutstandingShares;
+    property companyId: integer read fcompanyId write fcompanyId;
+    property outstandingShares: single read foutstandingShares write foutstandingShares;
   end;
 
   TJSONIndexModel = class
@@ -118,13 +118,34 @@ type
     findexAbb: string;
     fisSectoral: string;
     findexName: string;
-    fsortOrder: string;
+    fsortOrder: integer;
   public
     property indexId: string read findexId write findexId;
     property isSectoral: string read fisSectoral write fisSectoral;
-    property sortOrder: string read fsortOrder write fsortOrder;
+    property sortOrder: integer read fsortOrder write fsortOrder;
     property indexName: string read findexName write findexName;
     property indexAbb: string read findexAbb write findexAbb;
+  end;
+
+  TJSONDailySummaryModel = class
+  private
+    ftotalValue: single;
+    ftotalVolume: single;
+    flastTradePrice: single;
+    fchangeClose: single;
+    fpercChangeClose: single;
+    fnumber: integer;
+    fsecuritySymbol: string;
+    fsecurityName: string;
+  public
+    property percChangeClose: single read fpercChangeClose write fpercChangeClose;
+    property totalVolume: single read ftotalVolume write ftotalVolume;
+    property lastTradePrice: single read flastTradePrice write flastTradePrice;
+    property securitySymbol: string read fsecuritySymbol write fsecuritySymbol;
+    property number: integer read fnumber write fnumber;
+    property securityName: string read fsecurityName write fsecurityName;
+    property changeClose: single read fchangeClose write fchangeClose;
+    property totalValue: single read ftotalValue write ftotalValue;
   end;
 
 implementation

@@ -56,12 +56,12 @@ object frmAlert: TfrmAlert
   object lblNote: TLabel
     Left = 6
     Top = 55
-    Width = 74
+    Width = 31
     Height = 12
     Margins.Left = 2
     Margins.Top = 2
     Margins.Right = 2
-    Caption = 'lblVolumeTrigger'
+    Caption = 'lblNote'
   end
   object BitBtn1: TBitBtn
     Left = 51

@@ -3,7 +3,6 @@ object frameStockPrice: TframeStockPrice
   Top = 0
   Width = 309
   Height = 50
-  Cursor = crHandPoint
   Anchors = [akLeft, akTop, akRight, akBottom]
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -38,8 +37,10 @@ object frameStockPrice: TframeStockPrice
   object lblStockName: TLabel
     Left = 27
     Top = 26
-    Width = 89
+    Width = 180
     Height = 20
+    Anchors = [akLeft, akTop, akRight]
+    AutoSize = False
     Caption = 'Philex Mining'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -47,6 +48,7 @@ object frameStockPrice: TframeStockPrice
     Font.Name = 'Segoe UI'
     Font.Style = []
     ParentFont = False
+    ShowAccelChar = False
   end
   object lblStockPrice: TLabel
     Left = 179
@@ -159,7 +161,7 @@ object frameStockPrice: TframeStockPrice
     Left = 136
     Top = 9
     Bitmap = {
-      494C010102008400D40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102008400E00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       000000000000000000000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFF
       FF00F0F0F000EBEBEB00EBEBEB00EBEBEB00EBEBEB00EBEBEB00EBEBEB00EBEB

@@ -61,7 +61,7 @@ object frameSettings: TframeSettings
     Top = 96
     Width = 141
     Height = 31
-    Caption = 'Reload Stock List'
+    Caption = 'Reload Data'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -15
@@ -131,7 +131,7 @@ object frameSettings: TframeSettings
     Top = 378
     Width = 318
     Height = 38
-    Anchors = [akLeft, akBottom]
+    Anchors = [akLeft, akRight, akBottom]
     AutoSize = False
     Caption = '2014 Yeahbah! Very Good Apps. All rights reserved.'
     Font.Charset = DEFAULT_CHARSET
@@ -147,7 +147,7 @@ object frameSettings: TframeSettings
     Top = 422
     Width = 318
     Height = 145
-    Anchors = [akLeft, akBottom]
+    Anchors = [akLeft, akRight, akBottom]
     AutoSize = False
     Caption = 
       'This software is free and does not guarantee anything. Feel free' +
@@ -162,7 +162,7 @@ object frameSettings: TframeSettings
     ParentFont = False
     TabOrder = 6
   end
-  object StaticText4: TStaticText
+  object lblVersion: TStaticText
     Left = 18
     Top = 354
     Width = 90
@@ -208,7 +208,7 @@ object frameSettings: TframeSettings
     Left = 68
     Top = 232
     Bitmap = {
-      494C010101004C006C0014001400FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010101004C00700014001400FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000500000001400000001002000000000000019
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

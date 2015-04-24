@@ -23,7 +23,9 @@ uses
   ExtCtrls;
 
 type
-  TStockPriceController = class(TBaseController<TStockModel>, IMessageReceiver)
+  TUserAction = (Close, AddAlert);
+  TUserActions = set of TUserAction;
+  TStockPriceController = class(TBaseController<TIntradayModel>, IMessageReceiver)
   private
     {$HINTS OFF}
     [Bind('Symbol', {$IFDEF FMXAPP}'Text'{$ELSE}'Caption'{$ENDIF})]
@@ -45,6 +47,8 @@ type
 {$ELSE}
     [Bind]
     ImageList1: TImageList;
+    fUserActions: TUserActions;
+    procedure SetUserActions(const Value: TUserActions);
 {$ENDIF}
     {$HINTS ON}
   protected
@@ -55,10 +59,12 @@ type
   public
     destructor Destroy; override;
     procedure Receive(const aMessage: IMessage);
+    property UserActions: TUserActions read fUserActions write SetUserActions;
   end;
 
-function CreateStockPriceController(aStockModel: TStockModel;
-  aParent: {$IFDEF FMXAPP}TFMXObject{$ELSE}TWinControl{$ENDIF}): IController<TStockModel>;
+function CreateStockPriceController(aStockModel: TIntradayModel;
+  aParent: {$IFDEF FMXAPP}TFMXObject{$ELSE}TWinControl{$ENDIF};
+  aUserActions: TUserActions): IController<TIntradayModel>;
 
 implementation
 
@@ -67,11 +73,12 @@ uses
 
 {$R PSEAlert.res PSEAlertResource.rc}
 
-function CreateStockPriceController(aStockModel: TStockModel;
-  aParent: {$IFDEF FMXAPP}TFMXObject{$ELSE}TWinControl{$ENDIF}): IController<TStockModel>;
+function CreateStockPriceController(aStockModel: TIntradayModel;
+  aParent: {$IFDEF FMXAPP}TFMXObject{$ELSE}TWinControl{$ENDIF};
+  aUserActions: TUserActions): IController<TIntradayModel>;
 begin
-  TControllerFactory<TStockModel>.RegisterFactoryMethod(TframeStockPrice,
-    function: IController<TStockModel>
+  TControllerFactory<TIntradayModel>.RegisterFactoryMethod(TframeStockPrice,
+    function: IController<TIntradayModel>
     var
       frm: TframeStockPrice;
     begin
@@ -84,9 +91,11 @@ begin
       frm.Align := {$IFDEF FMXAPP}TAlignLayout.Top{$ELSE}alTop{$ENDIF};
       frm.Name := GenerateControlName(aStockModel.Symbol);
       result := TStockPriceController.Create(aStockModel, frm);
+      TStockPriceController(result).UserActions := aUserActions;
       frm.Visible := true;
     end);
-  result := TControllerFactory<TStockModel>.GetInstance(TframeStockPrice);
+  result := TControllerFactory<TIntradayModel>.GetInstance(TframeStockPrice);
+
 end;
 
 { TStockPriceController }
@@ -124,14 +133,18 @@ end;
 procedure TStockPriceController.Initialize;
 begin
   inherited;
-  MessengerInstance.RegisterReceiver(self, TStockUpdateMessage);
+  MessengerInstance.RegisterReceiver(self, TIntradayUpdateMessage);
   MessengerInstance.RegisterReceiver(self, TAlertTriggeredMessage);
   MessengerInstance.RegisterReceiver(self, TDismissAlertMessage);
 
-  if Assigned(btnClose) and (Self.Model.Symbol[1] <> '^') then
-    btnClose.OnClick := DoCloseView
-  else
-    btnClose.Visible := false;
+//  if Assigned(btnClose) then
+//  begin
+//    if (Self.Model.Symbol[1] = '^') then
+//      btnClose.Visible := false
+//    else
+//
+//  end;
+  btnClose.OnClick := DoCloseView;
   lblStockSymbol.Font.Style := [TFontStyle.fsBold];
   lblStockSymbol.Font.Size := 12;
   lblStockName.Font.Size := 9;
@@ -146,9 +159,9 @@ var
   isIndex: boolean;
   priceText, volumeText: string;
 begin
-  if aMessage is TStockUpdateMessage then
+  if aMessage is TIntradayUpdateMessage then
   begin
-    stock := (aMessage as TStockUpdateMessage).Data;
+    stock := (aMessage as TIntradayUpdateMessage).Data;
     if GenerateControlName(stock.Symbol) = (View as TframeStockPrice).Name then
     begin
       isIndex := stock.Symbol[1] = '^';
@@ -230,6 +243,15 @@ begin
     TStockStatus.Down: ImageList1.GetBitmap(1, aImage.Picture.Bitmap);
   end;
 {$ENDIF}
+end;
+
+procedure TStockPriceController.SetUserActions(const Value: TUserActions);
+begin
+  fUserActions := Value;
+  if Assigned(btnClose) then
+  begin
+    btnClose.Enabled := TUserAction.Close in Value;
+  end;
 end;
 
 end.

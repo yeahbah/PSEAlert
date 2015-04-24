@@ -32,7 +32,8 @@ uses
   PSEAlert.Controller.Settings,
   PSEAlert.Settings,
   PSE.Data.Model,
-  System.UITypes;
+  System.UITypes,
+  PSEAlert.Controller.StockPrice;
 
 type
   TMainFormController = class(TBaseController<TObject>, IMessageReceiver)
@@ -49,6 +50,8 @@ type
     actSortDesc: TAction;
     [Bind]
     btnSort: TSpeedButton;
+    [Bind]
+    actRefreshMostActive: TAction;
 {$IFDEF FMXAPP}
     [Bind]
     lblStatusText: TLabel;
@@ -65,6 +68,12 @@ type
     scrollMyStocks: TScrollBox;
     [Bind]
     scrollIndeces: TScrollBox;
+    [Bind]
+    scrollBoxMostActive: TScrollBox;
+    [Bind]
+    scrollBoxGainers: TScrollBox;
+    [Bind]
+    scrollBoxLosers: TScrollBox;
   protected
     fAlertEntryController: IController<TList<TAlertModel>>;
     fSettingsController: IController<TPSEAlertSettings>;
@@ -72,12 +81,13 @@ type
     procedure TriggerTimer1(Sender: TObject);
     procedure TriggerTimer2(Sender: TObject);
     procedure ExecuteRefreshAction(Sender: TObject);
+    procedure ExecuteRefreshMostActiveAction(Sender: TObject);
     procedure ExecuteAddAction(Sender: TObject);
     procedure ExecuteSortAction(Sender: TObject);
     procedure ReloadComboStockList(const aComboBox:{$IFDEF FMXAPP}TComboEdit{$ELSE}TComboBox{$ENDIF});
     procedure AddStockToWatchList(const aSymbol: string);
     procedure CreateStockPriceFrame(const aParent: {$IFDEF FMXAPP}TFMXObject{$ELSE}TWinControl{$ENDIF};
-      const aStockSymbol, aStockDescription: string);
+      const aStockSymbol, aStockDescription: string; aUserActions: TUserActions);
     procedure MainFormClose(Sender: TObject; var Action: TCloseAction);
     procedure MainFormCreate(Sender: TObject);
     procedure MainFormActivate(Sender: TObject);
@@ -94,12 +104,15 @@ implementation
 
 uses {$IFDEF FMXAPP}PSEAlert.FMX.MainForm{$ELSE}PSEAlert.MainForm{$ENDIF},
   PSEAlert.Messages,
-  PSEAlert.Controller.StockPrice, PSE.Data.Downloader, PSEAlert.Utils,
+  PSE.Data.Downloader, PSEAlert.Utils,
   Spring.Collections, PSE.Data,
   Spring.Persistence.Core.Interfaces,
   Spring.Persistence.Criteria.Interfaces,
   Spring.Persistence.Criteria.Restrictions,
-  Spring.Persistence.Criteria.Properties, PSE.Data.Repository;
+  Spring.Persistence.Criteria.OrderBy,
+  Spring.Persistence.Criteria.Properties, PSE.Data.Repository,
+  PSE.Data.Model.JSON,
+  Classes;
 
 function CreateMainFormController(aModel: TObject): IController<TObject>;
 begin
@@ -150,7 +163,7 @@ begin
 {$ELSE}
     if scrollMyStocks.FindChildControl(aSymbol.ToUpper) = nil then
 {$ENDIF}
-    CreateStockPriceFrame(scrollMyStocks, aSymbol.ToUpper, stock.Description);
+    CreateStockPriceFrame(scrollMyStocks, aSymbol.ToUpper, stock.Description, [Close]);
   end
   else
     MessageDlg('Unable to find ' + aSymbol.ToUpper, TMsgDlgType.mtError, [TMsgDlgBtn.mbOk], 0);
@@ -159,15 +172,15 @@ end;
 
 procedure TMainFormController.CreateStockPriceFrame(
   const aParent: {$IFDEF FMXAPP}TFMXObject{$ELSE}TWinControl{$ENDIF};
-  const aStockSymbol, aStockDescription: string);
+  const aStockSymbol, aStockDescription: string; aUserActions: TUserActions);
 var
-  controller: IController<TStockModel>;
-  stockModel: TStockModel;
+  controller: IController<TIntradayModel>;
+  stockModel: TIntradayModel;
 begin
-  stockModel := TStockModel.Create;
+  stockModel := TIntradayModel.Create;
   stockModel.Symbol := aStockSymbol;
   stockModel.Description := aStockDescription;
-  controller := CreateStockPriceController(stockModel, aParent);
+  controller := CreateStockPriceController(stockModel, aParent, aUserActions);
 end;
 
 destructor TMainFormController.Destroy;
@@ -208,8 +221,13 @@ begin
     procedure (stock: TIntradayModel)
     begin
       if stock <> nil then
-        MessengerInstance.SendMessage(TStockUpdateMessage.Create(stock));
+        MessengerInstance.SendMessage(TIntradayUpdateMessage.Create(stock));
     end);
+end;
+
+procedure TMainFormController.ExecuteRefreshMostActiveAction(Sender: TObject);
+begin
+  ExecuteRefreshAction(Sender);
 end;
 
 procedure TMainFormController.ExecuteSortAction(Sender: TObject);
@@ -281,10 +299,10 @@ begin
   inherited;
   MessengerInstance.RegisterReceiver(self, TPollIntervalChangedMessage);
   MessengerInstance.RegisterReceiver(self, TEnableDisablePollingMessage);
-  MessengerInstance.RegisterReceiver(self, TReloadDataMessage);
+  MessengerInstance.RegisterReceiver(self, TReloadDataMessage<TStockModel>);
   MessengerInstance.RegisterReceiver(self, TBeforeDownloadMessage);
   MessengerInstance.RegisterReceiver(self, TAfterDownloadMessage);
-  MessengerInstance.RegisterReceiver(self, TNoDataMessage);
+  MessengerInstance.RegisterReceiver(self, TNoDataMessage<TIntradayModel>);
   MessengerInstance.RegisterReceiver(self, TAddStockToWatchListMessage);
   MessengerInstance.RegisterReceiver(self, TAlertTriggeredMessage);
 
@@ -293,12 +311,15 @@ begin
 
   Timer1.OnTimer := TriggerTimer1;
   Timer2.OnTimer := TriggerTimer2;
+
+  // Attach action execute events
   actRefresh.OnExecute := ExecuteRefreshAction;
   actAdd.OnExecute := ExecuteAddAction;
   actSortAsc.OnExecute := ExecuteSortAction;
   actSortDesc.OnExecute := ExecuteSortAction;
+  actRefreshMostActive.OnExecute := ExecuteRefreshMostActiveAction;
 
-  btnSort.Action := actSortDesc;
+  btnSort.Action := actSortAsc;
 end;
 
 procedure TMainFormController.InitializeForm;
@@ -312,7 +333,8 @@ begin
 {$IFDEF FMXAPP}
   MainFormActivate(frmMain);
 {$ELSE}
-  frmMain.PageControl.ActivePage := frmMain.tabWatchList;
+  frmMain.PageControl.ActivePageIndex := 0;
+  frmMain.pageStocks.ActivePageIndex := 0;
   StatusBar1.Font.Size := 9;
 {$ENDIF}
 
@@ -325,7 +347,10 @@ var
   alertModels: IList<TAlertModel>;
   mainView: TfrmMain;
   stocks: IList<TStockModel>;
+  indeces: IList<TIndexModel>;
+  pseIndex: TIndexModel;
   stock: TStockModel;
+  activityDownloader: TStockActivityDownloader;
 begin
 
 {$IFNDEF FMXAPP}
@@ -337,20 +362,58 @@ begin
   stocks := stockRepository.GetFavoriteStocks;
   for stock in stocks do
   begin
-    CreateStockPriceFrame(scrollMyStocks, stock.Symbol, stock.description);
+    CreateStockPriceFrame(scrollMyStocks, stock.Symbol, stock.description, [Close]);
   end;
 
-  stocks := stockRepository.GetAllStocks(true);
-  for stock in stocks do
+  indeces := PSEAlertDb.Session.CreateCriteria<TIndexModel>
+              .OrderBy(TOrderBy.Asc('SORT_ORDER'))
+              .ToList;
+
+  for pseIndex in indeces do
   begin
-    CreateStockPriceFrame(scrollIndeces, stock.Symbol, stock.description);
+    CreateStockPriceFrame(scrollIndeces, pseIndex.AltIndexSymbol, pseIndex.IndexName, []);
   end;
 
-  alertModels := stockAlertRepository.GetStockAlerts;
+  // download most active
+  activityDownloader := TStockActivityDownloader.Create(TActivityDownloadType.MostActive);
+  activityDownloader.Execute(nil, nil,
+    procedure (aStock: TJSONDailySummaryModel)
+    begin
+      TThread.Synchronize(nil,
+      procedure
+      begin
+        CreateStockPriceFrame(scrollBoxMostActive, aStock.securitySymbol, aStock.securityName, [])
+      end);
+    end);
+
+  // top gainers
+  activityDownloader := TStockActivityDownloader.Create(TActivityDownloadType.Advance);
+  activityDownloader.Execute(nil, nil,
+    procedure (aStock: TJSONDailySummaryModel)
+    begin
+      TThread.Synchronize(nil,
+      procedure
+      begin
+        CreateStockPriceFrame(scrollBoxGainers, aStock.securitySymbol, aStock.securityName, [])
+      end);
+    end);
+
+  // top losers
+  activityDownloader := TStockActivityDownloader.Create(TActivityDownloadType.Decline);
+  activityDownloader.Execute(nil, nil,
+    procedure (aStock: TJSONDailySummaryModel)
+    begin
+      TThread.Synchronize(nil,
+      procedure
+      begin
+        CreateStockPriceFrame(scrollBoxLosers, aStock.securitySymbol, aStock.securityName, [])
+      end);
+    end);
 
   mainView := View as TfrmMain;
-  fAlertEntryController := CreateStockAlertEntryController(alertModels, mainView.tabAlerts);
 
+  alertModels := stockAlertRepository.GetStockAlerts;
+  fAlertEntryController := CreateStockAlertEntryController(alertModels, mainView.tabAlerts);
   fSettingsController := CreatePSEAlertSettingsController(PSEAlertSettings, mainView.tabAbout);
 
 end;
@@ -398,12 +461,12 @@ begin
       SetStatusText('Market Pre-Open');
   end
   else
-  if aMessage is TNoDataMessage then
+  if aMessage is TNoDataMessage<TIntradayModel> then
   begin
     SetStatusText('');
   end
   else
-  if aMessage is TReloadDataMessage then
+  if aMessage is TReloadDataMessage<TStockModel> then
   begin
     ReloadComboStockList(cmbAddStock);
   end

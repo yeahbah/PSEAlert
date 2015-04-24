@@ -54,18 +54,21 @@ type
     fId: string;
     fIndexSymbol: string;
     fIndexName: string;
-    fSortOrder: string;
+    fSortOrder: integer;
+    fAltIndexSymbol: string;
   public
-    [Column('ID')]
+    [Column('ID', [cpRequired, cpPrimaryKey])]
     property Id: string read fId write fId;
     [Column('INDEX_SYMBOL')]
     property IndexSymbol: string read fIndexSymbol write fIndexSymbol;
+    [Column('ALT_INDEX_SYMBOL')]
+    property AltIndexSymbol: string read fAltIndexSymbol write fAltIndexSymbol;
     [Column('INDEX_NAME')]
     property IndexName: string read fIndexName write fIndexName;
     [Column('IS_SECTORAL')]
     property IsSector: string read fIsSector write fIsSector;
     [Column('SORT_ORDER')]
-    property SortOrder: string read fSortOrder write fSortOrder;
+    property SortOrder: integer read fSortOrder write fSortOrder;
   end;
 
   [Entity]

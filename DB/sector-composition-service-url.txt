@@ -4,3 +4,7 @@ http://www.pse.com.ph/stockMarket/marketInfo-marketActivity-indicesComposition.h
 
 query
 http://www.pse.com.ph/stockMarket/marketInfo-marketActivity-indicesComposition.html?method=getCompositionIndices&ajax=true&sector=ALL
+
+
+most active
+www.pse.com.ph/stockMarket/dailySummary.html?method=getTopActiveStocks&ajax=true

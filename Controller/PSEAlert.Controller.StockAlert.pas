@@ -98,7 +98,6 @@ end;
 procedure TStockAlertController.DoCloseView(Sender: TObject);
 var
   p: {$IFDEF FMXAPP}TFMXObject{$ELSE}TWinControl{$ENDIF};
-  stockSymbol: string;
 begin
   p := (Sender as TAction).Owner as {$IFDEF FMXAPP}TFMXObject{$ELSE}TWinControl{$ENDIF};
   try
@@ -107,7 +106,6 @@ begin
 {$ELSE}
     p.Parent.RemoveControl(p);
 {$ENDIF}
-    //stockSymbol := ReplaceStr(p.Name, 'alert', string.Empty).Trim;
     stockAlertRepository.DeleteStockAlert(Model.ID);
     MessengerInstance.UnRegisterReceiver(Self);
     MessengerInstance.SendMessage(TDismissAlertMessage.Create(Model));
@@ -127,7 +125,7 @@ begin
   inherited;
   MessengerInstance.RegisterReceiver(self, TAcknoledgeAlertMessage);
   MessengerInstance.RegisterReceiver(self, TDismissAlertMessage);
-  MessengerInstance.RegisterReceiver(self, TStockUpdateMessage);
+  MessengerInstance.RegisterReceiver(self, TIntradayUpdateMessage);
 
   actDelete.OnExecute := DoCloseView;
 
@@ -158,10 +156,10 @@ var
   stock: TIntradayModel;
   alertModel: TAlertModel;
 begin
-  if aMessage is TStockUpdateMessage then
+  if aMessage is TIntradayUpdateMessage then
   begin
 
-    stock := (aMessage as TStockUpdateMessage).Data;
+    stock := (aMessage as TIntradayUpdateMessage).Data;
     if SameText(Model.StockSymbol, stock.Symbol) then
     begin
       if Model.CanTrigger then

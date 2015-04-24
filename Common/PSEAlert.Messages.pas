@@ -6,7 +6,7 @@ uses
   Yeahbah.Messaging, PSE.Data.Model, Vcl.Forms;
 
 type
-  TStockUpdateMessage = class(TGenericMessage<TIntradayModel>)
+  TIntradayUpdateMessage = class(TGenericMessage<TIntradayModel>)
   end;
 
   TAlertTriggeredMessage = class(TGenericMessage<TAlertModel>)
@@ -33,7 +33,7 @@ type
 
   end;
 
-  TReloadDataMessage = class(TMessageBase)
+  TReloadDataMessage<T> = class(TMessageBase)
 
   end;
 
@@ -45,7 +45,7 @@ type
 
   end;
 
-  TNoDataMessage = class(TMessageBase)
+  TNoDataMessage<T> = class(TMessageBase)
 
   end;
 

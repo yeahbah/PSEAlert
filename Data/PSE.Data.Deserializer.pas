@@ -3,34 +3,30 @@ unit PSE.Data.Deserializer;
 interface
 
 uses
-  Generics.Collections,
-  PSE.Data.Model;
+  Generics.Collections;
 
 type
   TDeserializer = class
   public
-    procedure Deserialize<T: class>(const aJSONText: string; const aObjects: TObjectList<T>);
+    procedure Deserialize(const aJSONText: string;
+      const aObjects: TObjectList<TObject>); virtual; abstract;
   end;
 
-  TPSEIntradayDeserializer = class sealed(TDeserializer)
+  TDeserializerFactory = class
   public
-    procedure Deserialize<T>(const aJSONText: string; const aObjects: TObjectList<TIntradayModel>);
+    class function GetDeserializer(const aClass: TClass): TDeserializer;
   end;
-
-  TPSEStockDataDeserializer = class sealed(TDeserializer)
-  protected
-    procedure Deserialize<T>(const aJSONText: string; const aObjects: TObjectList<TStockModel>);
-  end;
-
-
 
 
 implementation
 
 uses
+  PSE.Data.Model,
   PSE.Data.Model.JSON,
   System.JSON,
-  SysUtils, PSEAlert.Utils;
+  SysUtils, PSEAlert.Utils,
+  SvSerializer,
+  Generics.Defaults;
 
 type
   TModelConverter = class
@@ -41,12 +37,38 @@ type
       const aTarget: TStockHeaderModel); overload;
     class procedure ConvertModel(const aSource: TJSONStockModel;
       const aTarget: TStockModel); overload;
+    class procedure ConvertModel(const aSource: TJSONIndexModel;
+      const aTarget: TIndexModel); overload;
+  end;
+
+  TPSEIntradayDeserializer = class sealed(TDeserializer)
+  public
+    procedure Deserialize(const aJSONText: string;
+      const aObjects: TObjectList<TObject>); override;
+  end;
+
+  TPSEStockDataDeserializer = class sealed(TDeserializer)
+  public
+    procedure Deserialize(const aJSONText: string;
+      const aObjects: TObjectList<TObject>); override;
+  end;
+
+  TPSEIndexDataDeserializer = class sealed(TDeserializer)
+  public
+    procedure Deserialize(const aJSONText: string;
+      const aObjects: TObjectList<TObject>); override;
+  end;
+
+  TPSEDailySummaryDeserializer = class sealed(TDeserializer)
+  public
+    procedure Deserialize(const aJSONText: string;
+      const aObjects: TObjectList<TObject>); override;
   end;
 
 { TPSEIntradayDeserializer }
 
 procedure TPSEIntradayDeserializer.Deserialize(const aJSONText: string;
-  const aObjects: TObjectList<TIntradayModel>);
+  const aObjects: TObjectList<TObject>);
 var
   jsonStock: TJSONIntradayModel;
   intradayData: TIntradayModel;
@@ -148,31 +170,62 @@ class procedure TModelConverter.ConvertModel(const aSource: TJSONStockModel;
 begin
   aTarget.Symbol := aSource.securitySymbol;
   aTarget.Description := aSource.securityName;
-  aTarget.SecurityId := StrToInt(aSource.securityID);
-  aTarget.CompanyId := StrToInt(aSource.companyId);
-  aTarget.LastTradedPrice := StrToFloat(aSource.lastTradePrice);
+  aTarget.SecurityId := aSource.securityID;
+  aTarget.CompanyId := aSource.companyId;
+  aTarget.LastTradedPrice := aSource.lastTradePrice;
   if aSource.lastTradeDate.Trim <> '' then
     aTarget.LastTradedDate := ConvertStringDateToSystem(aSource.lastTradeDate);
-  aTarget.MarketCapitalization := StrToFloat(aSource.marketCapitilization);
-  aTarget.FreeFloatLevel := StrToFloat(aSource.freeFloatLevel);
-  aTarget.OutstandingShares := StrToFloat(aSource.outstandingShares);
+  aTarget.MarketCapitalization := aSource.marketCapitilization;
+  aTarget.FreeFloatLevel := aSource.freeFloatLevel;
+  aTarget.OutstandingShares := aSource.outstandingShares;
+end;
+
+class procedure TModelConverter.ConvertModel(const aSource: TJSONIndexModel;
+  const aTarget: TIndexModel);
+begin
+  aTarget.Id := aSource.indexId;
+  aTarget.IndexSymbol := aSource.indexAbb;
+  aTarget.IndexName := aSource.indexName;
+  aTarget.IsSector := aSource.isSectoral;
+  aTarget.SortOrder := aSource.sortOrder;
+  if aTarget.IndexSymbol = 'PSE' then
+    aTarget.AltIndexSymbol := '^PSEi'
+  else
+  if aTarget.IndexSymbol = 'ALL' then
+    aTarget.AltIndexSymbol := '^ALLSHARES'
+  else
+  if aTarget.IndexSymbol = 'FIN' then
+    aTarget.AltIndexSymbol := '^FINANCIAL'
+  else
+  if aTarget.IndexSymbol = 'IND' then
+    aTarget.AltIndexSymbol := '^INDUSTRIAL'
+  else
+  if aTarget.IndexSymbol = 'HDG' then
+    aTarget.AltIndexSymbol := '^HOLDING'
+  else
+  if aTarget.IndexSymbol = 'PRO' then
+    aTarget.AltIndexSymbol := '^PROPERTY'
+  else
+  if aTarget.IndexSymbol = 'SVC' then
+    aTarget.AltIndexSymbol := '^SERVICE'
+  else
+  if aTarget.IndexSymbol = 'M-O' then
+    aTarget.AltIndexSymbol := '^MINING-OIL';
+
 end;
 
 { TPSEStockDataDeserializer }
 
 procedure TPSEStockDataDeserializer.Deserialize(const aJSONText: string;
-  const aObjects: TObjectList<TStockModel>);
+  const aObjects: TObjectList<TObject>);
 var
   jsonStock: TJSONStockModel;
   stockData: TStockModel;
 
   jsonArray: TJSONArray;
   jsonValue: TJSONValue;
-  jsonObject: TJSONObject;
-  jsonPair: TJSONPair;
 
   i: Integer;
-
 begin
   aObjects.Clear;
 
@@ -195,26 +248,9 @@ begin
   begin
     jsonStock := TJSONStockModel.Create;
     try
-      jsonObject := jsonArray.Items[i] as TJSONObject;
-      jsonStock.securitySymbol := jsonObject.Get('securitySymbol').JsonValue.Value;
-      jsonStock.securityName := jsonObject.Get('securityName').JsonValue.Value;
-      jsonStock.lastTradePrice := jsonObject.Get('lastTradePrice').JsonValue.Value;
-
-      jsonPair := jsonObject.Get('lastTradeDate');
-      if jsonPair <> nil then
-      begin
-        jsonStock.lastTradeDate := jsonPair.JsonValue.Value;
-      end;
-      jsonStock.percentWeight := jsonObject.Get('percentWeight').JsonValue.Value;
-      jsonStock.securityID := jsonObject.Get('securityID').JsonValue.Value;
-      jsonStock.marketCapitilization := jsonObject.Get('marketCapitilization').JsonValue.Value;
-      jsonStock.freeFloatLevel := jsonObject.Get('freeFloatLevel').JsonValue.Value;
-      jsonStock.companyId := jsonObject.Get('companyId').JsonValue.Value;
-      jsonStock.outstandingShares := jsonObject.Get('outstandingShares').JsonValue.Value;
-
+      TSvSerializer.DeSerializeObject(jsonStock, jsonArray.Items[i].ToJSON, sstSuperJson);
       stockData := TStockModel.Create;
       TModelConverter.ConvertModel(jsonStock, stockData);
-
       aObjects.Add(stockData);
     finally
       jsonStock.Free;
@@ -223,16 +259,112 @@ begin
 
 end;
 
-{ TDeserializer<T> }
 
-procedure TDeserializer<T>.Deserialize(const aJSONText: string;
-  const aObjects: TObjectList<T>);
+{ TDeserializerFactory }
+
+class function TDeserializerFactory.GetDeserializer(
+  const aClass: TClass): TDeserializer;
 begin
-  if T = TStockModel then
-  begin
+  if aClass = TIntradayModel then
+    result := TPSEIntradayDeserializer.Create
+  else
+  if aClass = TStockModel then
+    result := TPSEStockDataDeserializer.Create
+  else
+  if aClass = TIndexModel then
+    result := TPSEIndexDataDeserializer.Create
+  else
+  if aClass = TJSONDailySummaryModel then
+    result := TPSEDailySummaryDeserializer.Create
+  else
+    raise Exception.Create('Unsupported type for deserialization');
+end;
 
-    Deserialize(aJSONText, aObjects)
-  end
+{ TPSEIndexDataDeserializer }
+
+procedure TPSEIndexDataDeserializer.Deserialize(const aJSONText: string;
+  const aObjects: TObjectList<TObject>);
+var
+  jsonIndexModel: TJSONIndexModel;
+  indexData: TIndexModel;
+
+  jsonArray: TJSONArray;
+  jsonValue: TJSONValue;
+
+  i: Integer;
+begin
+  jsonValue := TJSONObject.ParseJSONValue(aJSONText);
+  if jsonValue is TJSONObject then
+  begin
+    i := 0;
+    if TryStrToInt(TJSONObject(jsonValue).Get('count').JsonValue.Value, i) then
+      if i = 0 then
+        exit;
+  end;
+
+  jsonValue := TJSONObject.ParseJSONValue(
+    TJSONObject(jsonValue).Get('records').JsonValue.ToString);
+  Assert(jsonValue is TJSONArray);
+
+  jsonArray := jsonValue as TJSONArray;
+  for i := 0 to jsonArray.Count - 1  do
+  begin
+    jsonIndexModel := TJSONIndexModel.Create;
+    try
+      TSvSerializer.DeSerializeObject(jsonIndexModel, jsonArray.Items[i].ToJSON, sstSuperJson);
+      indexData := TIndexModel.Create;
+
+      TModelConverter.ConvertModel(jsonIndexModel, indexData);
+      aObjects.Add(indexData);
+    finally
+      jsonIndexModel.Free;
+    end;
+  end;
+
+end;
+
+{ TPSEDailySummaryDeserializer }
+
+procedure TPSEDailySummaryDeserializer.Deserialize(const aJSONText: string;
+  const aObjects: TObjectList<TObject>);
+var
+  jsonIndexModel: TJSONDailySummaryModel;
+
+  jsonArray: TJSONArray;
+  jsonValue: TJSONValue;
+
+  i: Integer;
+  sortResult: TDelegatedComparer<TObject>;
+begin
+  jsonValue := TJSONObject.ParseJSONValue(aJSONText);
+  if jsonValue is TJSONObject then
+  begin
+    i := 0;
+    if TryStrToInt(TJSONObject(jsonValue).Get('count').JsonValue.Value, i) then
+      if i = 0 then
+        exit;
+  end;
+
+  jsonValue := TJSONObject.ParseJSONValue(
+    TJSONObject(jsonValue).Get('records').JsonValue.ToString);
+  Assert(jsonValue is TJSONArray);
+
+  jsonArray := jsonValue as TJSONArray;
+  for i := 0 to jsonArray.Count - 1  do
+  begin
+    jsonIndexModel := TJSONDailySummaryModel.Create;
+
+    TSvSerializer.DeSerializeObject(jsonIndexModel, jsonArray.Items[i].ToJSON, sstSuperJson);
+    aObjects.Add(jsonIndexModel);
+
+  end;
+
+  sortResult := TDelegatedComparer<TObject>.Create(
+    function (const l, r: TObject): integer
+    begin
+      result := TJSONDailySummaryModel(l).number - TJSONDailySummaryModel(r).number
+    end);
+  aObjects.Sort(sortResult);
 
 end;
 
