@@ -1,0 +1,18 @@
+
+{"count":1,"records":
+[{"headerSqLow":"789.0000000000",
+"headerFiftyTwoWeekHigh":"806.5000000000",
+"headerChangeClose":"2.0000000000",
+"headerChangeClosePercChangeClose":"",
+"lastTradedDate":"2015-04-23 00:00:00.0",
+"headerTotalValue":"483,528,095.0000000000",
+"headerLastTradePrice":"795.0000000000",
+"headerSqHigh":"795.0000000000",
+"headerPercChangeClose":"0.2522068000",
+"headerFiftyTwoWeekLow":"613.5000000000",
+"headerSqPrevious":"793.0000000000",
+"securitySymbol":"AC",
+"headerCurrentPe":"38.7238188018",
+"headerSqOpen":"790.0000000000",
+"headerAvgPrice":"792.9029600000",
+"headerTotalVolume":"609,820.0000000000"}]}
