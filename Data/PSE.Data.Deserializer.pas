@@ -26,7 +26,8 @@ uses
   System.JSON,
   SysUtils, PSEAlert.Utils,
   SvSerializer,
-  Generics.Defaults;
+  Generics.Defaults,
+  JclStrings;
 
 type
   TModelConverter = class
@@ -167,8 +168,8 @@ begin
   aTarget.ChangeClose := aSource.headerChangeClose;
   aTarget.ChangeClosePercentage := aSource.headerPercChangeClose;
   aTarget.LastTradedPrice := aSource.headerLastTradePrice;
-  aTarget.TotalValue := Trunc(aSource.headerTotalValue);
-  aTarget.TotalVolume := Trunc(aSource.headerTotalVolume);
+  aTarget.TotalValue := Trunc(StrRemoveChars(aSource.headerTotalValue, [',']).ToSingle);
+  aTarget.TotalVolume := Trunc(StrRemoveChars(aSource.headerTotalVolume, [',']).ToSingle);
   aTarget.AvgPrice := aSource.headerAvgPrice;
   aTarget.CurrentPE := aSource.headerCurrentPe;
 

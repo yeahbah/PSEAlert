@@ -82,6 +82,7 @@ begin
       frm.Align := {$IFDEF FMXAPP}TAlignLayout.Top;{$ELSE}alTop{$ENDIF};
       frm.Name := 'alert' + GenerateControlName(aAlertModel.StockSymbol) + '_' + aAlertModel.ID.ToString;
       result := TStockAlertController.Create(aAlertModel, frm);
+      result.AutoFreeModel := true;
       frm.Visible := true;
     end);
   result := TControllerFactory<TAlertModel>.GetInstance(TframeStockAlert);

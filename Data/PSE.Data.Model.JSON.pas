@@ -31,8 +31,8 @@ type
     FheaderFiftyTwoWeekLow: single;
     FlastTradedDate: string;
     FheaderSqHigh: single;
-    FheaderTotalVolume: single;
-    FheaderTotalValue: single;
+    FheaderTotalVolume: string;
+    FheaderTotalValue: string;
     FheaderLastTradePrice: single;
     FheaderSqPrevious: single;
     FheaderChangeClose: single;
@@ -53,8 +53,8 @@ type
     procedure SetheaderSqHigh(const Value: single);
     procedure SetheaderSqOpen(const Value: single);
     procedure SetheaderSqPrevious(const Value: single);
-    procedure SetheaderTotalValue(const Value: single);
-    procedure SetheaderTotalVolume(const Value: single);
+    procedure SetheaderTotalValue(const Value: string);
+    procedure SetheaderTotalVolume(const Value: string);
     procedure SetlastTradedDate(const Value: string);
     procedure SetsecuritySymbol(const Value: string);
   public
@@ -63,7 +63,7 @@ type
     property headerChangeClose: single read FheaderChangeClose write SetheaderChangeClose;
     property headerChangeClosePercChangeClose: string read FheaderChangeClosePercChangeClose write SetheaderChangeClosePercChangeClose;
     property lastTradedDate: string read FlastTradedDate write SetlastTradedDate;
-    property headerTotalValue: single read FheaderTotalValue write SetheaderTotalValue;
+    property headerTotalValue: string read FheaderTotalValue write SetheaderTotalValue;
     property headerLastTradePrice: single read FheaderLastTradePrice write SetheaderLastTradePrice;
     property headerSqHigh: single read FheaderSqHigh write SetheaderSqHigh;
     property headerPercChangeClose: single read FheaderPercChangeClose write SetheaderPercChangeClose;
@@ -73,7 +73,7 @@ type
     property headerCurrentPe: single read FheaderCurrentPe write SetheaderCurrentPe;
     property headerSqOpen: single read FheaderSqOpen write SetheaderSqOpen;
     property headerAvgPrice: single read FheaderAvgPrice write SetheaderAvgPrice;
-    property headerTotalVolume: single read FheaderTotalVolume write SetheaderTotalVolume;
+    property headerTotalVolume: string read FheaderTotalVolume write SetheaderTotalVolume;
   end;
 
   TJSONPseHeaderModel = class
@@ -214,12 +214,12 @@ begin
   FheaderSqPrevious := Value;
 end;
 
-procedure TJSONStockHeaderModel.SetheaderTotalValue(const Value: single);
+procedure TJSONStockHeaderModel.SetheaderTotalValue(const Value: string);
 begin
   FheaderTotalValue := Value;
 end;
 
-procedure TJSONStockHeaderModel.SetheaderTotalVolume(const Value: single);
+procedure TJSONStockHeaderModel.SetheaderTotalVolume(const Value: string);
 begin
   FheaderTotalVolume := Value;
 end;

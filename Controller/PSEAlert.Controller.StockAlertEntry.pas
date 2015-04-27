@@ -265,14 +265,6 @@ begin
     comboSymbol.Items.Add(stock.Symbol);
   end;
 
-
-//  PSEStocksData.sqlStocks.Open;
-//  PSEStocksData.sqlStocks.First;
-//  while not PSEStocksData.sqlStocks.Eof do
-//  begin
-//    comboSymbol.Items.Add(PSEStocksData.sqlStocks.FieldByName('SYMBOL').AsString);
-//    PSEStocksData.sqlStocks.Next;
-//  end;
   comboSymbol.ItemIndex := 0;
 end;
 

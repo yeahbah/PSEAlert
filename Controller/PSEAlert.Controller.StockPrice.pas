@@ -30,7 +30,7 @@ type
     {$HINTS OFF}
     [Bind('Symbol', {$IFDEF FMXAPP}'Text'{$ELSE}'Caption'{$ENDIF})]
     lblStockSymbol: TLabel;
-    [Bind('Description',  {$IFDEF FMXAPP}'Text'{$ELSE}'Caption'{$ENDIF})]
+    [Bind('Description', {$IFDEF FMXAPP}'Text'{$ELSE}'Caption'{$ENDIF})]
     lblStockName: TLabel;
     [Bind]
     btnClose: TSpeedButton;
@@ -75,7 +75,7 @@ uses
   PSEAlert.Utils, PSEAlert.Messages, PSE.Data, PSE.Data.Repository, System.UITypes,
   PSEAlert.Controller.StockDetails, PSE.Data.Downloader,
   Spring.Persistence.Criteria.Interfaces,
-  Spring.Persistence.Criteria.Restrictions;
+  Spring.Persistence.Criteria.Restrictions, Yeahbah.ObjectClone;
 
 {$R PSEAlert.res PSEAlertResource.rc}
 
@@ -100,8 +100,10 @@ begin
         frm.stockInfoPanel.Cursor := crDefault;
 
       result := TStockPriceController.Create(aStockModel, frm);
+      result.AutoFreeModel := true;
       TStockPriceController(result).UserActions := aUserActions;
       frm.Visible := true;
+      TDataBindManager.BindView(frm, aStockModel);
     end);
   result := TControllerFactory<TIntradayModel>.GetInstance(TframeStockPrice);
 
@@ -166,7 +168,8 @@ begin
           TThread.Synchronize(nil,
             procedure
             begin
-              CreateStockDetailsController(self.View as TComponent, aStock)
+              CreateStockDetailsController(self.View as TComponent,
+                TObjectClone.From<TStockHeaderModel>(aStock))
             end);
         end)
     end;
