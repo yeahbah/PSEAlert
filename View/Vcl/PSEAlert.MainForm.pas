@@ -33,7 +33,6 @@ type
     btnAddStock: TButton;
     scrollMyStocks: TScrollBox;
     SpeedButton2: TSpeedButton;
-    scrollIndeces: TScrollBox;
     btnSort: TSpeedButton;
     SpeedButton1: TSpeedButton;
     tabTopGainers: TTabSheet;
@@ -45,6 +44,7 @@ type
     tabTopLosers: TTabSheet;
     SpeedButton3: TSpeedButton;
     scrollBoxLosers: TScrollBox;
+    scrollIndeces: TScrollBox;
     procedure ApplicationEvents1Exception(Sender: TObject; E: Exception);
   private
     { Private declarations }

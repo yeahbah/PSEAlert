@@ -25,55 +25,55 @@ type
 
   TJSONStockHeaderModel = class
   private
-    FheaderSqLow: string;
-    FheaderAvgPrice: string;
-    FheaderSqOpen: string;
-    FheaderFiftyTwoWeekLow: string;
+    FheaderSqLow: single;
+    FheaderAvgPrice: single;
+    FheaderSqOpen: single;
+    FheaderFiftyTwoWeekLow: single;
     FlastTradedDate: string;
-    FheaderSqHigh: string;
-    FheaderTotalVolume: string;
-    FheaderTotalValue: string;
-    FheaderLastTradePrice: string;
-    FheaderSqPrevious: string;
-    FheaderChangeClose: string;
-    FheaderCurrentPe: string;
+    FheaderSqHigh: single;
+    FheaderTotalVolume: single;
+    FheaderTotalValue: single;
+    FheaderLastTradePrice: single;
+    FheaderSqPrevious: single;
+    FheaderChangeClose: single;
+    FheaderCurrentPe: single;
     FsecuritySymbol: string;
-    FheaderFiftyTwoWeekHigh: string;
-    FheaderPercChangeClose: string;
+    FheaderFiftyTwoWeekHigh: single;
+    FheaderPercChangeClose: single;
     FheaderChangeClosePercChangeClose: string;
-    procedure SetheaderSqLow(const Value: string);
-    procedure SetheaderAvgPrice(const Value: string);
-    procedure SetheaderChangeClose(const Value: string);
+    procedure SetheaderSqLow(const Value: single);
+    procedure SetheaderAvgPrice(const Value: single);
+    procedure SetheaderChangeClose(const Value: single);
     procedure SetheaderChangeClosePercChangeClose(const Value: string);
-    procedure SetheaderCurrentPe(const Value: string);
-    procedure SetheaderFiftyTwoWeekHigh(const Value: string);
-    procedure SetheaderFiftyTwoWeekLow(const Value: string);
-    procedure SetheaderLastTradePrice(const Value: string);
-    procedure SetheaderPercChangeClose(const Value: string);
-    procedure SetheaderSqHigh(const Value: string);
-    procedure SetheaderSqOpen(const Value: string);
-    procedure SetheaderSqPrevious(const Value: string);
-    procedure SetheaderTotalValue(const Value: string);
-    procedure SetheaderTotalVolume(const Value: string);
+    procedure SetheaderCurrentPe(const Value: single);
+    procedure SetheaderFiftyTwoWeekHigh(const Value: single);
+    procedure SetheaderFiftyTwoWeekLow(const Value: single);
+    procedure SetheaderLastTradePrice(const Value: single);
+    procedure SetheaderPercChangeClose(const Value: single);
+    procedure SetheaderSqHigh(const Value: single);
+    procedure SetheaderSqOpen(const Value: single);
+    procedure SetheaderSqPrevious(const Value: single);
+    procedure SetheaderTotalValue(const Value: single);
+    procedure SetheaderTotalVolume(const Value: single);
     procedure SetlastTradedDate(const Value: string);
     procedure SetsecuritySymbol(const Value: string);
   public
-    property headerSqLow: string read FheaderSqLow write SetheaderSqLow;
-    property headerFiftyTwoWeekHigh: string read FheaderFiftyTwoWeekHigh write SetheaderFiftyTwoWeekHigh;
-    property headerChangeClose: string read FheaderChangeClose write SetheaderChangeClose;
+    property headerSqLow: single read FheaderSqLow write SetheaderSqLow;
+    property headerFiftyTwoWeekHigh: single read FheaderFiftyTwoWeekHigh write SetheaderFiftyTwoWeekHigh;
+    property headerChangeClose: single read FheaderChangeClose write SetheaderChangeClose;
     property headerChangeClosePercChangeClose: string read FheaderChangeClosePercChangeClose write SetheaderChangeClosePercChangeClose;
     property lastTradedDate: string read FlastTradedDate write SetlastTradedDate;
-    property headerTotalValue: string read FheaderTotalValue write SetheaderTotalValue;
-    property headerLastTradePrice: string read FheaderLastTradePrice write SetheaderLastTradePrice;
-    property headerSqHigh: string read FheaderSqHigh write SetheaderSqHigh;
-    property headerPercChangeClose: string read FheaderPercChangeClose write SetheaderPercChangeClose;
-    property headerFiftyTwoWeekLow: string read FheaderFiftyTwoWeekLow write SetheaderFiftyTwoWeekLow;
-    property headerSqPrevious: string read FheaderSqPrevious write SetheaderSqPrevious;
+    property headerTotalValue: single read FheaderTotalValue write SetheaderTotalValue;
+    property headerLastTradePrice: single read FheaderLastTradePrice write SetheaderLastTradePrice;
+    property headerSqHigh: single read FheaderSqHigh write SetheaderSqHigh;
+    property headerPercChangeClose: single read FheaderPercChangeClose write SetheaderPercChangeClose;
+    property headerFiftyTwoWeekLow: single read FheaderFiftyTwoWeekLow write SetheaderFiftyTwoWeekLow;
+    property headerSqPrevious: single read FheaderSqPrevious write SetheaderSqPrevious;
     property securitySymbol: string read FsecuritySymbol write SetsecuritySymbol;
-    property headerCurrentPe: string read FheaderCurrentPe write SetheaderCurrentPe;
-    property headerSqOpen: string read FheaderSqOpen write SetheaderSqOpen;
-    property headerAvgPrice: string read FheaderAvgPrice write SetheaderAvgPrice;
-    property headerTotalVolume: string read FheaderTotalVolume write SetheaderTotalVolume;
+    property headerCurrentPe: single read FheaderCurrentPe write SetheaderCurrentPe;
+    property headerSqOpen: single read FheaderSqOpen write SetheaderSqOpen;
+    property headerAvgPrice: single read FheaderAvgPrice write SetheaderAvgPrice;
+    property headerTotalVolume: single read FheaderTotalVolume write SetheaderTotalVolume;
   end;
 
   TJSONPseHeaderModel = class
@@ -153,12 +153,12 @@ implementation
 
 { TJSONStockHeaderModel }
 
-procedure TJSONStockHeaderModel.SetheaderAvgPrice(const Value: string);
+procedure TJSONStockHeaderModel.SetheaderAvgPrice(const Value: single);
 begin
   FheaderAvgPrice := Value;
 end;
 
-procedure TJSONStockHeaderModel.SetheaderChangeClose(const Value: string);
+procedure TJSONStockHeaderModel.SetheaderChangeClose(const Value: single);
 begin
   FheaderChangeClose := Value;
 end;
@@ -169,57 +169,57 @@ begin
   FheaderChangeClosePercChangeClose := Value;
 end;
 
-procedure TJSONStockHeaderModel.SetheaderCurrentPe(const Value: string);
+procedure TJSONStockHeaderModel.SetheaderCurrentPe(const Value: single);
 begin
   FheaderCurrentPe := Value;
 end;
 
-procedure TJSONStockHeaderModel.SetheaderFiftyTwoWeekHigh(const Value: string);
+procedure TJSONStockHeaderModel.SetheaderFiftyTwoWeekHigh(const Value: single);
 begin
   FheaderFiftyTwoWeekHigh := Value;
 end;
 
-procedure TJSONStockHeaderModel.SetheaderFiftyTwoWeekLow(const Value: string);
+procedure TJSONStockHeaderModel.SetheaderFiftyTwoWeekLow(const Value: single);
 begin
   FheaderFiftyTwoWeekLow := Value;
 end;
 
-procedure TJSONStockHeaderModel.SetheaderLastTradePrice(const Value: string);
+procedure TJSONStockHeaderModel.SetheaderLastTradePrice(const Value: single);
 begin
   FheaderLastTradePrice := Value;
 end;
 
-procedure TJSONStockHeaderModel.SetheaderPercChangeClose(const Value: string);
+procedure TJSONStockHeaderModel.SetheaderPercChangeClose(const Value: single);
 begin
   FheaderPercChangeClose := Value;
 end;
 
-procedure TJSONStockHeaderModel.SetheaderSqHigh(const Value: string);
+procedure TJSONStockHeaderModel.SetheaderSqHigh(const Value: single);
 begin
   FheaderSqHigh := Value;
 end;
 
-procedure TJSONStockHeaderModel.SetheaderSqLow(const Value: string);
+procedure TJSONStockHeaderModel.SetheaderSqLow(const Value: single);
 begin
   FheaderSqLow := Value;
 end;
 
-procedure TJSONStockHeaderModel.SetheaderSqOpen(const Value: string);
+procedure TJSONStockHeaderModel.SetheaderSqOpen(const Value: single);
 begin
   FheaderSqOpen := Value;
 end;
 
-procedure TJSONStockHeaderModel.SetheaderSqPrevious(const Value: string);
+procedure TJSONStockHeaderModel.SetheaderSqPrevious(const Value: single);
 begin
   FheaderSqPrevious := Value;
 end;
 
-procedure TJSONStockHeaderModel.SetheaderTotalValue(const Value: string);
+procedure TJSONStockHeaderModel.SetheaderTotalValue(const Value: single);
 begin
   FheaderTotalValue := Value;
 end;
 
-procedure TJSONStockHeaderModel.SetheaderTotalVolume(const Value: string);
+procedure TJSONStockHeaderModel.SetheaderTotalVolume(const Value: single);
 begin
   FheaderTotalVolume := Value;
 end;

@@ -41,25 +41,35 @@ type
       const aTarget: TIndexModel); overload;
   end;
 
+  // intraday data
   TPSEIntradayDeserializer = class sealed(TDeserializer)
   public
     procedure Deserialize(const aJSONText: string;
       const aObjects: TObjectList<TObject>); override;
   end;
 
+  // stock information
   TPSEStockDataDeserializer = class sealed(TDeserializer)
   public
     procedure Deserialize(const aJSONText: string;
       const aObjects: TObjectList<TObject>); override;
   end;
 
+  // market indeces
   TPSEIndexDataDeserializer = class sealed(TDeserializer)
   public
     procedure Deserialize(const aJSONText: string;
       const aObjects: TObjectList<TObject>); override;
   end;
 
+  // most active / top gainers / top losers
   TPSEDailySummaryDeserializer = class sealed(TDeserializer)
+  public
+    procedure Deserialize(const aJSONText: string;
+      const aObjects: TObjectList<TObject>); override;
+  end;
+
+  TPSEHeaderDataDeserializer = class sealed(TDeserializer)
   public
     procedure Deserialize(const aJSONText: string;
       const aObjects: TObjectList<TObject>); override;
@@ -148,19 +158,19 @@ class procedure TModelConverter.ConvertModel(
   const aSource: TJSONStockHeaderModel; const aTarget: TStockHeaderModel);
 begin
   aTarget.Symbol := aSource.securitySymbol;
-  aTarget.IntradayLow := StrToFloat(aSource.headerSqLow);
-  aTarget.IntradayHigh := StrToFloat(aSource.headerSqHigh);
-  aTarget.IntradayOpen := StrToFloat(aSource.headerSqOpen);
-  aTarget.PreviousClose := StrToFloat(aSource.headerSqPrevious);
-  aTarget.FiftyTwoWeekHigh := StrToFloat(aSource.headerFiftyTwoWeekHigh);
-  aTarget.FiftyTwoWeekLow := StrToFloat(aSource.headerFiftyTwoWeekLow);
-  aTarget.ChangeClose := StrToFloat(aSource.headerChangeClose);
-  aTarget.ChangeClosePercentage := StrToFloat(aSource.headerPercChangeClose);
-  aTarget.LastTradedPrice := StrToFloat(aSource.headerLastTradePrice);
-  aTarget.TotalValue := StrToInt64(aSource.headerTotalValue);
-  aTarget.TotalVolume := StrToInt64(aSource.headerTotalVolume);
-  aTarget.AvgPrice := StrToFloat(aSource.headerAvgPrice);
-  aTarget.CurrentPE := StrToFloat(aSource.headerCurrentPe);
+  aTarget.IntradayLow := aSource.headerSqLow;
+  aTarget.IntradayHigh := aSource.headerSqHigh;
+  aTarget.IntradayOpen := aSource.headerSqOpen;
+  aTarget.PreviousClose := aSource.headerSqPrevious;
+  aTarget.FiftyTwoWeekHigh := aSource.headerFiftyTwoWeekHigh;
+  aTarget.FiftyTwoWeekLow := aSource.headerFiftyTwoWeekLow;
+  aTarget.ChangeClose := aSource.headerChangeClose;
+  aTarget.ChangeClosePercentage := aSource.headerPercChangeClose;
+  aTarget.LastTradedPrice := aSource.headerLastTradePrice;
+  aTarget.TotalValue := Trunc(aSource.headerTotalValue);
+  aTarget.TotalVolume := Trunc(aSource.headerTotalVolume);
+  aTarget.AvgPrice := aSource.headerAvgPrice;
+  aTarget.CurrentPE := aSource.headerCurrentPe;
 
   aTarget.LastTradedDate := ConvertStringDateToSystem(aSource.lastTradedDate);
 end;
@@ -277,6 +287,9 @@ begin
   if aClass = TJSONDailySummaryModel then
     result := TPSEDailySummaryDeserializer.Create
   else
+  if aClass = TStockHeaderModel then
+    result := TPSEHeaderDataDeserializer.Create
+  else
     raise Exception.Create('Unsupported type for deserialization');
 end;
 
@@ -366,6 +379,50 @@ begin
     end);
   aObjects.Sort(sortResult);
 
+end;
+
+
+{ TPSEHeaderDataDeserializer }
+
+procedure TPSEHeaderDataDeserializer.Deserialize(const aJSONText: string;
+  const aObjects: TObjectList<TObject>);
+var
+  jsonStockHeader: TJSONStockHeaderModel;
+  jsonArray: TJSONArray;
+  jsonValue: TJSONValue;
+  i: integer;
+  sortResult: TDelegatedComparer<TObject>;
+  stockHeaderModel: TStockHeaderModel;
+begin
+
+  jsonValue := TJSONObject.ParseJSONValue(aJSONText);
+  if jsonValue is TJSONObject then
+  begin
+    i := 0;
+    if TryStrToInt(TJSONObject(jsonValue).Get('count').JsonValue.Value, i) then
+      if i = 0 then
+        exit;
+  end;
+
+  jsonValue := TJSONObject.ParseJSONValue(
+    TJSONObject(jsonValue).Get('records').JsonValue.ToString);
+  Assert(jsonValue is TJSONArray);
+
+  jsonArray := jsonValue as TJSONArray;
+  for i := 0 to jsonArray.Count - 1  do
+  begin
+    jsonStockHeader := TJSONStockHeaderModel.Create;
+    try
+      TSvSerializer.DeSerializeObject(jsonStockHeader, jsonArray.Items[i].ToJSON, sstSuperJson);
+
+      stockHeaderModel := TStockHeaderModel.Create;
+      TModelConverter.ConvertModel(jsonStockHeader, stockHeaderModel);
+      aObjects.Add(stockHeaderModel);
+    finally
+      jsonStockHeader.Free;
+    end;
+
+  end;
 end;
 
 end.

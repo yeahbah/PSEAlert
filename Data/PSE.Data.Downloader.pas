@@ -16,46 +16,37 @@ type
       const aForEachStockProc: TProc<T>); virtual;
   end;
 
+  // intraday data
   TIntradayDownloader = class sealed(TPSEDownloader<TIntradayModel>)
   public
     procedure Execute(const aBeforeDownloadProc: TProc; const aAfterDownloadProc: TProc;
       const aForEachStockProc: TProc<TIntradayModel>); override;
   end;
 
+  // stock information
   TStockDataDownloader = class sealed(TPSEDownloader<TStockModel>)
   public
     constructor Create(const aSector: string);
   end;
 
+  // market summary: most active, top gainers, top losers
   TActivityDownloadType = (MostActive, Advance, Decline);
   TStockActivityDownloader = class sealed(TPSEDownloader<TJSONDailySummaryModel>)
   public
     constructor Create(const aActivityDownloadType: TActivityDownloadType);
   end;
 
+  // market indeces
   TIndexDataDownloader = class sealed(TPSEDownloader<TIndexModel>)
   public
     constructor Create;
   end;
 
-  TStockDetail_HeaderDownloader = class sealed(TPSEDownloader<TJSONStockHeaderModel>)
+  // stock header information i.e. PE ratio, 52 wk hi/lo etc
+  TStockDetail_HeaderDownloader = class sealed(TPSEDownloader<TStockHeaderModel>)
   public
     constructor Create(const aStockId: integer);
   end;
-
-  TPSEHeaderData = class
-  private
-    fRecordCount: integer;
-  protected
-    procedure Deserialize(const aJSONText: string);
-  public
-    function UpdateStockHeaderObject(const aSymbol: string; aStockHeaderModel: TStockHeaderModel): boolean;
-  end;
-
-//  TStockIdMapDownloader = class
-//  public
-//    procedure Execute;
-//  end;
 
 implementation
 
@@ -173,58 +164,6 @@ begin
     end);
 end;
 
-{ TStockIdMapDownloader }
-
-//procedure TStockIdMapDownloader.Execute;
-//var
-//  i: Integer;
-//
-//  httpGet: TIndyHTTPClient;
-//  url: string;
-//  stream: TStringStream;
-//
-//  jsonArray: TJSONArray;
-//  jsonValue: TJSONValue;
-//  jsonObject: TJSONObject;
-//  recordCount: integer;
-//  symbol: string;
-//begin
-//  for i := 100 to 5000 do
-//  begin
-//    httpGet := TIndyHTTPClient.Create;
-//    try
-//      stream := TStringStream.Create;
-//      try
-//        url := 'http://pse.com.ph/stockMarket/companyInfo.html?method=fetchHeaderData&ajax=true&security=' + i.ToString;
-//        httpGet.Get(url, stream);
-//
-//        jsonValue := TJSONObject.ParseJSONValue(stream.DataString);
-//
-//        recordCount := StrToInt((jsonValue as TJSONObject).Get('count').JsonValue.Value);
-//        if recordCount = 0 then
-//          Continue;
-//
-//        jsonArray := (jsonValue as TJSONObject).Get('records').JsonValue as TJSONArray;
-//
-//        jsonObject := jsonArray.Items[0] as TJSONObject;
-//        try
-//          jsonValue := jsonObject.Get('securitySymbol').JsonValue;
-//          symbol := jsonValue.Value;
-//          PSEStocksData.PSEStocksConnection.ExecSQL('INSERT OR REPLACE INTO STOCKID_MAP (ID, SYMBOL) VALUES (' + i.ToString + ', ' + QuotedStr(symbol)+')');
-//          Sleep(500);
-//        except
-//          Continue;
-//        end;
-//
-//      finally
-//        stream.Free;
-//      end;
-//    finally
-//      httpGet.Free;
-//    end;
-//  end;
-//end;
-
 { TStockDataDownloader }
 
 constructor TStockDataDownloader.Create(const aSector: string);
@@ -234,130 +173,6 @@ begin
   inherited Create;
   fUrl := Format(PSE_INDEX_URL, [aSector]);
 end;
-
-//procedure TStockDataDownloader.Execute(const aBeforeDownloadProc,
-//  aAfterDownloadProc: TProc; const aForEachStockProc: TProc<TStockModel>);
-//var
-//  downloadStream: TStringStream;
-//  stockDataList: TObjectList<TStockModel>;
-//  deserializer: TPSEStockDataDeserializer;
-//begin
-//  if Assigned(aBeforeDownloadProc) then
-//    aBeforeDownloadProc;
-//
-//  MessengerInstance.SendMessage(TBeforeDownloadMessage.Create);
-//  Async(
-//    procedure
-//    begin
-//      downloadStream := TStringStream.Create;
-//      stockDataList := TObjectList<TStockModel>.Create;
-//      deserializer := TPSEStockDataDeserializer.Create;
-//      try
-//        Download(Format(PSE_INDEX_URL, ['ALL']), downloadStream);
-//        deserializer.Deserialize(downloadStream.DataString, stockDataList);
-//        if stockDataList.Count = 0 then
-//        begin
-//          if Assigned(aForEachStockProc) then
-//            aForEachStockProc(nil);
-//          MessengerInstance.SendMessage(TNoDataMessage.Create);
-//          Exit;
-//        end;
-//
-//        TGenericQuery<TStockModel>.ForEach(stockDataList,
-//          procedure (stock: TStockModel)
-//          begin
-//
-//            if Assigned(aForEachStockProc) then
-//              aForEachStockProc(stock);
-//
-//          end);
-//
-//      finally
-//        downloadStream.Free;
-//        stockDataList.Free;
-//        deserializer.Free;
-//      end;
-//    end)
-//  .Await(
-//    procedure
-//    begin
-//      if Assigned(aAfterDownloadProc) then
-//        aAfterDownloadProc;
-//      MessengerInstance.SendMessage(TAfterDownloadMessage.Create(Now));
-//    end);
-//
-//end;
-
-{ TPSEHeaderData }
-
-procedure TPSEHeaderData.Deserialize(const aJSONText: string);
-var
-  jsonStockHeader: TJSONStockHeaderModel;
-  jsonArray: TJSONArray;
-  jsonValue: TJSONValue;
-  jsonObject: TJSONObject;
-begin
-
-  jsonValue := TJSONObject.ParseJSONValue(aJSONText);
-
-  fRecordCount := StrToInt((jsonValue as TJSONObject).Get('count').JsonValue.Value);
-  if fRecordCount = 0 then
-    Exit;
-
-  jsonArray := (jsonValue as TJSONObject).Get('records').JsonValue as TJSONArray;
-
-  jsonStockHeader := TJSONStockHeaderModel.Create;
-  try
-    jsonObject := jsonArray.Items[0] as TJSONObject;
-    jsonStockHeader.headerSqLow := jsonObject.Get('headerSqLow').JsonValue.Value;
-    jsonStockHeader.headerFiftyTwoWeekHigh := jsonObject.Get('headerFiftyTwoWeekHigh').JsonValue.Value;
-    jsonStockHeader.headerChangeClose := jsonObject.Get('headerChangeClose').JsonValue.Value;
-    jsonStockHeader.lastTradedDate := jsonObject.Get('lastTradedDate').JsonValue.Value;
-    jsonStockHeader.headerTotalValue := jsonObject.Get('headerTotalValue').JsonValue.Value;
-    jsonStockHeader.headerLastTradePrice := jsonObject.Get('headerLastTradePrice').JsonValue.Value;
-    jsonStockHeader.headerSqHigh := jsonObject.Get('headerSqHigh').JsonValue.Value;;
-    jsonStockHeader.headerPercChangeClose := jsonObject.Get('headerPercChangeClose').JsonValue.Value;;
-    jsonStockHeader.headerFiftyTwoWeekLow := jsonObject.Get('headerFiftyTwoWeekLow').JsonValue.Value;;
-    jsonStockHeader.headerSqPrevious := jsonObject.Get('headerSqPrevious').JsonValue.Value;;
-    jsonStockHeader.securitySymbol := jsonObject.Get('securitySymbol').JsonValue.Value;;
-    jsonStockHeader.headerCurrentPe := jsonObject.Get('headerCurrentPe').JsonValue.Value;;
-    jsonStockHeader.headerSqOpen := jsonObject.Get('headerSqOpen').JsonValue.Value;;
-    jsonStockHeader.headerAvgPrice := jsonObject.Get('headerAvgPrice').JsonValue.Value;;
-    jsonStockHeader.headerTotalVolume := jsonObject.Get('headerTotalVolume').JsonValue.Value;;
-
-    //TModelConverter.ConvertModel(jsonStockHeader, fStockHeaderModel);
-
-  finally
-    jsonStockHeader.Free;
-  end;
-
-
-end;
-
-function TPSEHeaderData.UpdateStockHeaderObject(const aSymbol: string; aStockHeaderModel: TStockHeaderModel): boolean;
-//var
-//  httpGet: TIndyHTTPClient;
-//  url: string;
-//  stream: TStringStream;
-begin
-//  fStockHeaderModel := aStockHeaderModel;
-//  httpGet := TIndyHTTPClient.Create;
-//  try
-//    stream := TStringStream.Create;
-//    try
-//      url := 'http://pse.com.ph/stockMarket/companyInfo.html?method=fetchHeaderData&ajax=true&security=' + getStockId(aSymbol).ToString;
-//      httpGet.Get(url, stream);
-//      Deserialize(stream.DataString);
-//      result := fRecordCount > 0;
-//    finally
-//      stream.Free;
-//    end;
-//  finally
-//    httpGet.Free;
-//  end;
-  result := false;
-end;
-
 
 { TIndexDataDownloader }
 

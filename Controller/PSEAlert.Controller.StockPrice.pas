@@ -42,6 +42,8 @@ type
     lblStockVolume: TLabel;
     [Bind]
     imgStatus: TImage;
+    [Bind]
+    stockInfoPanel: TPanel;
 {$IFDEF FMXAPP}
 
 {$ELSE}
@@ -54,6 +56,7 @@ type
   protected
     procedure Initialize; override;
     procedure DoCloseView(Sender: TObject);
+    procedure DoStockInfoPanelClick(Sender: TObject);
     procedure SetStockStatusImage(const aStockStatus: TStockStatus;
       const aImage: {$IFDEF FMXAPP}TImage{$ELSE}TImage{$ENDIF});
   public
@@ -69,7 +72,10 @@ function CreateStockPriceController(aStockModel: TIntradayModel;
 implementation
 
 uses
-  PSEAlert.Utils, PSEAlert.Messages, PSE.Data, PSE.Data.Repository, System.UITypes;
+  PSEAlert.Utils, PSEAlert.Messages, PSE.Data, PSE.Data.Repository, System.UITypes,
+  PSEAlert.Controller.StockDetails, PSE.Data.Downloader,
+  Spring.Persistence.Criteria.Interfaces,
+  Spring.Persistence.Criteria.Restrictions;
 
 {$R PSEAlert.res PSEAlertResource.rc}
 
@@ -90,6 +96,9 @@ begin
       {$ENDIF}
       frm.Align := {$IFDEF FMXAPP}TAlignLayout.Top{$ELSE}alTop{$ENDIF};
       frm.Name := GenerateControlName(aStockModel.Symbol);
+      if aStockModel.Symbol[1] = '^' then
+        frm.stockInfoPanel.Cursor := crDefault;
+
       result := TStockPriceController.Create(aStockModel, frm);
       TStockPriceController(result).UserActions := aUserActions;
       frm.Visible := true;
@@ -130,6 +139,41 @@ begin
   end;
 end;
 
+procedure TStockPriceController.DoStockInfoPanelClick(Sender: TObject);
+var
+  downloader: TStockDetail_HeaderDownloader;
+  stockModel: TStockModel;
+begin
+  if self.Model.Symbol[1] <> '^' then
+  begin
+
+    stockModel := PSEAlertDb.Session.CreateCriteria<TStockModel>
+      .Add(TRestrictions.Eq('SYMBOL', Model.Symbol.ToUpper)).ToList.SingleOrDefault(nil);
+    if stockModel <> nil then
+    begin
+      downloader := TStockDetail_HeaderDownloader.Create(stockModel.SecurityId);
+      downloader.Execute(
+        procedure
+        begin
+          Application.MainForm.Cursor := crHourGlass;
+        end,
+        procedure
+        begin
+          Application.MainForm.Cursor := crDefault;
+        end,
+        procedure (aStock: TStockHeaderModel)
+        begin
+          TThread.Synchronize(nil,
+            procedure
+            begin
+              CreateStockDetailsController(self.View as TComponent, aStock)
+            end);
+        end)
+    end;
+
+  end;
+end;
+
 procedure TStockPriceController.Initialize;
 begin
   inherited;
@@ -145,6 +189,7 @@ begin
 //
 //  end;
   btnClose.OnClick := DoCloseView;
+  stockInfoPanel.OnClick := DoStockInfoPanelClick;
   lblStockSymbol.Font.Style := [TFontStyle.fsBold];
   lblStockSymbol.Font.Size := 12;
   lblStockName.Font.Size := 9;
@@ -186,6 +231,7 @@ begin
           lblStockVolume.Caption := volumeText;
 {$ENDIF}
           SetStockStatusImage(stock.Status, imgStatus);
+          (View as TframeStockPrice).Refresh;
         end);
     end;
   end;

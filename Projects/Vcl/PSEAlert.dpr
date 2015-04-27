@@ -32,7 +32,10 @@ uses
   PSE.Data.Model.JSON in '..\..\Data\PSE.Data.Model.JSON.pas',
   PSE.Data.Deserializer in '..\..\Data\PSE.Data.Deserializer.pas',
   SvSerializerSuperJson,
-  PSEAlert.AlertFormManager in '..\..\Common\PSEAlert.AlertFormManager.pas';
+  PSEAlert.AlertFormManager in '..\..\Common\PSEAlert.AlertFormManager.pas',
+  PSEAlert.Frames.StockFilter in '..\..\View\Vcl\PSEAlert.Frames.StockFilter.pas' {frameStockFilter: TFrame},
+  PSEAlert.Forms.StockDetails in '..\..\View\Vcl\PSEAlert.Forms.StockDetails.pas' {frmStockDetails},
+  PSEAlert.Controller.StockDetails in '..\..\Controller\PSEAlert.Controller.StockDetails.pas';
 
 {$R *.res}
 

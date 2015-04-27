@@ -19,8 +19,8 @@ type
     PopupMenu1: TPopupMenu;
     NewAlert1: TMenuItem;
     btnAlert: TSpeedButton;
-    Panel1: TPanel;
-    procedure Panel1Click(Sender: TObject);
+    stockInfoPanel: TPanel;
+    procedure stockInfoPanelClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -54,7 +54,7 @@ begin
 end;
 
 
-procedure TframeStockPrice.Panel1Click(Sender: TObject);
+procedure TframeStockPrice.stockInfoPanelClick(Sender: TObject);
 begin
   ShowMessage('hello');
 end;
