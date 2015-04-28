@@ -34,7 +34,8 @@ var
 
 implementation
 
-uses PSE.Data;
+uses
+  PSE.Data;
 
 { TStocksRepository }
 
@@ -54,7 +55,7 @@ end;
 
 function TStocksRepository.GetFavoriteStocks: IList<TStockModel>;
 begin
-  result := PSEAlertDb.Session.GetList<TStockModel>('SELECT * FROM STOCKS WHERE ISFAVORITE = :0', [1]);
+  result := PSEAlertDb.Session.GetList<TStockModel>('SELECT * FROM STOCKS WHERE ISFAVORITE = :0 ORDER BY SYMBOL', [1]);
 end;
 
 procedure TStocksRepository.MakeFavorite(const aStockSymbol: string);

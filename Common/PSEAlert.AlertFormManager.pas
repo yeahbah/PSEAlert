@@ -27,7 +27,6 @@ type
 var
   AlertFormManager: TAlertFormManager;
 
-
 implementation
 
 { TAlertFormManager }
@@ -62,14 +61,15 @@ begin
 
     frm := TfrmAlert.Create(Application);
 {$IFDEF FMXAPP}
-    frm.lblStockSymbol.Text := Format(frm.lblStockSymbol.Text, [alertModel.StockSymbol]);
-    frm.lblPriceTrigger.Text := alertModel.PriceTrigger.ToString;
-    frm.lblVolumeTrigger.Text := alertModel.VolumeTrigger.ToString;
+//    frm.lblStockSymbol.Text := Format(frm.lblStockSymbol.Text, [alertModel.StockSymbol]);
+//    frm.lblPriceTrigger.Text := alertModel.PriceTrigger.ToString;
+//    frm.lblVolumeTrigger.Text := alertModel.VolumeTrigger.ToString;
     frm.Left := Screen.Size.Width - frm.Width - 20;
 {$ELSE}
-    frm.lblStockSymbol.Caption := Format(frm.lblStockSymbol.Caption, [alertModel.StockSymbol]);
-    frm.lblPriceTrigger.Caption := alertModel.PriceTriggerDescription;
-    frm.lblVolumeTrigger.Caption := alertModel.VolumeTriggerDescription;
+//    frm.lblStockSymbol.Caption := Format(frm.lblStockSymbol.Caption, [alertModel.StockSymbol]);
+//    frm.lblPriceTrigger.Caption := alertModel.PriceTriggerDescription;
+//    frm.lblVolumeTrigger.Caption := alertModel.VolumeTriggerDescription;
+//    frm.lblNote.Caption := alertModel.Notes;
     frm.Left := Screen.Width - frm.Width - 20;
 {$ENDIF}
 
@@ -78,8 +78,6 @@ begin
     else
       frm.Top := 20;
     frm.AlertModel := TObjectClone.From(alertModel);
-//    frm.AlertModel.PriceTrigger := TObjectClone.From(alertModel.PriceTrigger);
-//    frm.AlertModel.VolumeTrigger := TObjectClone.From(alertModel.VolumeTrigger);
     frm.Show;
     fAlertForms.Add(frm);
   end

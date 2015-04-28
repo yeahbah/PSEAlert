@@ -18,7 +18,7 @@ type
     StaticText2: TStaticText;
     StaticText3: TStaticText;
     ImageList1: TImageList;
-    StaticText4: TStaticText;
+    lblVersion: TStaticText;
     Label2: TLabel;
     cmbSkin: TComboBox;
     procedure cmbSkinChange(Sender: TObject);
@@ -34,7 +34,8 @@ implementation
 {$R *.dfm}
 
 uses
-  Vcl.Themes, PSEAlert.Settings;
+  Vcl.Themes, PSEAlert.Settings,
+  JclFileUtils;
 
 { TframeSettings }
 
@@ -73,6 +74,9 @@ begin
 
   Font.Size := 9;
   cmbSkin.ItemIndex := cmbSkin.Items.IndexOf(PSEAlertSettings.Skin);
+
+  lblVersion.Caption := 'PSEAlert Version: ' + VersionFixedFileInfoString
+    (ParamStr(0), vfFull, 'Unknown');
 end;
 
 end.

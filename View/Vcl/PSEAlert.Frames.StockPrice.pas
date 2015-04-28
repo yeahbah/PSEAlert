@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.Buttons, Vcl.ImgList, Vcl.Menus;
+  Vcl.Buttons, Vcl.ImgList, Vcl.Menus, System.ImageList;
 
 type
   TframeStockPrice = class(TFrame)
@@ -13,13 +13,14 @@ type
     lblStockName: TLabel;
     lblStockPrice: TLabel;
     lblStockVolume: TLabel;
-    Bevel1: TBevel;
     btnClose: TSpeedButton;
     imgStatus: TImage;
     ImageList1: TImageList;
     PopupMenu1: TPopupMenu;
     NewAlert1: TMenuItem;
     btnAlert: TSpeedButton;
+    stockInfoPanel: TPanel;
+    procedure stockInfoPanelClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -52,5 +53,10 @@ begin
   inherited;
 end;
 
+
+procedure TframeStockPrice.stockInfoPanelClick(Sender: TObject);
+begin
+  ShowMessage('hello');
+end;
 
 end.

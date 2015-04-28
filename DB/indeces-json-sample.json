@@ -1,0 +1,11 @@
+http://www.pse.com.ph/stockMarket/marketInfo-marketActivity-indicesComposition.html?method=getMarketIndices&ajax=true
+
+{"count":8,
+"records":[
+	{"indexId":"PSE_MKTIN20080000001",
+	"isSectoral":"Y",
+	"sortOrder":2,
+	"indexName":"All Shares",
+	"indexAbb":"ALL"},{"indexId":"PSE_MKTIN20080000002","isSectoral":"N","sortOrder":1,"indexName":"PSEi","indexAbb":"PSE"},{"indexId":"PSE_MKTIN20080000003","isSectoral":"Y","sortOrder":3,"indexName":"Financials","indexAbb":"FIN"},{"indexId":"PSE_MKTIN20080000008","isSectoral":"Y","sortOrder":4,"indexName":"Industrial","indexAbb":"IND"},{"indexId":"PSE_MKTIN20080000004","isSectoral":"Y","sortOrder":5,"indexName":"Holding Firms","indexAbb":"HDG"},{"indexId":"PSE_MKTIN20080000007","isSectoral":"Y","sortOrder":7,"indexName":"Mining and Oil","indexAbb":"M-O"},{"indexId":"PSE_MKTIN20080000005","isSectoral":"Y","sortOrder":8,"indexName":"Property","indexAbb":"PRO"},{"indexId":"PSE_MKTIN20080000006","isSectoral":"Y","sortOrder":6,"indexName":"Services","indexAbb":"SVC"}]}
+	
+	
