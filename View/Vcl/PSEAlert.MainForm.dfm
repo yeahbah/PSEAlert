@@ -22,7 +22,7 @@ object frmMain: TfrmMain
     Margins.Top = 2
     Margins.Right = 2
     Margins.Bottom = 2
-    ActivePage = tabIndeces
+    ActivePage = tabMarket
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -31,7 +31,6 @@ object frmMain: TfrmMain
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 302
     object tabMarket: TTabSheet
       Margins.Left = 2
       Margins.Top = 2
@@ -45,7 +44,6 @@ object frmMain: TfrmMain
       Font.Style = []
       ImageIndex = -1
       ParentFont = False
-      ExplicitWidth = 294
       object pageStocks: TPageControl
         Left = 0
         Top = 0
@@ -55,10 +53,12 @@ object frmMain: TfrmMain
         Align = alClient
         Style = tsFlatButtons
         TabOrder = 0
-        ExplicitWidth = 294
         object tabWatchList: TTabSheet
           Caption = 'Watch List'
+          ExplicitLeft = 0
+          ExplicitTop = 0
           ExplicitWidth = 286
+          ExplicitHeight = 0
           DesignSize = (
             336
             497)
@@ -116,7 +116,10 @@ object frmMain: TfrmMain
         object tabMostActive: TTabSheet
           Caption = 'Most Active'
           ImageIndex = 1
+          ExplicitLeft = 0
+          ExplicitTop = 0
           ExplicitWidth = 286
+          ExplicitHeight = 0
           DesignSize = (
             336
             497)
@@ -145,7 +148,10 @@ object frmMain: TfrmMain
         object tabTopGainers: TTabSheet
           Caption = 'Top Gainers'
           ImageIndex = 2
+          ExplicitLeft = 0
+          ExplicitTop = 0
           ExplicitWidth = 286
+          ExplicitHeight = 0
           DesignSize = (
             336
             497)
@@ -174,7 +180,6 @@ object frmMain: TfrmMain
         object tabTopLosers: TTabSheet
           Caption = 'Top Losers'
           ImageIndex = 3
-          ExplicitWidth = 286
           DesignSize = (
             336
             497)
@@ -197,7 +202,6 @@ object frmMain: TfrmMain
             BevelOuter = bvNone
             BorderStyle = bsNone
             TabOrder = 0
-            ExplicitWidth = 282
           end
         end
       end
@@ -215,7 +219,6 @@ object frmMain: TfrmMain
       Font.Style = []
       ImageIndex = -1
       ParentFont = False
-      ExplicitWidth = 294
       DesignSize = (
         344
         530)
@@ -254,7 +257,10 @@ object frmMain: TfrmMain
       Font.Style = []
       ImageIndex = 1
       ParentFont = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
       ExplicitWidth = 294
+      ExplicitHeight = 0
     end
     object tabAbout: TTabSheet
       Caption = 'Settings'
@@ -265,7 +271,10 @@ object frmMain: TfrmMain
       Font.Style = []
       ImageIndex = -1
       ParentFont = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
       ExplicitWidth = 294
+      ExplicitHeight = 0
     end
   end
   object StatusBar1: TStatusBar
@@ -281,7 +290,6 @@ object frmMain: TfrmMain
     Panels = <>
     SimplePanel = True
     UseSystemFont = False
-    ExplicitWidth = 302
   end
   object ApplicationEvents1: TApplicationEvents
     OnException = ApplicationEvents1Exception
@@ -294,7 +302,7 @@ object frmMain: TfrmMain
     Left = 70
     Top = 47
     Bitmap = {
-      494C010104000800780018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101040008007C0018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000003000000001002000000000000048
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

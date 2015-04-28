@@ -392,7 +392,6 @@ var
   jsonArray: TJSONArray;
   jsonValue: TJSONValue;
   i: integer;
-  sortResult: TDelegatedComparer<TObject>;
   stockHeaderModel: TStockHeaderModel;
 begin
 
