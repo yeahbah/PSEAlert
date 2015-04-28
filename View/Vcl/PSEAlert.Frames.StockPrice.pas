@@ -5,8 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls,
-  Vcl.Buttons, Vcl.ImgList, Vcl.Menus, System.ImageList,
-  DSharp.Bindings.VCLControls;
+  Vcl.Buttons, Vcl.ImgList, Vcl.Menus, System.ImageList;
 
 type
   TframeStockPrice = class(TFrame)

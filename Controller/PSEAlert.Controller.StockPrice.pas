@@ -54,6 +54,7 @@ type
 {$ENDIF}
     {$HINTS ON}
   protected
+    fStockDetailsController: IController<TStockHeaderModel>;
     procedure Initialize; override;
     procedure DoCloseView(Sender: TObject);
     procedure DoStockInfoPanelClick(Sender: TObject);
@@ -75,7 +76,7 @@ uses
   PSEAlert.Utils, PSEAlert.Messages, PSE.Data, PSE.Data.Repository, System.UITypes,
   PSEAlert.Controller.StockDetails, PSE.Data.Downloader,
   Spring.Persistence.Criteria.Interfaces,
-  Spring.Persistence.Criteria.Restrictions, Yeahbah.ObjectClone;
+  Spring.Persistence.Criteria.Restrictions;
 
 {$R PSEAlert.res PSEAlertResource.rc}
 
@@ -103,7 +104,6 @@ begin
       result.AutoFreeModel := true;
       TStockPriceController(result).UserActions := aUserActions;
       frm.Visible := true;
-      TDataBindManager.BindView(frm, aStockModel);
     end);
   result := TControllerFactory<TIntradayModel>.GetInstance(TframeStockPrice);
 
@@ -133,9 +133,6 @@ begin
 {$ENDIF}
     MessengerInstance.UnRegisterReceiver(self);
     stockRepository.Unfavorite(p.Name);
-    //PSEAlertDb.Session.Execute('UPDATE STOCKS SET ISFAVORITE = null WHERE SYMBOL = :0', [p.Name]);
-
-//    PSEStocksData.PSEStocksConnection.ExecSQL('UPDATE STOCKS SET ISFAVORITE = null WHERE SYMBOL = ' + QuotedStr(p.Name));
   finally
     p.Free;
   end;
@@ -168,8 +165,7 @@ begin
           TThread.Synchronize(nil,
             procedure
             begin
-              CreateStockDetailsController(self.View as TComponent,
-                TObjectClone.From<TStockHeaderModel>(aStock))
+              fStockDetailsController := CreateStockDetailsController(self.View as TComponent, aStock);
             end);
         end)
     end;

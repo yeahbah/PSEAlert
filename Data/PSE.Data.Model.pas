@@ -119,6 +119,7 @@ type
     fChangeClosePercentage: single;
   public
     constructor Create;
+    destructor Destroy; override;
     property Symbol: string read fSymbol write fSymbol;
     property FiftyTwoWeekHigh: single read fFiftyTwoWeekHigh write fFiftyTwoWeekHigh;
     property FiftyTwoWeekLow: single read fFiftyTwoWeekLow write fFiftyTwoWeekLow;
@@ -383,6 +384,12 @@ begin
   fIntradayOpen := 0;
   fIntradayHigh := 0;
   fChangeClosePercentage := 0;
+end;
+
+destructor TStockHeaderModel.Destroy;
+begin
+
+  inherited;
 end;
 
 end.

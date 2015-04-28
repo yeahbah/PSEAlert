@@ -9,7 +9,7 @@ uses
 
 type
   TfrmStockDetails = class(TForm)
-    lblLastUpdateDateTime: TLabel;
+    lblStockName: TLabel;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -42,10 +42,7 @@ type
     ImageList2: TImageList;
     ActionList: TActionList;
     actRefresh: TAction;
-    actAdd: TAction;
-    actSortAsc: TAction;
-    actSortDesc: TAction;
-    actRefreshMostActive: TAction;
+    actAddAlert: TAction;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Button2Click(Sender: TObject);
     procedure actRefreshExecute(Sender: TObject);

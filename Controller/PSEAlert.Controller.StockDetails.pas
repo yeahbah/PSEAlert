@@ -12,46 +12,68 @@ uses
   StdCtrls,
   SysUtils,
   Classes,
-  DSharp.Bindings;
+  DSharp.Bindings,
+  SvBindings.Converters.DWScript;
 
 type
   TStockDetailsController = class(TBaseController<TStockHeaderModel>, IMessageReceiver)
   private
     {$HINTS OFF}
     [Bind]
-    lblLastUpdateDateTime: TLabel;
-    [Bind('LastTradedPrice', 'Caption')]
+    lblStockName: TLabel;
+
+    [BindExpression('LastTradedPrice', 'Caption', 'FormatFloat(''#,##0.####'', LastTradedPrice)', '')]
     lblLastTradePrice: TLabel;
-    [Bind('ChangeClose', 'Caption')]
+
+    [BindExpression('ChangeClose', 'Caption', 'FormatFloat(''0.##'', ChangeClose)', '')]
     lblChange: TLabel;
-    [Bind('ChangeClosePercentage', 'Caption')]
+
+    [BindExpression('ChangeClosePercentage', 'Caption', 'FormatFloat(''0.##'', ChangeClosePercentage)', '')]
     lblPctChange: TLabel;
-    [Bind('TotalValue', 'Caption')]
+
+    [BindExpression('TotalValue', 'Caption', 'FormatFloat(''#,##0.##'', TotalValue)', '')]
     lblValue: TLabel;
 
-    [Bind('TotalVolume', 'Caption', TBindingMode.bmOneWay, Ord(TBindConverterType.bctIntegerToString))]
+    [BindExpression('TotalVolume', 'Caption', 'FormatFloat(''#,##0'', TotalVolume)', '')]
     lblVolume: TLabel;
 
-    [Bind('IntradayOpen', 'Caption')]
+    [BindExpression('IntradayOpen', 'Caption', 'FormatFloat(''#,##0.####'', IntradayOpen)', '')]
     lblOpen: TLabel;
 
-    [Bind('IntradayHigh', 'Caption')]
+    [BindExpression('IntradayHigh', 'Caption', 'FormatFloat(''#,##0.####'', IntradayHigh)', '')]
     lblHigh: TLabel;
 
-    [Bind('IntradayLow', 'Caption')]
+    [BindExpression('IntradayLow', 'Caption', 'FormatFloat(''#,##0.####'', IntradayLow)', '')]
     lblLow: TLabel;
 
-    [Bind('AvgPrice', 'Caption')]
+    [BindExpression('AvgPrice', 'Caption', 'FormatFloat(''#,##0.####'', AvgPrice)', '')]
     lblAvgPrice: TLabel;
+
+    [BindExpression('PreviousClose', 'Caption', 'FormatFloat(''#,##0.####'', PreviousClose)', '')]
+    lblPrevClose: TLabel;
+
+    [BindExpression('CurrentPE', 'Caption', 'FormatFloat(''#,##0.##'', CurrentPE)', '')]
+    lblPERatio: TLabel;
+
+    [BindExpression('FiftyTwoWeekHigh', 'Caption', 'FormatFloat(''#,##0.####'', FiftyTwoWeekHigh)', '')]
+    lbl52WkHigh: TLabel;
+
+    [BindExpression('FiftyTwoWeekLow', 'Caption', 'FormatFloat(''#,##0.####'', FiftyTwoWeekLow)', '')]
+    lbl52WkLow: TLabel;
 
     [Bind]
     actRefresh: TAction;
+
+    [Bind]
+    actAddAlert: TAction;
     {$HINTS ON}
     fStockId: integer;
   protected
     procedure Initialize; override;
     procedure DoExecuteRefreshAction(Sender: TObject);
+    procedure DoExecuteAddAlertAction(Sender: TObject);
   public
+    destructor Destroy; override;
     procedure Receive(const aMessage: IMessage);
     property StockId: integer read fStockId;
   end;
@@ -64,7 +86,7 @@ uses PSEAlert.Forms.StockDetails, Forms, PSEAlert.Messages, PSE.Data.Downloader,
   PSE.Data,
   Spring.Persistence.Criteria.Interfaces,
   Spring.Persistence.Criteria.Restrictions,
-  UITypes;
+  UITypes, Yeahbah.ObjectClone;
 
 function CreateStockDetailsController(aOwner: TComponent; aModel: TStockHeaderModel): IController<TStockHeaderModel>;
 begin
@@ -72,10 +94,13 @@ begin
     function: IController<TStockHeaderModel>
     var
       frm: TfrmStockDetails;
+      s: TStockHeaderModel;
     begin
-      frm := TfrmStockDetails.Create(aOwner);
 
-      result := TStockDetailsController.Create(aModel, frm);
+      frm := TfrmStockDetails.Create(aOwner);
+      s := TObjectClone.From<TStockHeaderModel>(aModel);
+      result := TStockDetailsController.Create(s, frm);
+
       TStockDetailsController(result).AutoFreeModel := true;
 
       frm.Caption := aModel.Symbol;
@@ -87,6 +112,17 @@ end;
 
 { TStockDetailsController }
 
+destructor TStockDetailsController.Destroy;
+begin
+
+  inherited;
+end;
+
+procedure TStockDetailsController.DoExecuteAddAlertAction(Sender: TObject);
+begin
+  MessengerInstance.SendMessage(TAddStockAlertMessage.Create(self.Model.Symbol));
+end;
+
 procedure TStockDetailsController.DoExecuteRefreshAction(Sender: TObject);
 var
   downloader: TStockDetail_HeaderDownloader;
@@ -96,9 +132,12 @@ begin
   begin
 
     stockModel := PSEAlertDb.Session.CreateCriteria<TStockModel>
-      .Add(TRestrictions.Eq('SYMBOL', Model.Symbol.ToUpper)).ToList.SingleOrDefault(nil);
+      .Add(
+        TRestrictions.Eq('SYMBOL', Model.Symbol.ToUpper))
+      .ToList.SingleOrDefault(nil);
     if stockModel <> nil then
     begin
+      lblStockName.Caption := stockModel.Description;
       downloader := TStockDetail_HeaderDownloader.Create(stockModel.SecurityId);
       downloader.Execute(
         procedure
@@ -138,22 +177,31 @@ begin
 end;
 
 procedure TStockDetailsController.Initialize;
+var
+  stockModel: TStockModel;
 begin
   inherited;
-  MessengerInstance.RegisterReceiver(self, TAfterDownloadMessage);
+  //MessengerInstance.RegisterReceiver(self, TAfterDownloadMessage);
 
   actRefresh.OnExecute := DoExecuteRefreshAction;
+  actAddAlert.OnExecute := DoExecuteAddAlertAction;
+
+  stockModel := PSEAlertDb.Session.CreateCriteria<TStockModel>
+    .Add(TRestrictions.Eq('SYMBOL', Model.Symbol.ToUpper)).ToList.SingleOrDefault(nil);
+  if stockModel <> nil then
+    lblStockName.Caption := stockModel.Description;
+
 end;
 
 procedure TStockDetailsController.Receive(const aMessage: IMessage);
 begin
-  if aMessage is TAfterDownloadMessage then
-  begin
-    if (aMessage as TAfterDownloadMessage).Data > 0 then
-      lblLastUpdateDateTime.Caption := 'As of ' + DateTimeToStr((aMessage as TAfterDownloadMessage).Data)
-    else
-      lblLastUpdateDateTime.Caption := 'Market Pre-Open';
-  end;
+//  if aMessage is TAfterDownloadMessage then
+//  begin
+//    if (aMessage as TAfterDownloadMessage).Data > 0 then
+//      lblLastUpdateDateTime.Caption := 'As of ' + DateTimeToStr((aMessage as TAfterDownloadMessage).Data)
+//    else
+//      lblLastUpdateDateTime.Caption := 'Market Pre-Open';
+//  end;
 end;
 
 end.

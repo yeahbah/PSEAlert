@@ -4,7 +4,7 @@ object frmStockDetails: TfrmStockDetails
   BorderStyle = bsDialog
   Caption = 'frmStockDetails'
   ClientHeight = 177
-  ClientWidth = 532
+  ClientWidth = 512
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,16 +15,22 @@ object frmStockDetails: TfrmStockDetails
   Position = poOwnerFormCenter
   OnClose = FormClose
   DesignSize = (
-    532
+    512
     177)
   PixelsPerInch = 96
   TextHeight = 13
-  object lblLastUpdateDateTime: TLabel
+  object lblStockName: TLabel
     Left = 8
     Top = 8
-    Width = 29
-    Height = 13
+    Width = 30
+    Height = 15
     Caption = 'As of '
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
   end
   object Label1: TLabel
     Left = 8
@@ -62,144 +68,144 @@ object frmStockDetails: TfrmStockDetails
     Caption = 'Volume:'
   end
   object Label6: TLabel
-    Left = 208
+    Left = 192
     Top = 40
     Width = 32
     Height = 13
     Caption = 'Open:'
   end
   object Label7: TLabel
-    Left = 208
+    Left = 192
     Top = 59
     Width = 28
     Height = 13
     Caption = 'High:'
   end
   object Label8: TLabel
-    Left = 208
+    Left = 192
     Top = 78
     Width = 24
     Height = 13
     Caption = 'Low:'
   end
   object Label9: TLabel
-    Left = 208
+    Left = 192
     Top = 97
     Width = 52
     Height = 13
     Caption = 'Avg. Price:'
   end
   object Label10: TLabel
-    Left = 368
+    Left = 344
     Top = 40
     Width = 77
     Height = 13
     Caption = 'Previous Close:'
   end
   object Label11: TLabel
-    Left = 368
+    Left = 344
     Top = 59
     Width = 49
     Height = 13
     Caption = 'P/E Ratio:'
   end
   object Label12: TLabel
-    Left = 368
+    Left = 344
     Top = 78
     Width = 75
     Height = 13
     Caption = '52 Week High:'
   end
   object Label13: TLabel
-    Left = 368
+    Left = 344
     Top = 97
     Width = 71
     Height = 13
     Caption = '52 Week Low:'
   end
   object lblLastTradePrice: TLabel
-    Left = 104
+    Left = 95
     Top = 40
-    Width = 98
+    Width = 82
     Height = 13
     Alignment = taRightJustify
     AutoSize = False
     Caption = 'lblLastTradePrice'
   end
   object lblChange: TLabel
-    Left = 104
+    Left = 95
     Top = 59
-    Width = 98
+    Width = 82
     Height = 13
     Alignment = taRightJustify
     AutoSize = False
     Caption = 'Label14'
   end
   object lblPctChange: TLabel
-    Left = 104
+    Left = 95
     Top = 78
-    Width = 98
+    Width = 82
     Height = 13
     Alignment = taRightJustify
     AutoSize = False
     Caption = 'Label14'
   end
   object lblValue: TLabel
-    Left = 104
+    Left = 95
     Top = 97
-    Width = 98
+    Width = 82
     Height = 13
     Alignment = taRightJustify
     AutoSize = False
     Caption = 'Label14'
   end
   object lblVolume: TLabel
-    Left = 104
+    Left = 95
     Top = 116
-    Width = 98
+    Width = 82
     Height = 13
     Alignment = taRightJustify
     AutoSize = False
     Caption = 'Label14'
   end
   object lblOpen: TLabel
-    Left = 272
+    Left = 252
     Top = 40
-    Width = 90
+    Width = 75
     Height = 13
     Alignment = taRightJustify
     AutoSize = False
     Caption = 'lblLastTradePrice'
   end
   object lblHigh: TLabel
-    Left = 272
+    Left = 252
     Top = 59
-    Width = 90
+    Width = 75
     Height = 13
     Alignment = taRightJustify
     AutoSize = False
     Caption = 'Label14'
   end
   object lblLow: TLabel
-    Left = 272
+    Left = 252
     Top = 78
-    Width = 90
+    Width = 75
     Height = 13
     Alignment = taRightJustify
     AutoSize = False
     Caption = 'Label14'
   end
   object lblAvgPrice: TLabel
-    Left = 272
+    Left = 252
     Top = 97
-    Width = 90
+    Width = 75
     Height = 13
     Alignment = taRightJustify
     AutoSize = False
     Caption = 'Label14'
   end
   object lblPrevClose: TLabel
-    Left = 448
+    Left = 424
     Top = 40
     Width = 73
     Height = 13
@@ -208,7 +214,7 @@ object frmStockDetails: TfrmStockDetails
     Caption = 'Label14'
   end
   object lblPERatio: TLabel
-    Left = 448
+    Left = 424
     Top = 59
     Width = 73
     Height = 13
@@ -217,7 +223,7 @@ object frmStockDetails: TfrmStockDetails
     Caption = 'Label14'
   end
   object lbl52WkHigh: TLabel
-    Left = 448
+    Left = 424
     Top = 78
     Width = 73
     Height = 13
@@ -226,7 +232,7 @@ object frmStockDetails: TfrmStockDetails
     Caption = 'Label14'
   end
   object lbl52WkLow: TLabel
-    Left = 448
+    Left = 424
     Top = 97
     Width = 73
     Height = 13
@@ -235,7 +241,7 @@ object frmStockDetails: TfrmStockDetails
     Caption = 'Label14'
   end
   object SpeedButton2: TSpeedButton
-    Left = 498
+    Left = 474
     Top = 8
     Width = 23
     Height = 22
@@ -243,15 +249,15 @@ object frmStockDetails: TfrmStockDetails
     Anchors = [akTop, akRight]
   end
   object Button1: TButton
-    Left = 203
+    Left = 187
     Top = 144
     Width = 75
     Height = 25
-    Caption = 'Create Alert'
+    Action = actAddAlert
     TabOrder = 0
   end
   object Button2: TButton
-    Left = 284
+    Left = 268
     Top = 144
     Width = 75
     Height = 25
@@ -265,7 +271,7 @@ object frmStockDetails: TfrmStockDetails
     Left = 342
     Top = 65535
     Bitmap = {
-      494C010104000800800018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000800880018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000003000000001002000000000000048
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -875,21 +881,8 @@ object frmStockDetails: TfrmStockDetails
       ShortCut = 16466
       OnExecute = actRefreshExecute
     end
-    object actAdd: TAction
-      Caption = '&Add'
-    end
-    object actSortAsc: TAction
-      Caption = 'actSortAsc'
-      ImageIndex = 2
-    end
-    object actSortDesc: TAction
-      Caption = 'actSortDesc'
-      ImageIndex = 3
-    end
-    object actRefreshMostActive: TAction
-      Caption = 'actRefreshMostActive'
-      ImageIndex = 0
-      ShortCut = 16466
+    object actAddAlert: TAction
+      Caption = 'Create Alert'
     end
   end
 end

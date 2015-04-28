@@ -53,6 +53,10 @@ type
 
   end;
 
+  TAddStockAlertMessage = class(TStringMessage)
+
+  end;
+
 
 
 implementation

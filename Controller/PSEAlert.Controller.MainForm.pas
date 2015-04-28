@@ -305,6 +305,7 @@ begin
   MessengerInstance.RegisterReceiver(self, TNoDataMessage<TIntradayModel>);
   MessengerInstance.RegisterReceiver(self, TAddStockToWatchListMessage);
   MessengerInstance.RegisterReceiver(self, TAlertTriggeredMessage);
+  MessengerInstance.RegisterReceiver(self, TAddStockAlertMessage);
 
   Timer1 := TTimer.Create(Application);
   Timer2 := TTimer.Create(Application);
@@ -474,6 +475,12 @@ begin
   if aMessage is TAddStockToWatchListMessage then
   begin
     AddStockToWatchList((aMessage as TAddStockToWatchListMessage).Data);
+  end
+  else
+  if aMessage is TAddStockAlertMessage then
+  begin
+    frmMain.PageControl.ActivePage := frmMain.tabAlerts;
+
   end;
 {$IFNDEF FMXAPP}
   if aMessage is TAlertTriggeredMessage then

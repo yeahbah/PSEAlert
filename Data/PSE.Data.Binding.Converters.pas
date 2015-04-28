@@ -18,11 +18,11 @@ implementation
 
 procedure RegisterConverters;
 begin
-    TDataBindManager.RegisterConverter(bctIntegerToString,
-    function(AAtribute: BindAttribute; ASource, ATarget: TObject): IValueConverter
-    begin
-      Result := TIntegerConverter.Create;
-    end );
+//    TDataBindManager.RegisterConverter(bctIntegerToString,
+//    function(AAtribute: BindAttribute; ASource, ATarget: TObject): IValueConverter
+//    begin
+//      Result := TIntegerConverter.Create;
+//    end );
 end;
 
 { TIntegerConverter }
@@ -43,6 +43,6 @@ begin
 end;
 
 initialization
-  RegisterConverters;
+//  RegisterConverters;
 
 end.
