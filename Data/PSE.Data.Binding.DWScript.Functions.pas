@@ -25,6 +25,7 @@ begin
 end;
 
 initialization
-   RegisterInternalStringFunction(TFormatFloatFunc, 'FormatFloat', ['fmt', SYS_STRING, 'str', SYS_FLOAT], [iffStateLess], 'FormatFloat');
+   RegisterInternalStringFunction(TFormatFloatFunc, 'FormatFloat',
+    ['fmt', SYS_STRING, 'value', SYS_FLOAT], [iffStateLess], 'FormatFloat');
 
 end.

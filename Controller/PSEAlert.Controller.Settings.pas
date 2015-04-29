@@ -164,7 +164,7 @@ var
 begin
 
   stockDownloader := TStockDataDownloader.Create('ALL');
-  stockDownloader.Execute(
+  stockDownloader.ExecuteAsync(
     procedure
     begin
       {$IFDEF FMXAPP}
@@ -180,11 +180,6 @@ begin
     begin
       indexDownloader := TIndexDataDownloader.Create;
       indexDownloader.Execute(
-          nil,
-          procedure
-          begin
-            MessengerInstance.SendMessage(TReloadDataMessage<TIndexModel>.Create);
-          end,
           procedure (index: TIndexModel)
           var
             c1: ICriteria<TIndexModel>;
@@ -211,7 +206,7 @@ begin
       btnReloadData.Caption := 'Reload Data';
       {$ENDIF}
       MessengerInstance.SendMessage(TReloadDataMessage<TStockModel>.Create);
-
+      MessengerInstance.SendMessage(TReloadDataMessage<TIndexModel>.Create);
     end,
     procedure (stock: TStockModel)
     var

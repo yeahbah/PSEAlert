@@ -37,7 +37,13 @@ uses
   PSEAlert.Forms.StockDetails in '..\..\View\Vcl\PSEAlert.Forms.StockDetails.pas' {frmStockDetails},
   PSEAlert.Controller.StockDetails in '..\..\Controller\PSEAlert.Controller.StockDetails.pas',
   PSE.Data.Binding.Converters in '..\..\Data\PSE.Data.Binding.Converters.pas',
-  PSE.Data.Binding.DWScript.Functions in '..\..\Data\PSE.Data.Binding.DWScript.Functions.pas';
+  PSE.Data.Binding.DWScript.Functions in '..\..\Data\PSE.Data.Binding.DWScript.Functions.pas',
+  PSEAlert.Service.StockFilterService in '..\..\Service\PSEAlert.Service.StockFilterService.pas',
+  PSEAlert.Service.Filter.PERatioFilter in '..\..\Service\PSEAlert.Service.Filter.PERatioFilter.pas',
+  PSEAlert.Service.View.PERatioFilter in '..\..\Service\PSEAlert.Service.View.PERatioFilter.pas',
+  PSEAlert.Service.Controller.PERatioFilter in '..\..\Service\PSEAlert.Service.Controller.PERatioFilter.pas',
+  PSEAlert.Service.Types in '..\..\Service\PSEAlert.Service.Types.pas',
+  PSEAlert.Service.Filter.StockFilterItemBase in '..\..\Service\PSEAlert.Service.Filter.StockFilterItemBase.pas';
 
 {$R *.res}
 

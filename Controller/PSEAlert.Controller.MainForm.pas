@@ -207,7 +207,7 @@ var
   downloadTask: TIntradayDownloader;
 begin
   downloadTask := TIntradayDownloader.Create;
-  downloadTask.Execute(
+  downloadTask.ExecuteAsync(
     procedure
     begin
       actRefresh.Enabled := false;
@@ -223,6 +223,8 @@ begin
       if stock <> nil then
         MessengerInstance.SendMessage(TIntradayUpdateMessage.Create(stock));
     end);
+
+
 end;
 
 procedure TMainFormController.ExecuteRefreshMostActiveAction(Sender: TObject);
@@ -377,7 +379,7 @@ begin
 
   // download most active
   activityDownloader := TStockActivityDownloader.Create(TActivityDownloadType.MostActive);
-  activityDownloader.Execute(nil, nil,
+  activityDownloader.ExecuteAsync(nil, nil,
     procedure (aStock: TJSONDailySummaryModel)
     begin
       TThread.Synchronize(nil,
@@ -389,7 +391,7 @@ begin
 
   // top gainers
   activityDownloader := TStockActivityDownloader.Create(TActivityDownloadType.Advance);
-  activityDownloader.Execute(nil, nil,
+  activityDownloader.ExecuteAsync(nil, nil,
     procedure (aStock: TJSONDailySummaryModel)
     begin
       TThread.Synchronize(nil,
@@ -401,7 +403,7 @@ begin
 
   // top losers
   activityDownloader := TStockActivityDownloader.Create(TActivityDownloadType.Decline);
-  activityDownloader.Execute(nil, nil,
+  activityDownloader.ExecuteAsync(nil, nil,
     procedure (aStock: TJSONDailySummaryModel)
     begin
       TThread.Synchronize(nil,

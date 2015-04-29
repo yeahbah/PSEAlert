@@ -139,7 +139,7 @@ begin
     begin
       lblStockName.Caption := stockModel.Description;
       downloader := TStockDetail_HeaderDownloader.Create(stockModel.SecurityId);
-      downloader.Execute(
+      downloader.ExecuteAsync(
         procedure
         begin
           Application.MainForm.Cursor := crHourGlass;

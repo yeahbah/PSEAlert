@@ -12,14 +12,15 @@ type
     fUrl: string;
     procedure Download(const aSourceUrl: string; const aOuputStream: TStream); virtual;
   public
-    procedure Execute(const aBeforeDownloadProc: TProc; const aAfterDownloadProc: TProc;
+    procedure ExecuteAsync(const aBeforeDownloadProc: TProc; const aAfterDownloadProc: TProc;
       const aForEachStockProc: TProc<T>); virtual;
+    procedure Execute(const aForEachStockProc: TProc<T>); virtual;
   end;
 
   // intraday data
   TIntradayDownloader = class sealed(TPSEDownloader<TIntradayModel>)
   public
-    procedure Execute(const aBeforeDownloadProc: TProc; const aAfterDownloadProc: TProc;
+    procedure ExecuteAsync(const aBeforeDownloadProc: TProc; const aAfterDownloadProc: TProc;
       const aForEachStockProc: TProc<TIntradayModel>); override;
   end;
 
@@ -58,7 +59,7 @@ uses
 
 { TDownloadTask }
 
-procedure TIntradayDownloader.Execute(const aBeforeDownloadProc: TProc;
+procedure TIntradayDownloader.ExecuteAsync(const aBeforeDownloadProc: TProc;
   const aAfterDownloadProc: TProc;
   const aForEachStockProc: TProc<TIntradayModel>);
 var
@@ -197,12 +198,45 @@ begin
   end;
 end;
 
-procedure TPSEDownloader<T>.Execute(const aBeforeDownloadProc,
-  aAfterDownloadProc: TProc; const aForEachStockProc: TProc<T>);
+procedure TPSEDownloader<T>.Execute(const aForEachStockProc: TProc<T>);
 var
   downloadStream: TStringStream;
   objects: TObjectList<TObject>;
   deserializer: TDeserializer;
+begin
+  downloadStream := TStringStream.Create;
+  objects := TObjectList<TObject>.Create;
+  deserializer := TDeserializerFactory.GetDeserializer(T);
+  try
+    Download(fUrl, downloadStream);
+    deserializer.Deserialize(downloadStream.DataString, objects);
+    if objects.Count = 0 then
+    begin
+      if Assigned(aForEachStockProc) then
+        aForEachStockProc(nil);
+      MessengerInstance.SendMessage(TNoDataMessage<T>.Create);
+      Exit;
+    end;
+
+    TGenericQuery<TObject>.ForEach(objects,
+      procedure (stock: TObject)
+      begin
+
+        if Assigned(aForEachStockProc) then
+          aForEachStockProc(stock as T);
+
+      end);
+
+  finally
+    downloadStream.Free;
+    objects.Free;
+    deserializer.Free;
+  end;
+end;
+
+procedure TPSEDownloader<T>.ExecuteAsync(const aBeforeDownloadProc,
+  aAfterDownloadProc: TProc; const aForEachStockProc: TProc<T>);
+
 begin
   if Assigned(aBeforeDownloadProc) then
     aBeforeDownloadProc;
@@ -211,34 +245,7 @@ begin
   Async(
     procedure
     begin
-      downloadStream := TStringStream.Create;
-      objects := TObjectList<TObject>.Create;
-      deserializer := TDeserializerFactory.GetDeserializer(T);
-      try
-        Download(Format(fUrl, ['ALL']), downloadStream);
-        deserializer.Deserialize(downloadStream.DataString, objects);
-        if objects.Count = 0 then
-        begin
-          if Assigned(aForEachStockProc) then
-            aForEachStockProc(nil);
-          MessengerInstance.SendMessage(TNoDataMessage<T>.Create);
-          Exit;
-        end;
-
-        TGenericQuery<TObject>.ForEach(objects,
-          procedure (stock: TObject)
-          begin
-
-            if Assigned(aForEachStockProc) then
-              aForEachStockProc(stock as T);
-
-          end);
-
-      finally
-        downloadStream.Free;
-        objects.Free;
-        deserializer.Free;
-      end;
+      Execute(aForEachStockProc);
     end)
   .Await(
     procedure

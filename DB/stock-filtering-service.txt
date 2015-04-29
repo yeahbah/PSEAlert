@@ -1,0 +1,20 @@
+FilterService
+
+FilterService.RegisterFilter(TFilterItemBase)
+
+--- FilterItemBase
+--------- TPERatioFilter ---> View <--- Spring.RequestView<TPERatioFilter>
+--------- TSectorFilter
+--------- TDividendFilter
+
+FilterView ---> FilterController <--- Spring.RequestController<TPERatioFilter>
+
+
+TFilterBase.Result = TList<TFilterResultItem >
+
+
+TFilterResultItem = class
+   - stock: TStock
+   - StockAttrib: TDictionary<string, string>
+
+TList<TFilterResultItem> := FilterService.Run() 

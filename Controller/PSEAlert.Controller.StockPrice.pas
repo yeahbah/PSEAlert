@@ -151,7 +151,7 @@ begin
     if stockModel <> nil then
     begin
       downloader := TStockDetail_HeaderDownloader.Create(stockModel.SecurityId);
-      downloader.Execute(
+      downloader.ExecuteAsync(
         procedure
         begin
           Application.MainForm.Cursor := crHourGlass;
