@@ -14,65 +14,6 @@ object frameStockPrice: TframeStockPrice
   DesignSize = (
     309
     50)
-  object lblStockSymbol: TLabel
-    Left = 27
-    Top = -1
-    Width = 23
-    Height = 28
-    Caption = 'PX'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -20
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-  end
-  object lblStockName: TLabel
-    Left = 27
-    Top = 26
-    Width = 180
-    Height = 20
-    Anchors = [akLeft, akTop, akRight]
-    AutoSize = False
-    Caption = 'Philex Mining'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -15
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-    ShowAccelChar = False
-  end
-  object lblStockPrice: TLabel
-    Left = 179
-    Top = 2
-    Width = 96
-    Height = 28
-    Alignment = taRightJustify
-    Anchors = [akTop, akRight]
-    Caption = '123,456.00'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -20
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-  end
-  object lblStockVolume: TLabel
-    Left = 213
-    Top = 26
-    Width = 62
-    Height = 20
-    Alignment = taRightJustify
-    Anchors = [akTop, akRight]
-    Caption = '1,000,000'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -15
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-  end
   object imgStatus: TImage
     Left = 5
     Top = 7
@@ -164,12 +105,72 @@ object frameStockPrice: TframeStockPrice
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
       ExplicitLeft = 280
     end
+    object lblStockVolume: TLabel
+      Left = 207
+      Top = 25
+      Width = 62
+      Height = 20
+      Alignment = taRightJustify
+      Anchors = [akTop, akRight]
+      Caption = '1,000,000'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblStockSymbol: TLabel
+      Left = 27
+      Top = -1
+      Width = 23
+      Height = 28
+      Caption = 'PX'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -20
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblStockName: TLabel
+      Left = 27
+      Top = 25
+      Width = 150
+      Height = 20
+      Anchors = [akLeft, akTop, akRight]
+      AutoSize = False
+      Caption = 'Philex Mining'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      ShowAccelChar = False
+    end
+    object lblStockPrice: TLabel
+      Left = 173
+      Top = 2
+      Width = 96
+      Height = 28
+      Alignment = taRightJustify
+      Anchors = [akTop, akRight]
+      Caption = '123,456.00'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -20
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      ExplicitLeft = 179
+    end
   end
   object ImageList1: TImageList
     Left = 136
     Top = 9
     Bitmap = {
-      494C010102008400E40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102008400E80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       000000000000000000000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFF
       FF00F0F0F000EBEBEB00EBEBEB00EBEBEB00EBEBEB00EBEBEB00EBEBEB00EBEB
