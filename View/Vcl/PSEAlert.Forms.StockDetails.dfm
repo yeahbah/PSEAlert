@@ -1,308 +1,277 @@
-object frmMain: TfrmMain
+object frmStockDetails: TfrmStockDetails
   Left = 0
   Top = 0
-  Caption = 'PSEAlert'
-  ClientHeight = 583
-  ClientWidth = 352
+  BorderStyle = bsDialog
+  Caption = 'frmStockDetails'
+  ClientHeight = 177
+  ClientWidth = 512
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -10
+  Font.Height = -11
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = False
+  Position = poOwnerFormCenter
+  OnClose = FormClose
+  DesignSize = (
+    512
+    177)
   PixelsPerInch = 96
-  TextHeight = 12
-  object PageControl: TPageControl
-    Left = 0
-    Top = 0
-    Width = 352
-    Height = 562
-    Margins.Left = 2
-    Margins.Top = 2
-    Margins.Right = 2
-    Margins.Bottom = 2
-    ActivePage = tabMarket
-    Align = alClient
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 0
-    object tabMarket: TTabSheet
-      Margins.Left = 2
-      Margins.Top = 2
-      Margins.Right = 2
-      Margins.Bottom = 2
-      Caption = 'Market'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ImageIndex = -1
-      ParentFont = False
-      object pageStocks: TPageControl
-        Left = 0
-        Top = 0
-        Width = 344
-        Height = 530
-        ActivePage = tabTopLosers
-        Align = alClient
-        Style = tsFlatButtons
-        TabOrder = 0
-        object tabWatchList: TTabSheet
-          Caption = 'Watch List'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 286
-          ExplicitHeight = 0
-          DesignSize = (
-            336
-            497)
-          object btnSort: TSpeedButton
-            Left = 291
-            Top = 1
-            Width = 23
-            Height = 22
-            Action = actSortAsc
-            Anchors = [akTop, akRight]
-            ExplicitLeft = 204
-          end
-          object SpeedButton1: TSpeedButton
-            Left = 313
-            Top = 1
-            Width = 23
-            Height = 22
-            Action = actRefresh
-            Anchors = [akTop, akRight]
-            ExplicitLeft = 226
-          end
-          object cmbAddStock: TComboBox
-            Left = 3
-            Top = 2
-            Width = 96
-            Height = 23
-            Style = csDropDownList
-            TabOrder = 0
-          end
-          object btnAddStock: TButton
-            Left = 103
-            Top = 2
-            Width = 53
-            Height = 22
-            Margins.Left = 2
-            Margins.Top = 2
-            Margins.Right = 2
-            Margins.Bottom = 2
-            Action = actAdd
-            TabOrder = 1
-          end
-          object scrollMyStocks: TScrollBox
-            Left = 3
-            Top = 31
-            Width = 333
-            Height = 464
-            Anchors = [akLeft, akTop, akRight, akBottom]
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            BorderStyle = bsNone
-            TabOrder = 2
-            ExplicitWidth = 283
-          end
-        end
-        object tabMostActive: TTabSheet
-          Caption = 'Most Active'
-          ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 286
-          ExplicitHeight = 0
-          DesignSize = (
-            336
-            497)
-          object btnRefreshMostActive: TSpeedButton
-            Left = 313
-            Top = 1
-            Width = 23
-            Height = 22
-            Action = actRefreshMostActive
-            Anchors = [akTop, akRight]
-            ExplicitLeft = 263
-          end
-          object scrollBoxMostActive: TScrollBox
-            Left = 3
-            Top = 32
-            Width = 333
-            Height = 468
-            Anchors = [akLeft, akTop, akRight, akBottom]
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            BorderStyle = bsNone
-            TabOrder = 0
-            ExplicitWidth = 283
-          end
-        end
-        object tabTopGainers: TTabSheet
-          Caption = 'Top Gainers'
-          ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 286
-          ExplicitHeight = 0
-          DesignSize = (
-            336
-            497)
-          object btnRefreshGainers: TSpeedButton
-            Left = 313
-            Top = 1
-            Width = 23
-            Height = 22
-            Action = actRefresh
-            Anchors = [akTop, akRight]
-            ExplicitLeft = 263
-          end
-          object scrollBoxGainers: TScrollBox
-            Left = 3
-            Top = 29
-            Width = 332
-            Height = 468
-            Anchors = [akLeft, akTop, akRight, akBottom]
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            BorderStyle = bsNone
-            TabOrder = 0
-            ExplicitWidth = 282
-          end
-        end
-        object tabTopLosers: TTabSheet
-          Caption = 'Top Losers'
-          ImageIndex = 3
-          DesignSize = (
-            336
-            497)
-          object SpeedButton3: TSpeedButton
-            Left = 313
-            Top = 1
-            Width = 23
-            Height = 22
-            Action = actRefresh
-            Anchors = [akTop, akRight]
-            ExplicitLeft = 263
-          end
-          object scrollBoxLosers: TScrollBox
-            Left = 4
-            Top = 29
-            Width = 332
-            Height = 468
-            Anchors = [akLeft, akTop, akRight, akBottom]
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            BorderStyle = bsNone
-            TabOrder = 0
-          end
-        end
-      end
-    end
-    object tabIndeces: TTabSheet
-      Margins.Left = 2
-      Margins.Top = 2
-      Margins.Right = 2
-      Margins.Bottom = 2
-      Caption = 'Indeces'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ImageIndex = -1
-      ParentFont = False
-      DesignSize = (
-        344
-        530)
-      object SpeedButton2: TSpeedButton
-        Left = 318
-        Top = 1
-        Width = 23
-        Height = 22
-        Action = actRefresh
-        Anchors = [akTop, akRight]
-        ExplicitLeft = 231
-      end
-      object scrollIndeces: TScrollBox
-        Left = 0
-        Top = 29
-        Width = 344
-        Height = 499
-        Anchors = [akLeft, akTop, akRight, akBottom]
-        AutoSize = True
-        BevelInner = bvNone
-        BevelOuter = bvNone
-        BorderStyle = bsNone
-        TabOrder = 0
-      end
-    end
-    object tabAlerts: TTabSheet
-      Margins.Left = 2
-      Margins.Top = 2
-      Margins.Right = 2
-      Margins.Bottom = 2
-      Caption = 'Alerts'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ImageIndex = 1
-      ParentFont = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 294
-      ExplicitHeight = 0
-    end
-    object tabAbout: TTabSheet
-      Caption = 'Settings'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Segoe UI'
-      Font.Style = []
-      ImageIndex = -1
-      ParentFont = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 294
-      ExplicitHeight = 0
-    end
-  end
-  object StatusBar1: TStatusBar
-    Left = 0
-    Top = 562
-    Width = 352
-    Height = 21
+  TextHeight = 13
+  object lblStockName: TLabel
+    Left = 8
+    Top = 8
+    Width = 30
+    Height = 15
+    Caption = 'As of '
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
     Font.Name = 'Segoe UI'
     Font.Style = []
-    Panels = <>
-    SimplePanel = True
-    UseSystemFont = False
+    ParentFont = False
   end
-  object ApplicationEvents1: TApplicationEvents
-    OnException = ApplicationEvents1Exception
-    Left = 120
-    Top = 48
+  object Label1: TLabel
+    Left = 8
+    Top = 40
+    Width = 81
+    Height = 13
+    Caption = 'Last Trade Price:'
+  end
+  object Label2: TLabel
+    Left = 8
+    Top = 59
+    Width = 43
+    Height = 13
+    Caption = 'Change:'
+  end
+  object Label3: TLabel
+    Left = 8
+    Top = 78
+    Width = 55
+    Height = 13
+    Caption = '% Change:'
+  end
+  object Label4: TLabel
+    Left = 8
+    Top = 97
+    Width = 32
+    Height = 13
+    Caption = 'Value:'
+  end
+  object Label5: TLabel
+    Left = 8
+    Top = 116
+    Width = 42
+    Height = 13
+    Caption = 'Volume:'
+  end
+  object Label6: TLabel
+    Left = 192
+    Top = 40
+    Width = 32
+    Height = 13
+    Caption = 'Open:'
+  end
+  object Label7: TLabel
+    Left = 192
+    Top = 59
+    Width = 28
+    Height = 13
+    Caption = 'High:'
+  end
+  object Label8: TLabel
+    Left = 192
+    Top = 78
+    Width = 24
+    Height = 13
+    Caption = 'Low:'
+  end
+  object Label9: TLabel
+    Left = 192
+    Top = 97
+    Width = 52
+    Height = 13
+    Caption = 'Avg. Price:'
+  end
+  object Label10: TLabel
+    Left = 344
+    Top = 40
+    Width = 77
+    Height = 13
+    Caption = 'Previous Close:'
+  end
+  object Label11: TLabel
+    Left = 344
+    Top = 59
+    Width = 49
+    Height = 13
+    Caption = 'P/E Ratio:'
+  end
+  object Label12: TLabel
+    Left = 344
+    Top = 78
+    Width = 75
+    Height = 13
+    Caption = '52 Week High:'
+  end
+  object Label13: TLabel
+    Left = 344
+    Top = 97
+    Width = 71
+    Height = 13
+    Caption = '52 Week Low:'
+  end
+  object lblLastTradePrice: TLabel
+    Left = 95
+    Top = 40
+    Width = 82
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'lblLastTradePrice'
+  end
+  object lblChange: TLabel
+    Left = 95
+    Top = 59
+    Width = 82
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Label14'
+  end
+  object lblPctChange: TLabel
+    Left = 95
+    Top = 78
+    Width = 82
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Label14'
+  end
+  object lblValue: TLabel
+    Left = 95
+    Top = 97
+    Width = 82
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Label14'
+  end
+  object lblVolume: TLabel
+    Left = 95
+    Top = 116
+    Width = 82
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Label14'
+  end
+  object lblOpen: TLabel
+    Left = 252
+    Top = 40
+    Width = 75
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'lblLastTradePrice'
+  end
+  object lblHigh: TLabel
+    Left = 252
+    Top = 59
+    Width = 75
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Label14'
+  end
+  object lblLow: TLabel
+    Left = 252
+    Top = 78
+    Width = 75
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Label14'
+  end
+  object lblAvgPrice: TLabel
+    Left = 252
+    Top = 97
+    Width = 75
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Label14'
+  end
+  object lblPrevClose: TLabel
+    Left = 424
+    Top = 40
+    Width = 73
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Label14'
+  end
+  object lblPERatio: TLabel
+    Left = 424
+    Top = 59
+    Width = 73
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Label14'
+  end
+  object lbl52WkHigh: TLabel
+    Left = 424
+    Top = 78
+    Width = 73
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Label14'
+  end
+  object lbl52WkLow: TLabel
+    Left = 424
+    Top = 97
+    Width = 73
+    Height = 13
+    Alignment = taRightJustify
+    AutoSize = False
+    Caption = 'Label14'
+  end
+  object SpeedButton2: TSpeedButton
+    Left = 474
+    Top = 8
+    Width = 23
+    Height = 22
+    Action = actRefresh
+    Anchors = [akTop, akRight]
+  end
+  object Button1: TButton
+    Left = 187
+    Top = 144
+    Width = 75
+    Height = 25
+    Action = actAddAlert
+    TabOrder = 0
+  end
+  object Button2: TButton
+    Left = 268
+    Top = 144
+    Width = 75
+    Height = 25
+    Caption = 'Close'
+    TabOrder = 1
+    OnClick = Button2Click
   end
   object ImageList2: TImageList
     Height = 24
     Width = 24
-    Left = 70
-    Top = 47
+    Left = 342
+    Top = 65535
     Bitmap = {
-      494C0101040008007C0018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000800880018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000003000000001002000000000000048
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -905,24 +874,15 @@ object frmMain: TfrmMain
   end
   object ActionList: TActionList
     Images = ImageList2
-    Left = 14
-    Top = 47
+    Left = 286
+    Top = 65535
     object actRefresh: TAction
       ImageIndex = 0
       ShortCut = 16466
+      OnExecute = actRefreshExecute
     end
-    object actAdd: TAction
-      Caption = '&Add'
-    end
-    object actSortAsc: TAction
-      ImageIndex = 2
-    end
-    object actSortDesc: TAction
-      ImageIndex = 3
-    end
-    object actRefreshMostActive: TAction
-      ImageIndex = 0
-      ShortCut = 16466
+    object actAddAlert: TAction
+      Caption = 'Create Alert'
     end
   end
 end

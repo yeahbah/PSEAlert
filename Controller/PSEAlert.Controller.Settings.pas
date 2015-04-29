@@ -160,27 +160,57 @@ end;
 
 procedure TPSEAlertSettingsController.ReloadStockData;
 var
-  downloadTask: TDownloadTask;
+  stockDownloader: TStockDataDownloader;
 begin
 
-  downloadTask := TDownloadTask.Create;
-  downloadTask.Execute(
+  stockDownloader := TStockDataDownloader.Create('ALL');
+  stockDownloader.Execute(
     procedure
     begin
       {$IFDEF FMXAPP}
       actReloadData.Enabled := false;
       {$ELSE}
       btnReloadData.Enabled := false;
+      btnReloadData.Caption := 'Busy...';
       {$ENDIF}
     end,
     procedure
+    var
+      indexDownloader: TIndexDataDownloader;
     begin
+      indexDownloader := TIndexDataDownloader.Create;
+      indexDownloader.Execute(
+          nil,
+          procedure
+          begin
+            MessengerInstance.SendMessage(TReloadDataMessage<TIndexModel>.Create);
+          end,
+          procedure (index: TIndexModel)
+          var
+            c1: ICriteria<TIndexModel>;
+            l: IList<TIndexModel>;
+          begin
+            if index = nil then
+            begin
+              Exit;
+            end;
+            c1 := PSEAlertDb.Session.CreateCriteria<TIndexModel>;
+
+            l := c1.Add(TRestrictions.eq('ID', index.Id)).ToList;
+            if l.Any  then
+              PSEAlertDb.Session.Update(index)
+            else
+              PSEAlertDb.Session.Insert(index);
+
+          end);
+
       {$IFDEF FMXAPP}
       actReloadData.Enabled := true;
       {$ELSE}
       btnReloadData.Enabled := true;
+      btnReloadData.Caption := 'Reload Data';
       {$ENDIF}
-      MessengerInstance.SendMessage(TReloadDataMessage.Create);
+      MessengerInstance.SendMessage(TReloadDataMessage<TStockModel>.Create);
 
     end,
     procedure (stock: TStockModel)
@@ -193,9 +223,7 @@ begin
         Exit;
       end;
       c1 := PSEAlertDb.Session.CreateCriteria<TStockModel>;
-      //PSEStocksData.PSEStocksConnection.Close;
 
-      //trans := PSEAlertDb.Session.BeginTransaction;
       l := c1.Add(TRestrictions.eq('Symbol', stock.Symbol)).ToList;
       if l.Any  then
         PSEAlertDb.Session.Update(stock)
@@ -203,6 +231,7 @@ begin
         PSEAlertDb.Session.Insert(stock);
 
     end);
+
 end;
 
 //procedure TPSEAlertSettingsController.ReloadStockMap;

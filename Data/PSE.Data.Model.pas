@@ -18,20 +18,57 @@ type
     fPercentChange: single;
     fLastTradedPrice: single;
     fDescription: string;
-    fVolume: single;
-    fStatus: TStockStatus;
-    fLastUpdateDateTime: TDateTime;
+    fLastTradedDate: TDate;
+    fSecurityId: integer;
+    fMarketCapitalization: single;
+    fCompanyId: integer;
+    fFreeFloatLevel: single;
+    fOutstandingShares: single;
   public
     constructor Create;
     [Column('SYMBOL', [cpRequired, cpPrimaryKey])]
     property Symbol: string read fSymbol write fSymbol;
     [Column('DESCRIPTION')]
     property Description: string read fDescription write fDescription;
+    [Column('SECURITY_ID')]
+    property SecurityId: integer read fSecurityId write fSecurityId;
+    [Column('COMPANY_ID')]
+    property CompanyId: integer read fCompanyId write fCompanyId;
+    [Column('LAST_TRADED_PRICE')]
     property LastTradedPrice: single read fLastTradedPrice write fLastTradedPrice;
-    property PercentChange: single read fPercentChange write fPercentChange;
-    property Volume: single read fVolume write fVolume;
-    property Status: TStockStatus read fStatus write fStatus;
-    property LastUpdateDateTime: TDateTime read fLastUpdateDateTime write fLastUpdateDateTime;
+    [Column('LAST_TRADED_DATE')]
+    property LastTradedDate: TDate read fLastTradedDate write fLastTradedDate;
+    [Column('FREE_FLOAT_LEVEL')]
+    property FreeFloatLevel: single read fFreeFloatLevel write fFreeFloatLevel;
+    [Column('MARKET_CAPITALIZATION')]
+    property MarketCapitalization: single read fMarketCapitalization write fMarketCapitalization;
+    [Column('OUTSTANDING_SHARES')]
+    property OutstandingShares: single read fOutstandingShares write fOutstandingShares;
+  end;
+
+  [Entity]
+  [Table('INDECES')]
+  TIndexModel = class
+  private
+    fIsSector: string;
+    fId: string;
+    fIndexSymbol: string;
+    fIndexName: string;
+    fSortOrder: integer;
+    fAltIndexSymbol: string;
+  public
+    [Column('ID', [cpRequired, cpPrimaryKey])]
+    property Id: string read fId write fId;
+    [Column('INDEX_SYMBOL')]
+    property IndexSymbol: string read fIndexSymbol write fIndexSymbol;
+    [Column('ALT_INDEX_SYMBOL')]
+    property AltIndexSymbol: string read fAltIndexSymbol write fAltIndexSymbol;
+    [Column('INDEX_NAME')]
+    property IndexName: string read fIndexName write fIndexName;
+    [Column('IS_SECTORAL')]
+    property IsSector: string read fIsSector write fIsSector;
+    [Column('SORT_ORDER')]
+    property SortOrder: integer read fSortOrder write fSortOrder;
   end;
 
   [Entity]
@@ -44,17 +81,23 @@ type
 //    fValue: single;
     fVolume: single;
     fStockStatus: TStockStatus;
+    fLastUpdateDateTime: TDateTime;
+    fDescription: string;
   public
     [Column('SYMBOL', [cpRequired, cpPrimaryKey])]
     property Symbol: string read fSymbol write fSymbol;
-    [Column('PRICE')]
-    property Price: single read fPrice write fPrice;
+    [Column('LASTPRICE')]
+    property LastTradedPrice: single read fPrice write fPrice;
+    [Column('LASTUPDATE_DATETIME')]
+    property LastUpdateDateTime: TDateTime read fLastUpdateDateTime write fLastUpdateDateTime;
     [Column('PCTCHANGE')]
     property PercentChange: single read fPercentChange write fPercentChange;
     [Column('VOLUME')]
     property Volume: single read fVolume write fVolume;
     [Column('STATUS')]
     property Status: TStockStatus read fStockStatus write fStockStatus;
+
+    property Description: string read fDescription write fDescription;
   end;
 
   TStockHeaderModel = class
@@ -76,6 +119,7 @@ type
     fChangeClosePercentage: single;
   public
     constructor Create;
+    destructor Destroy; override;
     property Symbol: string read fSymbol write fSymbol;
     property FiftyTwoWeekHigh: single read fFiftyTwoWeekHigh write fFiftyTwoWeekHigh;
     property FiftyTwoWeekLow: single read fFiftyTwoWeekLow write fFiftyTwoWeekLow;
@@ -166,7 +210,9 @@ constructor TStockModel.Create;
 begin
   fPercentChange := 0;
   fLastTradedPrice := 0;
-  fVolume := 0;
+  fFreeFloatLevel := 0;
+  fMarketCapitalization := 0;
+  fOutstandingShares := 0;
 end;
 
 function TAlertModel.CanTrigger: boolean;
@@ -338,6 +384,12 @@ begin
   fIntradayOpen := 0;
   fIntradayHigh := 0;
   fChangeClosePercentage := 0;
+end;
+
+destructor TStockHeaderModel.Destroy;
+begin
+
+  inherited;
 end;
 
 end.

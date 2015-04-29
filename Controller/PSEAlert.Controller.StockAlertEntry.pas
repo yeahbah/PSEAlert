@@ -28,10 +28,11 @@ uses
   , Vcl.Samples.Spin
   {$ENDIF},
   Spring,
-  Spring.Collections;
+  Spring.Collections,
+  Yeahbah.Messaging;
 
 type
-  TStockAlertEntryController = class(TBaseController<TList<TAlertModel>>)
+  TStockAlertEntryController = class(TBaseController<TList<TAlertModel>>, IMessageReceiver)
   private
     {$HINTS OFF}
     [Bind]
@@ -79,6 +80,8 @@ type
     procedure ReloadStockList;
     procedure IntEditKeyPress(Sender: TObject; var Key: Char);
   public
+
+    procedure Receive(const aMessage: IMessage);
   end;
 
 function CreateStockAlertEntryController(aAlertModel: IList<TAlertModel>;
@@ -91,7 +94,6 @@ uses
   Yeahbah.ObjectClone,
   PSEAlert.Controller.StockAlert,
   PSEAlert.Messages,
-  Yeahbah.Messaging,
   PSE.Data,
   Spring.Persistence.Core.Interfaces,
   PSE.Data.Repository;
@@ -230,6 +232,8 @@ var
   alertModel: TAlertModel;
 begin
   inherited;
+  MessengerInstance.RegisterReceiver(self, TAddStockAlertMessage);
+
 {$IFDEF FMXAPP}
   actReset.OnExecute := DoReset;
   actAddAlert.OnExecute := DoAddAlert;
@@ -252,6 +256,15 @@ begin
     Key := #0;
 end;
 
+procedure TStockAlertEntryController.Receive(const aMessage: IMessage);
+begin
+  if aMessage is TAddStockAlertMessage then
+  begin
+    DoReset(nil);
+    comboSymbol.ItemIndex := comboSymbol.Items.IndexOf(TAddStockAlertMessage(aMessage).Data);
+  end;
+end;
+
 procedure TStockAlertEntryController.ReloadStockList;
 var
   stocks: IList<TStockModel>;
@@ -265,14 +278,6 @@ begin
     comboSymbol.Items.Add(stock.Symbol);
   end;
 
-
-//  PSEStocksData.sqlStocks.Open;
-//  PSEStocksData.sqlStocks.First;
-//  while not PSEStocksData.sqlStocks.Eof do
-//  begin
-//    comboSymbol.Items.Add(PSEStocksData.sqlStocks.FieldByName('SYMBOL').AsString);
-//    PSEStocksData.sqlStocks.Next;
-//  end;
   comboSymbol.ItemIndex := 0;
 end;
 

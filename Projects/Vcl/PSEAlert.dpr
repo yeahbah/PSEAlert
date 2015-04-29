@@ -29,7 +29,15 @@ uses
   PSEAlert.Messages in '..\..\Common\PSEAlert.Messages.pas',
   PSEAlert.Settings in '..\..\Common\PSEAlert.Settings.pas',
   PSEAlert.Utils in '..\..\Common\PSEAlert.Utils.pas',
-  PSEAlert.AlertFormManager in 'PSEAlert.AlertFormManager.pas';
+  PSE.Data.Model.JSON in '..\..\Data\PSE.Data.Model.JSON.pas',
+  PSE.Data.Deserializer in '..\..\Data\PSE.Data.Deserializer.pas',
+  SvSerializerSuperJson,
+  PSEAlert.AlertFormManager in '..\..\Common\PSEAlert.AlertFormManager.pas',
+  PSEAlert.Frames.StockFilter in '..\..\View\Vcl\PSEAlert.Frames.StockFilter.pas' {frameStockFilter: TFrame},
+  PSEAlert.Forms.StockDetails in '..\..\View\Vcl\PSEAlert.Forms.StockDetails.pas' {frmStockDetails},
+  PSEAlert.Controller.StockDetails in '..\..\Controller\PSEAlert.Controller.StockDetails.pas',
+  PSE.Data.Binding.Converters in '..\..\Data\PSE.Data.Binding.Converters.pas',
+  PSE.Data.Binding.DWScript.Functions in '..\..\Data\PSE.Data.Binding.DWScript.Functions.pas';
 
 {$R *.res}
 

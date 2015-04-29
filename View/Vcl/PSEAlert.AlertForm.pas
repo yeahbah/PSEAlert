@@ -27,9 +27,10 @@ type
     { Private declarations }
     fAlertModel: TAlertModel;
     Procedure WMWindowposChanging(Var msg: TWMWindowposChanging); message WM_WINDOWPOSCHANGING;
+    procedure SetAlertModel(const Value: TAlertModel);
   public
     { Public declarations }
-    property AlertModel: TAlertModel read fAlertModel write fAlertModel;
+    property AlertModel: TAlertModel read fAlertModel write SetAlertModel;
   end;
 
 implementation
@@ -61,6 +62,21 @@ end;
 procedure TfrmAlert.FormCreate(Sender: TObject);
 begin
   SetWindowPos(handle, hwnd_TopMost,0,0,0,0, swp_NoMove or swp_NoSize)
+end;
+
+procedure TfrmAlert.SetAlertModel(const Value: TAlertModel);
+begin
+  fAlertModel := Value;
+{$IFDEF FMXAPP}
+  frm.lblStockSymbol.Text := Format(frm.lblStockSymbol.Text, [fAlertModel.StockSymbol]);
+  frm.lblPriceTrigger.Text := fAlertModel.PriceTrigger.ToString;
+  frm.lblVolumeTrigger.Text := fAlertModel.VolumeTrigger.ToString;
+{$ELSE}
+  lblStockSymbol.Caption := Format(lblStockSymbol.Caption, [fAlertModel.StockSymbol]);
+  lblPriceTrigger.Caption := fAlertModel.PriceTriggerDescription;
+  lblVolumeTrigger.Caption := fAlertModel.VolumeTriggerDescription;
+  lblNote.Caption := fAlertModel.Notes;
+{$ENDIF}
 end;
 
 procedure TfrmAlert.Timer1Timer(Sender: TObject);

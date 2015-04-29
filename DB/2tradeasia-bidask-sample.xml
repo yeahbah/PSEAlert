@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+
+<tstock>
+
+
+	<security code='AC' box='1'>
+		<secname>Ayala Corporation</secname>
+		<stockinfo logupdate=''>
+			<last>800.00</last>
+			<diff>5.00</diff>
+            <change>0.63</change>
+            <bid>
+				<price rank='1'>798.50</price>
+                <price rank='2'>798.00</price>
+                <price rank='3'>797.50</price>
+                <price rank='4'>797.00</price>
+                <price rank='5'>796.50</price>
+				<orders rank='1'>1</orders>
+				<orders rank='2'>1</orders>
+				<orders rank='3'>3</orders>
+				<orders rank='4'>8</orders>
+				<orders rank='5'>1</orders>
+				<abbvol rank='1'>20</abbvol>
+				<abbvol rank='2'>10</abbvol>
+				<abbvol rank='3'>3.22K</abbvol>
+				<abbvol rank='4'>21K</abbvol>
+				<abbvol rank='5'>10</abbvol>
+			</bid>
+            <ask>
+				<price rank='1'>800.00</price>
+                <price rank='2'>800.50</price>
+                <price rank='3'>801.00</price>
+                <price rank='4'>801.50</price>
+                <price rank='5'>802.00</price>
+				<orders rank='1'>8</orders>
+				<orders rank='2'>2</orders>
+				<orders rank='3'>2</orders>
+				<orders rank='4'>1</orders>
+				<orders rank='5'>3</orders>
+				<abbvol rank='1'>25.66K</abbvol>
+				<abbvol rank='2'>420</abbvol>
+				<abbvol rank='3'>2.40K</abbvol>
+				<abbvol rank='4'>400</abbvol>
+				<abbvol rank='5'>470</abbvol>
+            </ask>
+		</stockinfo>
+	</security>
+
+</tstock>
