@@ -418,7 +418,7 @@ begin
   alertModels := stockAlertRepository.GetStockAlerts;
   fAlertEntryController := CreateStockAlertEntryController(alertModels, mainView.tabAlerts);
   fSettingsController := CreatePSEAlertSettingsController(PSEAlertSettings, mainView.tabAbout);
-
+  //mainView.Refresh;
 end;
 
 procedure TMainFormController.MainFormClose(Sender: TObject; var Action: TCloseAction);

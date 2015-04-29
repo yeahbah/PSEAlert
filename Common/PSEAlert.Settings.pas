@@ -68,11 +68,11 @@ begin
     tmpInt := ini.ReadInteger('Default', 'FormTop', 0);
     fFormTop := GetProperInt(tmpInt, 0, {$IFDEF FMXAPP}Screen.Size.Height{$ELSE}Screen.Height{$ENDIF});
 
-    tmpInt := ini.ReadInteger('Default', 'FormHeight', 0);
+    tmpInt := ini.ReadInteger('Default', 'FormHeight', 785);
     fFormHeight := GetProperInt(tmpInt, 507, {$IFDEF FMXAPP}Screen.Size.Height{$ELSE}Screen.Height{$ENDIF});
 
-    tmpInt := ini.ReadInteger('Default', 'FormWidth', 0);
-    fFormWidth := GetProperInt(tmpInt, 281, {$IFDEF FMXAPP}Screen.Size.Width{$ELSE}Screen.Width{$ENDIF});
+    tmpInt := ini.ReadInteger('Default', 'FormWidth', 400);
+    fFormWidth := GetProperInt(tmpInt, 400, {$IFDEF FMXAPP}Screen.Size.Width{$ELSE}Screen.Width{$ENDIF});
 
     fSkin := ini.ReadString('Default', 'Skin', 'Metropolis UI Blue');
   finally

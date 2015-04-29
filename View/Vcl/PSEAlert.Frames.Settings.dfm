@@ -180,7 +180,7 @@ object frameSettings: TframeSettings
   object cmbSkin: TComboBox
     Left = 65
     Top = 277
-    Width = 143
+    Width = 234
     Height = 28
     Style = csDropDownList
     Font.Charset = DEFAULT_CHARSET

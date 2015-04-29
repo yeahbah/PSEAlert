@@ -2,44 +2,36 @@ object frmMain: TfrmMain
   Left = 0
   Top = 0
   Caption = 'PSEAlert'
-  ClientHeight = 583
-  ClientWidth = 352
+  ClientHeight = 729
+  ClientWidth = 440
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -10
+  Font.Height = -13
   Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = False
-  PixelsPerInch = 96
-  TextHeight = 12
+  PixelsPerInch = 120
+  TextHeight = 17
   object PageControl: TPageControl
     Left = 0
     Top = 0
-    Width = 352
-    Height = 562
-    Margins.Left = 2
-    Margins.Top = 2
-    Margins.Right = 2
-    Margins.Bottom = 2
-    ActivePage = tabMarket
+    Width = 440
+    Height = 703
+    ActivePage = tabIndeces
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -16
     Font.Name = 'Segoe UI'
     Font.Style = []
     ParentFont = False
     TabOrder = 0
     object tabMarket: TTabSheet
-      Margins.Left = 2
-      Margins.Top = 2
-      Margins.Right = 2
-      Margins.Bottom = 2
       Caption = 'Market'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -12
+      Font.Height = -15
       Font.Name = 'Segoe UI'
       Font.Style = []
       ImageIndex = -1
@@ -47,156 +39,192 @@ object frmMain: TfrmMain
       object pageStocks: TPageControl
         Left = 0
         Top = 0
-        Width = 344
-        Height = 530
+        Width = 432
+        Height = 667
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         ActivePage = tabTopLosers
         Align = alClient
         Style = tsFlatButtons
         TabOrder = 0
         object tabWatchList: TTabSheet
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Caption = 'Watch List'
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 286
-          ExplicitHeight = 0
           DesignSize = (
-            336
-            497)
+            424
+            629)
           object btnSort: TSpeedButton
-            Left = 291
+            Left = 364
             Top = 1
-            Width = 23
-            Height = 22
+            Width = 29
+            Height = 28
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
             Action = actSortAsc
             Anchors = [akTop, akRight]
-            ExplicitLeft = 204
           end
           object SpeedButton1: TSpeedButton
-            Left = 313
+            Left = 391
             Top = 1
-            Width = 23
-            Height = 22
+            Width = 29
+            Height = 28
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
             Action = actRefresh
             Anchors = [akTop, akRight]
-            ExplicitLeft = 226
           end
           object cmbAddStock: TComboBox
-            Left = 3
-            Top = 2
-            Width = 96
-            Height = 23
+            Left = 4
+            Top = 3
+            Width = 120
+            Height = 28
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
             Style = csDropDownList
             TabOrder = 0
           end
           object btnAddStock: TButton
-            Left = 103
-            Top = 2
-            Width = 53
-            Height = 22
-            Margins.Left = 2
-            Margins.Top = 2
-            Margins.Right = 2
-            Margins.Bottom = 2
+            Left = 129
+            Top = 3
+            Width = 66
+            Height = 27
             Action = actAdd
             TabOrder = 1
           end
           object scrollMyStocks: TScrollBox
-            Left = 3
-            Top = 31
-            Width = 333
-            Height = 464
+            Left = 4
+            Top = 39
+            Width = 416
+            Height = 580
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
             Anchors = [akLeft, akTop, akRight, akBottom]
             BevelInner = bvNone
             BevelOuter = bvNone
             BorderStyle = bsNone
             TabOrder = 2
-            ExplicitWidth = 283
           end
         end
         object tabMostActive: TTabSheet
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Caption = 'Most Active'
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 286
-          ExplicitHeight = 0
           DesignSize = (
-            336
-            497)
+            424
+            629)
           object btnRefreshMostActive: TSpeedButton
-            Left = 313
+            Left = 391
             Top = 1
-            Width = 23
-            Height = 22
+            Width = 29
+            Height = 28
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
             Action = actRefreshMostActive
             Anchors = [akTop, akRight]
-            ExplicitLeft = 263
           end
           object scrollBoxMostActive: TScrollBox
-            Left = 3
-            Top = 32
-            Width = 333
-            Height = 468
+            Left = 4
+            Top = 40
+            Width = 416
+            Height = 585
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
             Anchors = [akLeft, akTop, akRight, akBottom]
             BevelInner = bvNone
             BevelOuter = bvNone
             BorderStyle = bsNone
             TabOrder = 0
-            ExplicitWidth = 283
           end
         end
         object tabTopGainers: TTabSheet
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Caption = 'Top Gainers'
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 286
-          ExplicitHeight = 0
           DesignSize = (
-            336
-            497)
+            424
+            629)
           object btnRefreshGainers: TSpeedButton
-            Left = 313
+            Left = 391
             Top = 1
-            Width = 23
-            Height = 22
+            Width = 29
+            Height = 28
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
             Action = actRefresh
             Anchors = [akTop, akRight]
-            ExplicitLeft = 263
           end
           object scrollBoxGainers: TScrollBox
-            Left = 3
-            Top = 29
-            Width = 332
-            Height = 468
+            Left = 4
+            Top = 36
+            Width = 415
+            Height = 585
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
             Anchors = [akLeft, akTop, akRight, akBottom]
             BevelInner = bvNone
             BevelOuter = bvNone
             BorderStyle = bsNone
             TabOrder = 0
-            ExplicitWidth = 282
           end
         end
         object tabTopLosers: TTabSheet
+          Margins.Left = 4
+          Margins.Top = 4
+          Margins.Right = 4
+          Margins.Bottom = 4
           Caption = 'Top Losers'
           ImageIndex = 3
           DesignSize = (
-            336
-            497)
+            424
+            629)
           object SpeedButton3: TSpeedButton
-            Left = 313
+            Left = 391
             Top = 1
-            Width = 23
-            Height = 22
+            Width = 29
+            Height = 28
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
             Action = actRefresh
             Anchors = [akTop, akRight]
-            ExplicitLeft = 263
           end
           object scrollBoxLosers: TScrollBox
-            Left = 4
-            Top = 29
-            Width = 332
-            Height = 468
+            Left = 5
+            Top = 36
+            Width = 415
+            Height = 585
+            Margins.Left = 4
+            Margins.Top = 4
+            Margins.Right = 4
+            Margins.Bottom = 4
             Anchors = [akLeft, akTop, akRight, akBottom]
             BevelInner = bvNone
             BevelOuter = bvNone
@@ -207,37 +235,39 @@ object frmMain: TfrmMain
       end
     end
     object tabIndeces: TTabSheet
-      Margins.Left = 2
-      Margins.Top = 2
-      Margins.Right = 2
-      Margins.Bottom = 2
       Caption = 'Indeces'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -12
+      Font.Height = -15
       Font.Name = 'Segoe UI'
       Font.Style = []
       ImageIndex = -1
       ParentFont = False
       DesignSize = (
-        344
-        530)
+        432
+        667)
       object SpeedButton2: TSpeedButton
-        Left = 318
+        Left = 398
         Top = 1
-        Width = 23
-        Height = 22
+        Width = 28
+        Height = 28
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Action = actRefresh
         Anchors = [akTop, akRight]
-        ExplicitLeft = 231
       end
       object scrollIndeces: TScrollBox
         Left = 0
-        Top = 29
-        Width = 344
-        Height = 499
+        Top = 36
+        Width = 430
+        Height = 624
+        Margins.Left = 4
+        Margins.Top = 4
+        Margins.Right = 4
+        Margins.Bottom = 4
         Anchors = [akLeft, akTop, akRight, akBottom]
-        AutoSize = True
         BevelInner = bvNone
         BevelOuter = bvNone
         BorderStyle = bsNone
@@ -245,46 +275,42 @@ object frmMain: TfrmMain
       end
     end
     object tabAlerts: TTabSheet
-      Margins.Left = 2
-      Margins.Top = 2
-      Margins.Right = 2
-      Margins.Bottom = 2
       Caption = 'Alerts'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -12
+      Font.Height = -15
       Font.Name = 'Segoe UI'
       Font.Style = []
       ImageIndex = 1
       ParentFont = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 294
-      ExplicitHeight = 0
     end
     object tabAbout: TTabSheet
+      Margins.Left = 4
+      Margins.Top = 4
+      Margins.Right = 4
+      Margins.Bottom = 4
       Caption = 'Settings'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -12
+      Font.Height = -15
       Font.Name = 'Segoe UI'
       Font.Style = []
       ImageIndex = -1
       ParentFont = False
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 294
-      ExplicitHeight = 0
     end
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 562
-    Width = 352
-    Height = 21
+    Top = 703
+    Width = 440
+    Height = 26
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -15
     Font.Name = 'Segoe UI'
     Font.Style = []
     Panels = <>
@@ -302,7 +328,7 @@ object frmMain: TfrmMain
     Left = 70
     Top = 47
     Bitmap = {
-      494C0101040008007C0018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010104000800800018001800FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000600000003000000001002000000000000048
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
