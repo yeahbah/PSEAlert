@@ -147,7 +147,7 @@ object frameSettings: TframeSettings
     Top = 422
     Width = 318
     Height = 145
-    Anchors = [akLeft, akBottom]
+    Anchors = [akLeft, akRight, akBottom]
     AutoSize = False
     Caption = 
       'This software is free and does not guarantee anything. Feel free' +
@@ -180,7 +180,7 @@ object frameSettings: TframeSettings
   object cmbSkin: TComboBox
     Left = 65
     Top = 277
-    Width = 143
+    Width = 234
     Height = 28
     Style = csDropDownList
     Font.Charset = DEFAULT_CHARSET
@@ -208,7 +208,7 @@ object frameSettings: TframeSettings
     Left = 68
     Top = 232
     Bitmap = {
-      494C010101004C006C0014001400FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010101004C00700014001400FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000500000001400000001002000000000000019
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
