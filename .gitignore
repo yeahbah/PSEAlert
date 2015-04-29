@@ -171,3 +171,5 @@ Tests/__history/PSEAlertTest.dpr.~4~
 Controller/__history/
 Data/__history/
 Tests/__history/
+Service/__history/PSEAlert.Service.Filter.StockFilterItemBase.pas.~1~
+Service/__history/PSEAlert.Service.StockFilterService.pas.~1~
