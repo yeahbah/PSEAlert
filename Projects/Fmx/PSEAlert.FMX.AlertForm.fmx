@@ -3,7 +3,7 @@ object frmAlert: TfrmAlert
   Top = 0
   BorderIcons = [biSystemMenu]
   BorderStyle = ToolWindow
-  ClientHeight = 104
+  ClientHeight = 119
   ClientWidth = 263
   Position = Designed
   FormStyle = StayOnTop
@@ -25,7 +25,7 @@ object frmAlert: TfrmAlert
   object lblPriceTrigger: TLabel
     AutoSize = True
     Position.X = 8.000000000000000000
-    Position.Y = 32.000000000000000000
+    Position.Y = 30.000000000000000000
     Size.Width = 81.000000000000000000
     Size.Height = 16.000000000000000000
     Size.PlatformDefault = False
@@ -35,7 +35,7 @@ object frmAlert: TfrmAlert
   object lblVolumeTrigger: TLabel
     AutoSize = True
     Position.X = 8.000000000000000000
-    Position.Y = 48.000000000000000000
+    Position.Y = 46.000000000000000000
     Size.Width = 96.000000000000000000
     Size.Height = 16.000000000000000000
     Size.PlatformDefault = False
@@ -44,7 +44,7 @@ object frmAlert: TfrmAlert
   end
   object Button1: TButton
     Position.X = 56.000000000000000000
-    Position.Y = 72.000000000000000000
+    Position.Y = 88.000000000000000000
     Size.Width = 80.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
@@ -54,12 +54,28 @@ object frmAlert: TfrmAlert
   end
   object Button2: TButton
     Position.X = 144.000000000000000000
-    Position.Y = 72.000000000000000000
+    Position.Y = 88.000000000000000000
     Size.Width = 80.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 5
     Text = 'Ok'
     OnClick = Button2Click
+  end
+  object lblNotes: TLabel
+    AutoSize = True
+    Position.X = 8.000000000000000000
+    Position.Y = 62.000000000000000000
+    Size.Width = 96.000000000000000000
+    Size.Height = 16.000000000000000000
+    Size.PlatformDefault = False
+    TextSettings.WordWrap = False
+    Text = 'lblVolumeTrigger'
+  end
+  object Timer1: TTimer
+    Interval = 10000
+    OnTimer = Timer1Timer
+    Left = 216
+    Top = 16
   end
 end

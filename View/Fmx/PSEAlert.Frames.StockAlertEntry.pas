@@ -21,7 +21,6 @@ type
     Label3: TLabel;
     edVolume: TEdit;
     Label4: TLabel;
-    memNotes: TMemo;
     Label5: TLabel;
     btnAddAlert: TButton;
     btnReset: TButton;
@@ -33,6 +32,7 @@ type
     Label6: TLabel;
     Label7: TLabel;
     Label8: TLabel;
+    edtNotes: TEdit;
   private
     { Private declarations }
   public

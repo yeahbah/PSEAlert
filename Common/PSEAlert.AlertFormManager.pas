@@ -61,15 +61,8 @@ begin
 
     frm := TfrmAlert.Create(Application);
 {$IFDEF FMXAPP}
-//    frm.lblStockSymbol.Text := Format(frm.lblStockSymbol.Text, [alertModel.StockSymbol]);
-//    frm.lblPriceTrigger.Text := alertModel.PriceTrigger.ToString;
-//    frm.lblVolumeTrigger.Text := alertModel.VolumeTrigger.ToString;
     frm.Left := Screen.Size.Width - frm.Width - 20;
 {$ELSE}
-//    frm.lblStockSymbol.Caption := Format(frm.lblStockSymbol.Caption, [alertModel.StockSymbol]);
-//    frm.lblPriceTrigger.Caption := alertModel.PriceTriggerDescription;
-//    frm.lblVolumeTrigger.Caption := alertModel.VolumeTriggerDescription;
-//    frm.lblNote.Caption := alertModel.Notes;
     frm.Left := Screen.Width - frm.Width - 20;
 {$ENDIF}
 

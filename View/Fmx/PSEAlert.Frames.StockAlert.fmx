@@ -4,47 +4,27 @@ object frameStockAlert: TframeStockAlert
   Padding.Right = 2.000000000000000000
   Padding.Bottom = 2.000000000000000000
   Size.Width = 320.000000000000000000
-  Size.Height = 64.000000000000000000
+  Size.Height = 82.000000000000000000
   Size.PlatformDefault = False
   object Panel1: TPanel
     Align = Client
     Size.Width = 316.000000000000000000
-    Size.Height = 60.000000000000000000
+    Size.Height = 78.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
     object btnAlertTriggered: TSpeedButton
       Anchors = [akTop, akRight]
-      Position.X = 240.000000000000000000
+      Position.X = 256.000000000000000000
       Position.Y = 5.000000000000000000
       Size.Width = 30.000000000000000000
       Size.Height = 25.000000000000000000
       Size.PlatformDefault = False
     end
-    object btnDelete: TSpeedButton
-      Anchors = [akTop, akRight]
-      Padding.Left = 2.000000000000000000
-      Padding.Top = 2.000000000000000000
-      Padding.Right = 2.000000000000000000
-      Padding.Bottom = 2.000000000000000000
-      Position.X = 284.000000000000000000
-      Position.Y = 5.000000000000000000
-      Size.Width = 25.000000000000000000
-      Size.Height = 25.000000000000000000
-      Size.PlatformDefault = False
-      object Label1: TLabel
-        Align = Client
-        Size.Width = 21.000000000000000000
-        Size.Height = 21.000000000000000000
-        Size.PlatformDefault = False
-        TextSettings.HorzAlign = Center
-        Text = 'x'
-      end
-    end
     object lblAlertSymbol: TLabel
       AutoSize = True
       Position.X = 8.000000000000000000
       Position.Y = 5.000000000000000000
-      Size.Width = 78.000000000000000000
+      Size.Width = 81.000000000000000000
       Size.Height = 16.000000000000000000
       Size.PlatformDefault = False
       TextSettings.WordWrap = False
@@ -54,7 +34,7 @@ object frameStockAlert: TframeStockAlert
       AutoSize = True
       Position.X = 8.000000000000000000
       Position.Y = 21.000000000000000000
-      Size.Width = 75.000000000000000000
+      Size.Width = 78.000000000000000000
       Size.Height = 16.000000000000000000
       Size.PlatformDefault = False
       TextSettings.WordWrap = False
@@ -64,37 +44,36 @@ object frameStockAlert: TframeStockAlert
       AutoSize = True
       Position.X = 8.000000000000000000
       Position.Y = 37.000000000000000000
-      Size.Width = 80.000000000000000000
+      Size.Width = 83.000000000000000000
       Size.Height = 16.000000000000000000
       Size.PlatformDefault = False
       TextSettings.WordWrap = False
       Text = 'lblVolumeAlert'
     end
-    object btnNotes: TSpeedButton
-      Position.X = 265.000000000000000000
-      Position.Y = 5.000000000000000000
-      Size.Width = 25.000000000000000000
-      Size.Height = 25.000000000000000000
-      Size.PlatformDefault = False
-      OnClick = btnNotesClick
-      object Label2: TLabel
-        Align = Client
-        Anchors = [akTop, akRight, akBottom]
-        Size.Width = 25.000000000000000000
-        Size.Height = 25.000000000000000000
-        Size.PlatformDefault = False
-        TextSettings.HorzAlign = Center
-        Text = 'n'
-      end
-    end
     object lblNote: TLabel
       Position.X = 8.000000000000000000
-      Position.Y = 59.000000000000000000
+      Position.Y = 54.000000000000000000
       Size.Width = 305.000000000000000000
       Size.Height = 41.000000000000000000
       Size.PlatformDefault = False
       TextSettings.VertAlign = Leading
       Text = 'lblNote'
+    end
+    object btnDelete: TSpeedButton
+      Anchors = [akTop, akRight]
+      Position.X = 283.000000000000000000
+      Position.Y = 5.000000000000000000
+      Size.Width = 30.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      object Label1: TLabel
+        Align = Client
+        Size.Width = 30.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.HorzAlign = Center
+        Text = 'x'
+      end
     end
   end
 end

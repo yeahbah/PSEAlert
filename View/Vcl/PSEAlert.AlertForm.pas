@@ -67,16 +67,12 @@ end;
 procedure TfrmAlert.SetAlertModel(const Value: TAlertModel);
 begin
   fAlertModel := Value;
-{$IFDEF FMXAPP}
-  frm.lblStockSymbol.Text := Format(frm.lblStockSymbol.Text, [fAlertModel.StockSymbol]);
-  frm.lblPriceTrigger.Text := fAlertModel.PriceTrigger.ToString;
-  frm.lblVolumeTrigger.Text := fAlertModel.VolumeTrigger.ToString;
-{$ELSE}
+
   lblStockSymbol.Caption := Format(lblStockSymbol.Caption, [fAlertModel.StockSymbol]);
   lblPriceTrigger.Caption := fAlertModel.PriceTriggerDescription;
   lblVolumeTrigger.Caption := fAlertModel.VolumeTriggerDescription;
   lblNote.Caption := fAlertModel.Notes;
-{$ENDIF}
+
 end;
 
 procedure TfrmAlert.Timer1Timer(Sender: TObject);

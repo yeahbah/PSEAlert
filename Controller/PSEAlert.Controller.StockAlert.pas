@@ -30,17 +30,19 @@ type
     {$HINTS OFF}
     [Bind]
     btnAlertTriggered: TSpeedButton;
-    [Bind]
-    actDelete: TAction;
 {$IFDEF FMXAPP}
     [Bind('Notes', 'Text')]
     lblNote: TLabel;
+    [Bind]
+    btnDelete: TSpeedButton;
 {$ELSE}
     [Bind('Notes', 'Caption')]
     lblNote: TLabel;
-{$ENDIF}
+    [Bind]
+    actDelete: TAction;
     [Bind]
     Label1: TLabel;
+{$ENDIF}
     [Bind('StockSymbol', {$IFDEF FMXAPP}'Text'{$ELSE}'Caption'{$ENDIF})]
     lblAlertSymbol: TLabel;
     [Bind('PriceTriggerDescription', {$IFDEF FMXAPP}'Text'{$ELSE}'Caption'{$ENDIF})]
@@ -100,7 +102,11 @@ procedure TStockAlertController.DoCloseView(Sender: TObject);
 var
   p: {$IFDEF FMXAPP}TFMXObject{$ELSE}TWinControl{$ENDIF};
 begin
-  p := (Sender as TAction).Owner as {$IFDEF FMXAPP}TFMXObject{$ELSE}TWinControl{$ENDIF};
+{$IFDEF FMXAPP}
+  p := (Sender as TSpeedButton).Owner as TFMXObject;
+{$ELSE}
+  p := (Sender as TAction).Owner as TWinControl;
+{$ENDIF}
   try
 {$IFDEF FMXAPP}
     p.Parent.RemoveObject(p);
@@ -128,14 +134,22 @@ begin
   MessengerInstance.RegisterReceiver(self, TDismissAlertMessage);
   MessengerInstance.RegisterReceiver(self, TIntradayUpdateMessage);
 
+{$IFDEF FMXAPP}
+  btnDelete.Text := 'x';
+  btnDelete.OnClick := DoCloseView;
+{$ELSE}
   actDelete.OnExecute := DoCloseView;
+{$ENDIF}
 
   lblAlertSymbol.Font.Size := 12;
   lblAlertSymbol.Font.Style := [TFontStyle.fsBold];
   lblAlertDetails.Font.Size := 9;
   lblVolumeAlert.Font.Size := 9;
   lblNote.Font.Size := 9;
+{$IFNDEF FMXAPP}
   Label1.Font.Size := 9;
+{$ENDIF}
+
 
   btnAlertTriggered.Visible := Model.AlertCount > 0;
 
@@ -183,7 +197,11 @@ begin
   begin
     if (aMessage as TDismissAlertMessage).Data.ID = Model.ID then
     begin
+    {$IFDEF FMXAPP}
+      btnDelete.OnClick(btnDelete);
+    {$ELSE}
       actDelete.Execute;
+    {$ENDIF}
     end;
   end;
 end;

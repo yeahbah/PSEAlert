@@ -128,9 +128,9 @@ begin
       c := TMainFormController.Create(aModel, frmMain);
       c.InitializeForm;
 
-      //{$IFNDEF FMXAPP}
+      {$IFNDEF FMXAPP}
       frmMain.OnActivate := c.MainFormActivate;
-      //{$ENDIF}
+      {$ENDIF}
 
       frmMain.OnClose := c.MainFormClose;
       result := c;

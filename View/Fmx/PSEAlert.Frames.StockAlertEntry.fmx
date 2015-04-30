@@ -106,18 +106,6 @@ object frameStockAlertEntry: TframeStockAlertEntry
     Size.PlatformDefault = False
     Text = 'Max Alert Count'
   end
-  object memNotes: TMemo
-    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
-    DataDetectorTypes = []
-    Position.X = 48.000000000000000000
-    Position.Y = 144.000000000000000000
-    Size.Width = 268.000000000000000000
-    Size.Height = 50.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 10
-    Viewport.Width = 264.000000000000000000
-    Viewport.Height = 46.000000000000000000
-  end
   object Label5: TLabel
     Position.X = 8.000000000000000000
     Position.Y = 144.000000000000000000
@@ -135,7 +123,7 @@ object frameStockAlertEntry: TframeStockAlertEntry
     Size.Width = 80.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 12
+    TabOrder = 11
     Visible = True
     object Label6: TLabel
       Align = Client
@@ -155,7 +143,7 @@ object frameStockAlertEntry: TframeStockAlertEntry
     Size.Width = 80.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 13
+    TabOrder = 12
     Visible = True
     object Label7: TLabel
       Align = Client
@@ -173,18 +161,27 @@ object frameStockAlertEntry: TframeStockAlertEntry
     Size.Width = 331.000000000000000000
     Size.Height = 185.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 14
+    TabOrder = 13
     Viewport.Width = 331.000000000000000000
     Viewport.Height = 185.000000000000000000
   end
   object comboSymbol: TComboEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
-    TabOrder = 15
+    TabOrder = 14
     ItemHeight = 19.000000000000000000
     ItemIndex = -1
     Position.X = 9.000000000000000000
     Position.Y = 27.000000000000000000
     Size.Width = 100.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
+  end
+  object edtNotes: TEdit
+    Touch.InteractiveGestures = [LongTap, DoubleTap]
+    TabOrder = 16
+    Position.X = 48.000000000000000000
+    Position.Y = 144.000000000000000000
+    Size.Width = 268.000000000000000000
     Size.Height = 22.000000000000000000
     Size.PlatformDefault = False
   end

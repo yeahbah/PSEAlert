@@ -38,7 +38,6 @@ type
     Label1: TLabel;
     cmbAddStock: TComboEdit;
     scrollMyStocks: TScrollBox;
-    SpeedButton1: TSpeedButton;
     scrollBoxMostActive: TScrollBox;
     scrollBoxGainers: TScrollBox;
     scrollBoxLosers: TScrollBox;

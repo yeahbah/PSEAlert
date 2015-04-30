@@ -8,8 +8,20 @@ uses
 function GenerateControlName(const aSuggestedName: string): string;
 function GetPollIntervalValue(const aIndex: integer): integer;
 function ConvertStringDateToSystem(const aDate: string): TDateTime;
+//function ExtractStockSymbol(const aValue: string): string;
 
 implementation
+
+function ExtractStockSymbol(const aValue: string): string;
+var
+  splitResult: TArray<string>;
+begin
+  splitResult := aValue.Split(['_']);
+  if Length(splitResult) > 1 then
+    result := splitResult[1]
+  else
+    result := aValue;
+end;
 
 function GenerateControlName(const aSuggestedName: string): string;
 begin
