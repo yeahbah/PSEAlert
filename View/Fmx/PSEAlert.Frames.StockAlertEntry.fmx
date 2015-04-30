@@ -1,47 +1,51 @@
 object frameStockAlertEntry: TframeStockAlertEntry
-  Height = 430.000000000000000000
-  Width = 341.000000000000000000
-  TabOrder = 0
+  Size.Width = 341.000000000000000000
+  Size.Height = 430.000000000000000000
+  Size.PlatformDefault = False
   object edMaxAlert: TSpinBox
     Touch.InteractiveGestures = [LongTap, DoubleTap]
     TabOrder = 0
     Cursor = crIBeam
     Position.X = 104.000000000000000000
     Position.Y = 110.000000000000000000
-    Width = 73.000000000000000000
-    Height = 22.000000000000000000
+    Size.Width = 73.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
   end
   object Label1: TLabel
-    Height = 17.000000000000000000
     Position.X = 8.000000000000000000
     Position.Y = 8.000000000000000000
+    Size.Width = 120.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
     Text = 'Symbol'
-    Width = 120.000000000000000000
   end
   object chkAddToMyStocks: TCheckBox
-    Height = 19.000000000000000000
     Position.X = 116.000000000000000000
     Position.Y = 28.000000000000000000
+    Size.Width = 120.000000000000000000
+    Size.Height = 19.000000000000000000
+    Size.PlatformDefault = False
     TabOrder = 2
-    Width = 120.000000000000000000
     object Label8: TLabel
       Align = Right
-      Height = 19.000000000000000000
       Position.X = 19.000000000000000000
+      Size.Width = 101.000000000000000000
+      Size.Height = 19.000000000000000000
+      Size.PlatformDefault = False
       Text = 'Add to Watch List'
-      Width = 101.000000000000000000
     end
   end
   object Label2: TLabel
-    Height = 17.000000000000000000
     Position.X = 8.000000000000000000
     Position.Y = 56.000000000000000000
+    Size.Width = 97.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
     Text = 'When Price is'
-    Width = 97.000000000000000000
   end
   object cmbPriceLevel: TComboBox
     DisableFocusEffect = False
-    Height = 22.000000000000000000
     Items.Strings = (
       'Below'
       'Equal'
@@ -50,103 +54,128 @@ object frameStockAlertEntry: TframeStockAlertEntry
       'Above/Equal')
     Position.X = 94.000000000000000000
     Position.Y = 54.000000000000000000
+    Size.Width = 123.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
     TabOrder = 4
-    Width = 123.000000000000000000
   end
   object edPrice: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
     TabOrder = 6
     Position.X = 224.000000000000000000
     Position.Y = 54.000000000000000000
-    Width = 93.000000000000000000
-    Height = 22.000000000000000000
+    Size.Width = 93.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
   end
   object cmbLogic: TComboBox
     DisableFocusEffect = False
-    Height = 22.000000000000000000
     Items.Strings = (
       ''
       'OR'
       'AND')
     Position.X = 8.000000000000000000
     Position.Y = 82.000000000000000000
+    Size.Width = 73.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
     TabOrder = 7
-    Width = 73.000000000000000000
   end
   object Label3: TLabel
-    Height = 17.000000000000000000
     Position.X = 90.000000000000000000
     Position.Y = 85.000000000000000000
+    Size.Width = 143.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
     Text = 'When Volume is at least'
-    Width = 143.000000000000000000
   end
   object edVolume: TEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
     TabOrder = 5
     Position.X = 224.000000000000000000
     Position.Y = 82.000000000000000000
-    Width = 93.000000000000000000
-    Height = 22.000000000000000000
+    Size.Width = 93.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
   end
   object Label4: TLabel
-    Height = 17.000000000000000000
     Position.X = 8.000000000000000000
     Position.Y = 112.000000000000000000
+    Size.Width = 97.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
     Text = 'Max Alert Count'
-    Width = 97.000000000000000000
   end
   object memNotes: TMemo
     Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
-    Height = 50.000000000000000000
+    DataDetectorTypes = []
     Position.X = 48.000000000000000000
     Position.Y = 144.000000000000000000
+    Size.Width = 268.000000000000000000
+    Size.Height = 50.000000000000000000
+    Size.PlatformDefault = False
     TabOrder = 10
-    Width = 268.000000000000000000
+    Viewport.Width = 264.000000000000000000
+    Viewport.Height = 46.000000000000000000
   end
   object Label5: TLabel
-    Height = 17.000000000000000000
     Position.X = 8.000000000000000000
     Position.Y = 144.000000000000000000
+    Size.Width = 49.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
     Text = 'Notes'
-    Width = 49.000000000000000000
   end
   object btnAddAlert: TButton
     Action = actAddAlert
-    Height = 22.000000000000000000
+    Enabled = True
+    ImageIndex = -1
     Position.X = 88.000000000000000000
     Position.Y = 204.000000000000000000
+    Size.Width = 80.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
     TabOrder = 12
-    Width = 80.000000000000000000
+    Visible = True
     object Label6: TLabel
       Align = Client
-      Height = 22.000000000000000000
+      Size.Width = 80.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
       TextSettings.HorzAlign = Center
       Text = 'Add'
-      Width = 80.000000000000000000
     end
   end
   object btnReset: TButton
     Action = actReset
-    Height = 22.000000000000000000
+    Enabled = True
+    ImageIndex = -1
     Position.X = 176.000000000000000000
     Position.Y = 204.000000000000000000
+    Size.Width = 80.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
     TabOrder = 13
-    Width = 80.000000000000000000
+    Visible = True
     object Label7: TLabel
       Align = Client
-      Height = 22.000000000000000000
+      Size.Width = 80.000000000000000000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
       TextSettings.HorzAlign = Center
       Text = 'Reset'
-      Width = 80.000000000000000000
     end
   end
   object scrollAlerts: TScrollBox
     Anchors = [akLeft, akTop, akRight, akBottom]
-    Height = 185.000000000000000000
     Position.X = 5.000000000000000000
     Position.Y = 240.000000000000000000
+    Size.Width = 331.000000000000000000
+    Size.Height = 185.000000000000000000
+    Size.PlatformDefault = False
     TabOrder = 14
-    Width = 331.000000000000000000
+    Viewport.Width = 331.000000000000000000
+    Viewport.Height = 185.000000000000000000
   end
   object comboSymbol: TComboEdit
     Touch.InteractiveGestures = [LongTap, DoubleTap]
@@ -155,8 +184,9 @@ object frameStockAlertEntry: TframeStockAlertEntry
     ItemIndex = -1
     Position.X = 9.000000000000000000
     Position.Y = 27.000000000000000000
-    Width = 100.000000000000000000
-    Height = 22.000000000000000000
+    Size.Width = 100.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
   end
   object ActionList: TActionList
     Left = 16

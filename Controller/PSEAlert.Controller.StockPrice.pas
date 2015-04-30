@@ -44,15 +44,15 @@ type
     imgStatus: TImage;
     [Bind]
     stockInfoPanel: TPanel;
-{$IFDEF FMXAPP}
+{$HINTS ON}
 
-{$ELSE}
+{$IFNDEF FMXAPP}
     [Bind]
     ImageList1: TImageList;
+{$ENDIF}
+
     fUserActions: TUserActions;
     procedure SetUserActions(const Value: TUserActions);
-{$ENDIF}
-    {$HINTS ON}
   protected
     fStockDetailsController: IController<TStockHeaderModel>;
     procedure Initialize; override;
@@ -230,7 +230,11 @@ begin
           lblStockVolume.Caption := volumeText;
 {$ENDIF}
           SetStockStatusImage(stock.Status, imgStatus);
+          {$IFDEF FMXAPP}
+          (View as TframeStockPrice).Repaint;
+          {$ELSE}
           (View as TframeStockPrice).Refresh;
+          {$ENDIF}
         end);
     end;
   end;
@@ -295,7 +299,11 @@ begin
   fUserActions := Value;
   if Assigned(btnClose) then
   begin
+{$IFDEF FMXAPP}
+    btnClose.Visible := TUserAction.Close in Value;
+{$ELSE}
     btnClose.Enabled := TUserAction.Close in Value;
+{$ENDIF}
   end;
 end;
 

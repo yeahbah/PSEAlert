@@ -24,6 +24,8 @@ uses
   , FMX.Layouts
   , FMX.ActnList
   , FMX.Objects
+  , FMX.ComboEdit
+  , FMX.SpinBox
   {$ELSE}
   , Vcl.Samples.Spin
   {$ENDIF},

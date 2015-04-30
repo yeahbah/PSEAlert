@@ -1,20 +1,25 @@
 object frameSettings: TframeSettings
-  Height = 413.000000000000000000
-  Width = 320.000000000000000000
-  TabOrder = 0
+  Size.Width = 320.000000000000000000
+  Size.Height = 413.000000000000000000
+  Size.PlatformDefault = False
   object btnReloadData: TButton
     Action = actReloadData
-    Height = 25.000000000000000000
+    Enabled = True
+    ImageIndex = -1
     Position.X = 104.000000000000000000
     Position.Y = 64.000000000000000000
+    Size.Width = 105.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
     TabOrder = 0
-    Width = 105.000000000000000000
+    Visible = True
     object Label5: TLabel
       Align = Client
-      Height = 25.000000000000000000
+      Size.Width = 105.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
       TextSettings.HorzAlign = Center
       Text = 'Reload Data'
-      Width = 105.000000000000000000
     end
   end
   object edtOpenWav: TEdit
@@ -22,20 +27,21 @@ object frameSettings: TframeSettings
     TabOrder = 1
     Position.X = 8.000000000000000000
     Position.Y = 165.000000000000000000
-    Width = 273.000000000000000000
-    Height = 22.000000000000000000
+    Size.Width = 273.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
   end
   object chkPlaySound: TCheckBox
-    Height = 19.000000000000000000
     Position.X = 8.000000000000000000
     Position.Y = 144.000000000000000000
+    Size.Width = 161.000000000000000000
+    Size.Height = 19.000000000000000000
+    Size.PlatformDefault = False
     TabOrder = 2
     Text = 'Play sound on alert'
-    Width = 161.000000000000000000
   end
   object cmbInterval: TComboBox
     DisableFocusEffect = False
-    Height = 22.000000000000000000
     Items.Strings = (
       'Manual'
       '10 Seconds'
@@ -48,61 +54,72 @@ object frameSettings: TframeSettings
       '30 Minutes')
     Position.X = 168.000000000000000000
     Position.Y = 120.000000000000000000
+    Size.Width = 97.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
     TabOrder = 3
-    Width = 97.000000000000000000
   end
   object Label1: TLabel
-    Height = 49.000000000000000000
     Position.X = 8.000000000000000000
+    Size.Width = 305.000000000000000000
+    Size.Height = 49.000000000000000000
+    Size.PlatformDefault = False
     Text = 
       'It would be wise to click the button below if you are not able t' +
       'o find your favorite stock in this App.'
-    Width = 305.000000000000000000
   end
   object Label2: TLabel
-    Height = 17.000000000000000000
     Position.X = 8.000000000000000000
     Position.Y = 120.000000000000000000
+    Size.Width = 161.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
     Text = 'Refresh stock prices every'
-    Width = 161.000000000000000000
   end
   object Label3: TLabel
     Anchors = [akLeft, akBottom]
-    Height = 17.000000000000000000
     Position.X = 8.000000000000000000
     Position.Y = 296.000000000000000000
+    Size.Width = 305.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
     Text = '2014 Yeahbah! Very Good Apps. All rights reserved.'
-    Width = 305.000000000000000000
   end
   object Label4: TLabel
     Anchors = [akLeft, akBottom]
-    Height = 89.000000000000000000
     Position.X = 8.000000000000000000
     Position.Y = 312.000000000000000000
+    Size.Width = 305.000000000000000000
+    Size.Height = 89.000000000000000000
+    Size.PlatformDefault = False
     Text = 
       'This software is free and does not guarantee anything. Feel free' +
       ' to share this software. Software development is hard work so If' +
       ' you wish to support this software, you are welcome to donate an' +
       'y amount. Send email to yeahbah@outlook.com for details.'
-    Width = 305.000000000000000000
   end
   object btnOpenWav: TButton
     Action = actOpenWav
-    Height = 22.000000000000000000
+    Enabled = True
+    ImageIndex = -1
     Padding.Left = 2.000000000000000000
     Padding.Top = 2.000000000000000000
     Padding.Right = 2.000000000000000000
     Padding.Bottom = 2.000000000000000000
     Position.X = 283.000000000000000000
     Position.Y = 164.000000000000000000
+    Size.Width = 29.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
     TabOrder = 8
-    Width = 29.000000000000000000
+    Visible = True
     object Label6: TLabel
       Align = Client
-      Height = 18.000000000000000000
+      Size.Width = 25.000000000000000000
+      Size.Height = 18.000000000000000000
+      Size.PlatformDefault = False
       TextSettings.HorzAlign = Center
       Text = '...'
-      Width = 25.000000000000000000
     end
   end
   object ActionList: TActionList

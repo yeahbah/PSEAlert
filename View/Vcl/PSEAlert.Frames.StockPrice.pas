@@ -20,13 +20,11 @@ type
     NewAlert1: TMenuItem;
     btnAlert: TSpeedButton;
     stockInfoPanel: TPanel;
-    procedure stockInfoPanelClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     constructor Create(aOwner: TComponent); override;
-    destructor Destroy; override;
   end;
 
 implementation
@@ -47,16 +45,5 @@ begin
   lblStockVolume.Caption := '';
 end;
 
-destructor TframeStockPrice.Destroy;
-begin
-
-  inherited;
-end;
-
-
-procedure TframeStockPrice.stockInfoPanelClick(Sender: TObject);
-begin
-  ShowMessage('hello');
-end;
 
 end.

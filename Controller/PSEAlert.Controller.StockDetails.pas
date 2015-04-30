@@ -137,7 +137,11 @@ begin
       .ToList.SingleOrDefault(nil);
     if stockModel <> nil then
     begin
+      {$IFDEF FMXAPP}
+      lblStockName.Text := stockModel.Description;
+      {$ELSE}
       lblStockName.Caption := stockModel.Description;
+      {$ENDIF}
       downloader := TStockDetail_HeaderDownloader.Create(stockModel.SecurityId);
       downloader.ExecuteAsync(
         procedure
@@ -189,7 +193,11 @@ begin
   stockModel := PSEAlertDb.Session.CreateCriteria<TStockModel>
     .Add(TRestrictions.Eq('SYMBOL', Model.Symbol.ToUpper)).ToList.SingleOrDefault(nil);
   if stockModel <> nil then
+{$IFDEF FMXAPP}
+    lblStockName.Text := stockModel.Description;
+{$ELSE}
     lblStockName.Caption := stockModel.Description;
+{$ENDIF}
 
 end;
 

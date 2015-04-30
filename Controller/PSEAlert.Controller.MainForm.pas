@@ -14,6 +14,7 @@ uses
   FMX.Types,
   FMX.ListBox,
   FMX.Layouts,
+  FMX.ComboEdit,
 {$ELSE}
   ComCtrls,
   Buttons,
@@ -50,8 +51,6 @@ type
     actSortDesc: TAction;
     [Bind]
     btnSort: TSpeedButton;
-    [Bind]
-    actRefreshMostActive: TAction;
 {$IFDEF FMXAPP}
     [Bind]
     lblStatusText: TLabel;
@@ -62,6 +61,8 @@ type
     StatusBar1: TStatusBar;
     [Bind]
     cmbAddStock: TComboBox;
+    [Bind]
+    actRefreshMostActive: TAction;
 {$ENDIF}
 
     [Bind]
@@ -127,9 +128,9 @@ begin
       c := TMainFormController.Create(aModel, frmMain);
       c.InitializeForm;
 
-      {$IFNDEF FMXAPP}
+      //{$IFNDEF FMXAPP}
       frmMain.OnActivate := c.MainFormActivate;
-      {$ENDIF}
+      //{$ENDIF}
 
       frmMain.OnClose := c.MainFormClose;
       result := c;
@@ -255,7 +256,11 @@ begin
   s := TList<TFrame>.Create;
   try
     a := Sender as TAction;
+{$IFDEF FMXAPP}
+    for i := 0 to scrollMyStocks.ControlsCount -1 do
+{$ELSE}
     for i := 0 to scrollMyStocks.ControlCount -1 do
+{$ENDIF}
     begin
       if scrollMyStocks.Controls[i] is TFrame then
       begin
@@ -263,12 +268,23 @@ begin
       end;
     end;
 
+{$IFDEF FMXAPP}
+    while scrollMyStocks.ControlsCount > 0 do
+    begin
+      scrollMyStocks.Controls[0].Visible := false;
+
+      scrollMyStocks.Controls[0].Align := TAlignLayout.alNone;
+      scrollMyStocks.RemoveObject(scrollMyStocks.Controls[0]);
+    end;
+{$ELSE}
     while scrollMyStocks.ControlCount > 0 do
     begin
       scrollMyStocks.Controls[0].Visible := false;
+
       scrollMyStocks.Controls[0].Align := alNone;
       scrollMyStocks.RemoveControl(scrollMyStocks.Controls[0]);
     end;
+{$ENDIF}
 
     if a = actSortAsc then
     begin
@@ -284,8 +300,13 @@ begin
     for f in s do
     begin
       f.Parent := scrollMyStocks;
+{$IFDEF FMXAPP}
+      f.Align := TAlignLayout.alTop;
+      f.Visible := true;
+{$ELSE}
       f.Align := alTop;
       f.Show;
+{$ENDIF}
     end;
 
   finally
@@ -320,8 +341,9 @@ begin
   actAdd.OnExecute := ExecuteAddAction;
   actSortAsc.OnExecute := ExecuteSortAction;
   actSortDesc.OnExecute := ExecuteSortAction;
+{$IFNDEF FMXAPP}
   actRefreshMostActive.OnExecute := ExecuteRefreshMostActiveAction;
-
+{$ENDIF}
   btnSort.Action := actSortAsc;
 end;
 
@@ -481,8 +503,11 @@ begin
   else
   if aMessage is TAddStockAlertMessage then
   begin
+{$IFDEF FMXAPP}
+    frmMain.PageControl.ActiveTab := frmMain.tabAlerts;
+{$ELSE}
     frmMain.PageControl.ActivePage := frmMain.tabAlerts;
-
+{$ENDIF}
   end;
 {$IFNDEF FMXAPP}
   if aMessage is TAlertTriggeredMessage then

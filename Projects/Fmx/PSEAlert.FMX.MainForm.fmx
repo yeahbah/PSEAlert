@@ -7,143 +7,260 @@ object frmMain: TfrmMain
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop, iPhone, iPad]
-  OnActivate = FormActivate
   OnCreate = FormCreate
-  OnClose = FormClose
-  DesignerMobile = False
-  DesignerWidth = 0
-  DesignerHeight = 0
-  DesignerDeviceName = ''
-  DesignerOrientation = 0
-  DesignerOSVersion = ''
+  DesignerMasterStyle = 0
   object Timer1: TTimer
-    Enabled = False
-    OnTimer = Timer1Timer
     Left = 208
     Top = 168
   end
   object StatusBar1: TStatusBar
-    Height = 22.000000000000000000
     Position.Y = 404.000000000000000000
     ShowSizeGrip = True
-    Width = 350.000000000000000000
+    Size.Width = 350.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
     TabOrder = 6
     object lblStatusText: TLabel
       Align = Left
-      Height = 22.000000000000000000
       Margins.Left = 5.000000000000000000
       Position.X = 5.000000000000000000
+      Size.Width = 155.294113159179700000
+      Size.Height = 22.000000000000000000
+      Size.PlatformDefault = False
       Text = 'lblStatusText'
-      Width = 155.294113159179700000
     end
   end
   object PageControl: TTabControl
     Align = Client
-    Height = 404.000000000000000000
+    Size.Width = 350.000000000000000000
+    Size.Height = 404.000000000000000000
+    Size.PlatformDefault = False
     StyleLookup = 'PageControlStyle1'
     TabIndex = 0
     TabOrder = 0
-    Width = 350.000000000000000000
+    TabPosition = Top
     object tabWatchList: TTabItem
       CustomIcon = <
         item
         end>
       StyledSettings = [Family, Style, FontColor]
-      Height = 24.000000000000000000
       IsSelected = True
+      Size.Width = 58.000000000000000000
+      Size.Height = 24.000000000000000000
+      Size.PlatformDefault = False
       TabOrder = 0
-      Text = 'Watch List'
-      Width = 71.000000000000000000
-      object scrollMyStocks: TScrollBox
-        Anchors = [akLeft, akTop, akRight, akBottom]
-        Height = 333.000000000000000000
-        Position.X = 8.000000000000000000
-        Position.Y = 40.000000000000000000
-        TabOrder = 0
-        Width = 337.000000000000000000
-      end
-      object btnAddStock: TButton
-        Action = actAdd
-        Height = 22.000000000000000000
-        Position.X = 120.000000000000000000
-        Position.Y = 11.000000000000000000
-        TabOrder = 1
-        Width = 80.000000000000000000
-        object Label3: TLabel
-          Align = Client
-          Height = 22.000000000000000000
-          TextSettings.HorzAlign = Center
-          Text = 'Add'
-          Width = 80.000000000000000000
+      Text = 'Market'
+      object TabControl1: TTabControl
+        Align = Client
+        Size.Width = 350.000000000000000000
+        Size.Height = 380.000000000000000000
+        Size.PlatformDefault = False
+        TabIndex = 0
+        TabOrder = 2
+        TabPosition = PlatformDefault
+        object TabItem1: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = True
+          Size.Width = 69.000000000000000000
+          Size.Height = 24.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Text = 'Watchlist'
+          object btnAddStock: TButton
+            Action = actAdd
+            Enabled = True
+            ImageIndex = -1
+            Position.X = 120.000000000000000000
+            Position.Y = 11.000000000000000000
+            Size.Width = 80.000000000000000000
+            Size.Height = 22.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 2
+            Visible = True
+            object Label3: TLabel
+              Align = Client
+              Size.Width = 80.000000000000000000
+              Size.Height = 22.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.HorzAlign = Center
+              Text = 'Add'
+            end
+          end
+          object btnRefresh: TSpeedButton
+            Action = actRefresh
+            Anchors = [akTop, akRight]
+            Enabled = True
+            ImageIndex = -1
+            Position.X = 286.000000000000000000
+            Position.Y = 8.000000000000000000
+            Size.Width = 64.000000000000000000
+            Size.Height = 22.000000000000000000
+            Size.PlatformDefault = False
+            Visible = True
+            object Label1: TLabel
+              Align = Client
+              Size.Width = 64.000000000000000000
+              Size.Height = 22.000000000000000000
+              Size.PlatformDefault = False
+              TextSettings.HorzAlign = Center
+              Text = 'Refresh'
+            end
+          end
+          object cmbAddStock: TComboEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            TabOrder = 6
+            ItemHeight = 19.000000000000000000
+            ItemIndex = -1
+            Position.X = 12.000000000000000000
+            Position.Y = 10.000000000000000000
+            Size.Width = 100.000000000000000000
+            Size.Height = 22.000000000000000000
+            Size.PlatformDefault = False
+          end
+          object scrollMyStocks: TScrollBox
+            Anchors = [akLeft, akTop, akRight, akBottom]
+            Position.X = 8.000000000000000000
+            Position.Y = 40.000000000000000000
+            Size.Width = 337.000000000000000000
+            Size.Height = 316.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Viewport.Width = 337.000000000000000000
+            Viewport.Height = 316.000000000000000000
+          end
+          object SpeedButton1: TSpeedButton
+            Action = actRefresh
+            Enabled = True
+            ImageIndex = -1
+            Position.X = 285.000000000000000000
+            Position.Y = 8.000000000000000000
+            Size.Width = 65.000000000000000000
+            Size.Height = 24.000000000000000000
+            Size.PlatformDefault = False
+            Visible = True
+          end
+          object btnSort: TSpeedButton
+            Action = actSortAsc
+            Enabled = True
+            ImageIndex = -1
+            Position.X = 208.000000000000000000
+            Position.Y = 8.000000000000000000
+            Visible = True
+          end
         end
-      end
-      object SpeedButton1: TSpeedButton
-        Action = actRefresh
-        Height = 24.000000000000000000
-        Position.X = 416.000000000000000000
-        Position.Y = 16.000000000000000000
-        Width = 65.000000000000000000
-      end
-      object btnRefresh: TSpeedButton
-        Action = actRefresh
-        Anchors = [akTop, akRight]
-        Height = 22.000000000000000000
-        Position.X = 280.000000000000000000
-        Position.Y = 11.000000000000000000
-        Width = 64.000000000000000000
-        object Label1: TLabel
-          Align = Client
-          Height = 22.000000000000000000
-          TextSettings.HorzAlign = Center
-          Text = 'Refresh'
-          Width = 64.000000000000000000
+        object TabItem2: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          Size.Width = 83.000000000000000000
+          Size.Height = 24.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Text = 'Most Active'
+          object scrollBoxMostActive: TScrollBox
+            Anchors = [akLeft, akTop, akRight, akBottom]
+            Position.X = 5.000000000000000000
+            Position.Y = 32.000000000000000000
+            Size.Width = 340.000000000000000000
+            Size.Height = 321.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Viewport.Width = 340.000000000000000000
+            Viewport.Height = 321.000000000000000000
+          end
         end
-      end
-      object cmbAddStock: TComboEdit
-        Touch.InteractiveGestures = [LongTap, DoubleTap]
-        TabOrder = 4
-        ItemHeight = 19.000000000000000000
-        ItemIndex = -1
-        Position.X = 12.000000000000000000
-        Position.Y = 10.000000000000000000
-        Width = 100.000000000000000000
-        Height = 22.000000000000000000
+        object TabItem3: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          Size.Width = 60.000000000000000000
+          Size.Height = 24.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Text = 'Gainers'
+          object scrollBoxGainers: TScrollBox
+            Anchors = [akLeft, akTop, akRight, akBottom]
+            Position.X = 4.000000000000000000
+            Position.Y = 16.000000000000000000
+            Size.Width = 343.000000000000000000
+            Size.Height = 337.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Viewport.Width = 343.000000000000000000
+            Viewport.Height = 337.000000000000000000
+          end
+        end
+        object TabItem4: TTabItem
+          CustomIcon = <
+            item
+            end>
+          IsSelected = False
+          Size.Width = 53.000000000000000000
+          Size.Height = 24.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Text = 'Losers'
+          object scrollBoxLosers: TScrollBox
+            Anchors = [akLeft, akTop, akRight, akBottom]
+            Position.X = 3.000000000000000000
+            Position.Y = 16.000000000000000000
+            Size.Width = 345.000000000000000000
+            Size.Height = 337.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Viewport.Width = 345.000000000000000000
+            Viewport.Height = 337.000000000000000000
+          end
+        end
       end
     end
     object tabIndeces: TTabItem
       CustomIcon = <
         item
         end>
-      Height = 24.000000000000000000
       IsSelected = False
+      Size.Width = 60.000000000000000000
+      Size.Height = 24.000000000000000000
+      Size.PlatformDefault = False
       TabOrder = 0
       Text = 'Indeces'
-      Width = 57.000000000000000000
       object scrollIndeces: TScrollBox
         Anchors = [akLeft, akTop, akRight, akBottom]
-        Height = 345.000000000000000000
         Position.X = 8.000000000000000000
         Position.Y = 40.000000000000000000
+        Size.Width = 337.000000000000000000
+        Size.Height = 345.000000000000000000
+        Size.PlatformDefault = False
         TabOrder = 0
-        Width = 337.000000000000000000
+        Viewport.Width = 337.000000000000000000
+        Viewport.Height = 345.000000000000000000
       end
       object SpeedButton2: TSpeedButton
         Action = actRefresh
         Anchors = [akTop, akRight]
-        Height = 22.000000000000000000
+        Enabled = True
+        ImageIndex = -1
         Padding.Left = 2.000000000000000000
         Padding.Top = 2.000000000000000000
         Padding.Right = 2.000000000000000000
         Padding.Bottom = 2.000000000000000000
         Position.X = 280.000000000000000000
         Position.Y = 11.000000000000000000
-        Width = 64.000000000000000000
+        Size.Width = 64.000000000000000000
+        Size.Height = 22.000000000000000000
+        Size.PlatformDefault = False
+        Visible = True
         object Label2: TLabel
           Align = Client
-          Height = 18.000000000000000000
+          Size.Width = 60.000000000000000000
+          Size.Height = 18.000000000000000000
+          Size.PlatformDefault = False
           TextSettings.HorzAlign = Center
           Text = 'Refresh'
-          Width = 60.000000000000000000
         end
       end
     end
@@ -151,36 +268,40 @@ object frmMain: TfrmMain
       CustomIcon = <
         item
         end>
-      Height = 24.000000000000000000
       IsSelected = False
+      Size.Width = 50.000000000000000000
+      Size.Height = 24.000000000000000000
+      Size.PlatformDefault = False
       TabOrder = 0
       Text = 'Alerts'
-      Width = 47.000000000000000000
     end
     object tabAbout: TTabItem
       CustomIcon = <
         item
         end>
-      Height = 24.000000000000000000
       IsSelected = False
+      Size.Width = 63.000000000000000000
+      Size.Height = 24.000000000000000000
+      Size.PlatformDefault = False
       TabOrder = 0
       Text = 'Settings'
-      Width = 59.000000000000000000
     end
-  end
-  object Timer2: TTimer
-    OnTimer = Timer2Timer
-    Left = 208
-    Top = 256
   end
   object ActionList1: TActionList
     Left = 136
     Top = 168
     object actRefresh: TAction
-      OnExecute = actRefreshExecute
     end
     object actAdd: TAction
-      OnExecute = actAddExecute
+    end
+    object actSortAsc: TAction
+      Text = 'actSortAsc'
+    end
+    object actSortDesc: TAction
+      Text = 'actSortDesc'
+    end
+    object actRefreshMostActive: TAction
+      Text = 'actRefreshMostActive'
     end
   end
 end

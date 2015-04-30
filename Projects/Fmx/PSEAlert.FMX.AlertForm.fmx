@@ -11,55 +11,55 @@ object frmAlert: TfrmAlert
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop, iPhone, iPad]
   OnClose = FormClose
-  DesignerMobile = False
-  DesignerWidth = 0
-  DesignerHeight = 0
-  DesignerDeviceName = ''
-  DesignerOrientation = 0
-  DesignerOSVersion = ''
+  DesignerMasterStyle = 0
   object lblStockSymbol: TLabel
     StyledSettings = [Family, Size, FontColor]
-    Height = 17.000000000000000000
     Position.X = 8.000000000000000000
     Position.Y = 8.000000000000000000
+    Size.Width = 225.000000000000000000
+    Size.Height = 17.000000000000000000
+    Size.PlatformDefault = False
     TextSettings.Font.Style = [fsBold]
     Text = 'Alert Triggered for %s!'
-    Width = 225.000000000000000000
   end
   object lblPriceTrigger: TLabel
     AutoSize = True
-    Height = 16.000000000000000000
     Position.X = 8.000000000000000000
     Position.Y = 32.000000000000000000
+    Size.Width = 81.000000000000000000
+    Size.Height = 16.000000000000000000
+    Size.PlatformDefault = False
     TextSettings.WordWrap = False
     Text = 'lblPriceTrigger'
-    Width = 78.000000000000000000
   end
   object lblVolumeTrigger: TLabel
     AutoSize = True
-    Height = 16.000000000000000000
     Position.X = 8.000000000000000000
     Position.Y = 48.000000000000000000
+    Size.Width = 96.000000000000000000
+    Size.Height = 16.000000000000000000
+    Size.PlatformDefault = False
     TextSettings.WordWrap = False
     Text = 'lblVolumeTrigger'
-    Width = 93.000000000000000000
   end
   object Button1: TButton
-    Height = 22.000000000000000000
     Position.X = 56.000000000000000000
     Position.Y = 72.000000000000000000
+    Size.Width = 80.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
     TabOrder = 4
     Text = 'Dismiss'
-    Width = 80.000000000000000000
     OnClick = Button1Click
   end
   object Button2: TButton
-    Height = 22.000000000000000000
     Position.X = 144.000000000000000000
     Position.Y = 72.000000000000000000
+    Size.Width = 80.000000000000000000
+    Size.Height = 22.000000000000000000
+    Size.PlatformDefault = False
     TabOrder = 5
     Text = 'Ok'
-    Width = 80.000000000000000000
     OnClick = Button2Click
   end
 end

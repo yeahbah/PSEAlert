@@ -3,7 +3,7 @@ unit PSEAlert.Messages;
 interface
 
 uses
-  Yeahbah.Messaging, PSE.Data.Model, Vcl.Forms;
+  Yeahbah.Messaging, PSE.Data.Model, Forms;
 
 type
   TIntradayUpdateMessage = class(TGenericMessage<TIntradayModel>)
