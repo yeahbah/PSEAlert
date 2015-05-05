@@ -137,6 +137,25 @@ type
     property CurrentPE: single read fCurrentPE write fCurrentPE;
   end;
 
+  [Entity]
+  [Table('STOCK_ATTRIBUTE')]
+  TStockAttribute = class
+  private
+    fSymbol: string;
+    fAttributeType: string;
+    fAttributeValue: string;
+    fAttributeKey: string;
+  public
+    [Column('SYMBOL', [cpRequired])]
+    property Symbol: string read fSymbol write fSymbol;
+    [Column('ATTR_KEY', [cpRequired])]
+    property AttributeKey: string read fAttributeKey write fAttributeKey;
+    [Column('ATTR_VALUE')]
+    property AttributeValue: string read fAttributeValue write fAttributeValue;
+    [Column('ATTR_TYPE')]
+    property AttributeType: string read fAttributeType write fAttributeType;
+  end;
+
   TPriceTriggerType = (Below, Equal, Above, BelowEqual, AboveEqual);
 
   TLogicType = (None=0, LogicOr=1, LogicAND=2);

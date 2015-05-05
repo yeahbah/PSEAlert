@@ -34,7 +34,8 @@ uses
   PSEAlert.Settings,
   PSE.Data.Model,
   System.UITypes,
-  PSEAlert.Controller.StockPrice;
+  PSEAlert.Controller.StockPrice,
+  PSEAlert.Service.Filter.StockFilterItemBase;
 
 type
   TMainFormController = class(TBaseController<TObject>, IMessageReceiver)
@@ -78,6 +79,7 @@ type
   protected
     fAlertEntryController: IController<TList<TAlertModel>>;
     fSettingsController: IController<TPSEAlertSettings>;
+    fStockFilterController: IController<TList<TStockFilterItemBase>>;
     procedure Initialize; override;
     procedure TriggerTimer1(Sender: TObject);
     procedure TriggerTimer2(Sender: TObject);
@@ -113,7 +115,7 @@ uses {$IFDEF FMXAPP}PSEAlert.FMX.MainForm{$ELSE}PSEAlert.MainForm{$ENDIF},
   Spring.Persistence.Criteria.OrderBy,
   Spring.Persistence.Criteria.Properties, PSE.Data.Repository,
   PSE.Data.Model.JSON,
-  Classes;
+  Classes, PSEAlert.Controller.StockFilter;
 
 function CreateMainFormController(aModel: TObject): IController<TObject>;
 begin
@@ -442,6 +444,8 @@ begin
   alertModels := stockAlertRepository.GetStockAlerts;
   fAlertEntryController := CreateStockAlertEntryController(alertModels, mainView.tabAlerts);
   fSettingsController := CreatePSEAlertSettingsController(PSEAlertSettings, mainView.tabAbout);
+
+  fStockFilterController := CreateStockFilterController(mainView.tabStockFilter);
   //mainView.Refresh;
 end;
 
