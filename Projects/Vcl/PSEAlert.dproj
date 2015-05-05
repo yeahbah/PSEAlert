@@ -166,11 +166,16 @@
         <DCCReference Include="..\..\Data\PSE.Data.Binding.Converters.pas"/>
         <DCCReference Include="..\..\Data\PSE.Data.Binding.DWScript.Functions.pas"/>
         <DCCReference Include="..\..\Service\PSEAlert.Service.StockFilterService.pas"/>
-        <DCCReference Include="..\..\Service\PSEAlert.Service.Filter.PERatioFilter.pas"/>
-        <DCCReference Include="..\..\Service\PSEAlert.Service.View.PERatioFilter.pas"/>
-        <DCCReference Include="..\..\Service\PSEAlert.Service.Controller.PERatioFilter.pas"/>
+        <DCCReference Include="..\..\Service\Filter\PSEAlert.Service.Filter.PERatioFilter.pas"/>
+        <DCCReference Include="..\..\Service\Controller\PSEAlert.Service.Controller.PERatioFilter.pas"/>
         <DCCReference Include="..\..\Service\PSEAlert.Service.Types.pas"/>
-        <DCCReference Include="..\..\Service\PSEAlert.Service.Filter.StockFilterItemBase.pas"/>
+        <DCCReference Include="..\..\Service\Filter\PSEAlert.Service.Filter.StockFilterItemBase.pas"/>
+        <DCCReference Include="..\..\Controller\PSEAlert.Controller.StockFilter.pas"/>
+        <DCCReference Include="..\..\Service\View\PSEAlert.Service.View.PERatioFilter.pas">
+            <Form>framePERatioFilter</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -695,13 +700,13 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
             <Platforms>
                 <Platform value="Win32">True</Platform>

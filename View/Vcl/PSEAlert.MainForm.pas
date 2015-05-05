@@ -45,6 +45,7 @@ type
     SpeedButton3: TSpeedButton;
     scrollBoxLosers: TScrollBox;
     scrollIndeces: TScrollBox;
+    tabStockFilter: TTabSheet;
     procedure ApplicationEvents1Exception(Sender: TObject; E: Exception);
   private
     { Private declarations }

@@ -27,6 +27,8 @@ type
     function GetStockAlerts: IList<TAlertModel>;
   end;
 
+
+
 var
   stockRepository: TStocksRepository;
   stockAlertRepository: TStockAlertRepository;
