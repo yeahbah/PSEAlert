@@ -7,6 +7,8 @@ uses
   dwsExprList,
   dwsStrings,
   dwsFunctions,
+  dwsErrors,
+  dwsSymbols,
   SysUtils;
 
 type

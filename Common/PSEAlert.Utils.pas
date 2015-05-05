@@ -27,6 +27,7 @@ function GenerateControlName(const aSuggestedName: string): string;
 begin
   result := Trim(ReplaceStr(aSuggestedName, '^', string.Empty));
   System.Delete(result, pos('-', result), 1);
+  result := 'stock_' + result;
 end;
 
 function GetPollIntervalValue(const aIndex: integer): integer;

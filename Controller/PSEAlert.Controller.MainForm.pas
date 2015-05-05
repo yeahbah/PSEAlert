@@ -149,6 +149,7 @@ var
   stocks: IList<TStockModel>;
   stock: TStockModel;
   criteria: ICriteria<TStockModel>;
+  frameName: string;
 begin
   //PSEStocksData.PSEStocksConnection.Close;
 
@@ -158,13 +159,14 @@ begin
 
   if stock <> nil then
   begin
+    frameName := GenerateControlName(aSymbol.ToUpper);
     stockRepository.MakeFavorite(aSymbol.ToUpper);
 {$IFDEF FMXAPP}
-    if scrollMyStocks.FindComponent(aSymbol.ToUpper) = nil then
+    if scrollMyStocks.FindComponent(frameName) = nil then
 {$ELSE}
-    if scrollMyStocks.FindChildControl(aSymbol.ToUpper) = nil then
+    if scrollMyStocks.FindChildControl(frameName) = nil then
 {$ENDIF}
-    CreateStockPriceFrame(scrollMyStocks, aSymbol.ToUpper, stock.Description, [Close]);
+      CreateStockPriceFrame(scrollMyStocks, aSymbol.ToUpper, stock.Description, [Close]);
   end
   else
     MessageDlg('Unable to find ' + aSymbol.ToUpper, TMsgDlgType.mtError, [TMsgDlgBtn.mbOk], 0);
