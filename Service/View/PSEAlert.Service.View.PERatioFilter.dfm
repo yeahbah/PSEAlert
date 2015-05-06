@@ -20,24 +20,24 @@ object framePERatioFilter: TframePERatioFilter
       334
       59)
     object Label3: TLabel
-      Left = 139
+      Left = 147
       Top = 30
-      Width = 16
-      Height = 13
+      Width = 20
+      Height = 16
       Caption = 'To:'
     end
     object Label2: TLabel
       Left = 35
       Top = 30
-      Width = 28
-      Height = 13
+      Width = 35
+      Height = 16
       Caption = 'From:'
     end
     object lblFilterDescription: TLabel
       Left = 11
       Top = 3
-      Width = 44
-      Height = 13
+      Width = 52
+      Height = 16
       Caption = 'P/E Ratio'
     end
     object btnClose: TSpeedButton
@@ -77,18 +77,18 @@ object framePERatioFilter: TframePERatioFilter
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
     end
     object edtPEFrom: TEdit
-      Left = 72
+      Left = 80
       Top = 27
       Width = 49
-      Height = 21
+      Height = 24
       TabOrder = 0
       Text = '10'
     end
     object edtPETo: TEdit
-      Left = 176
+      Left = 184
       Top = 27
       Width = 49
-      Height = 21
+      Height = 24
       TabOrder = 1
       Text = '25'
     end

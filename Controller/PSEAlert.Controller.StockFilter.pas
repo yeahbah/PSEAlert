@@ -130,44 +130,55 @@ var
 begin
   stockAttributeRepository.DeleteAll;
   stocks := PSEAlertDb.Session.FindAll<TStockModel>;
-  stocks.ForEach(
-    procedure (const stock: TStockModel)
-    begin
-      downloader := TStockDetail_HeaderDownloader.Create(stock.SecurityId);
-      downloader.Execute(
-//        procedure
-//        begin
-//          actReloadData.Caption := 'Busy...';
-//        end,
-//        procedure
-//        begin
-//          actReloadData.Caption := 'Reload Data';
-//        end,
-        procedure (s: TStockHeaderModel)
-        begin
-//          TThread.Synchronize(nil,
-//            procedure
-//            begin
-              actReloadData.Caption := 'Updating: (' + s.Symbol +')';
-              Application.ProcessMessages;
-              stockAttributeRepository.SaveNewAttribute(s.Symbol, 'PE',
-                s.CurrentPE.ToString, 'single', 'P/E');
+  try
+    actClearAll.Enabled := false;
+    actAddFilter.Enabled := false;
+    actRun.Enabled := false;
+    stocks.ForEach(
+      procedure (const stock: TStockModel)
+      begin
+        downloader := TStockDetail_HeaderDownloader.Create(stock.SecurityId);
+        downloader.Execute(
+  //        procedure
+  //        begin
+  //          actReloadData.Caption := 'Busy...';
+  //        end,
+  //        procedure
+  //        begin
+  //          actReloadData.Caption := 'Reload Data';
+  //        end,
+          procedure (s: TStockHeaderModel)
+          begin
+  //          TThread.Synchronize(nil,
+  //            procedure
+  //            begin
+                actReloadData.Caption := 'Updating: ' + s.Symbol;
+                Application.ProcessMessages;
+                stockAttributeRepository.SaveNewAttribute(s.Symbol, 'PE',
+                  s.CurrentPE.ToString, 'single', 'P/E');
 
-              stockAttributeRepository.SaveNewAttribute(s.Symbol, 'FiftyTwoWeekLow',
-                s.FiftyTwoWeekLow.ToString, 'single', '52Wk Low');
+                stockAttributeRepository.SaveNewAttribute(s.Symbol, 'FiftyTwoWeekLow',
+                  s.FiftyTwoWeekLow.ToString, 'single', '52Wk Low');
 
-              stockAttributeRepository.SaveNewAttribute(s.Symbol, 'FiftyTwoWeekHigh',
-                s.FiftyTwoWeekHigh.ToString, 'single', '52Wk High');
+                stockAttributeRepository.SaveNewAttribute(s.Symbol, 'FiftyTwoWeekHigh',
+                  s.FiftyTwoWeekHigh.ToString, 'single', '52Wk High');
 
-              stockAttributeRepository.SaveNewAttribute(s.Symbol, 'LastTradedPrice',
-                s.LastTradedPrice.ToString, 'single', 'Last Traded Price');
+                stockAttributeRepository.SaveNewAttribute(s.Symbol, 'LastTradedPrice',
+                  s.LastTradedPrice.ToString, 'single', 'Last Traded Price');
 
-              stockAttributeRepository.SaveNewAttribute(s.Symbol, 'LastTradedDate',
-                DateToStr(s.LastTradedDate), 'date', 'Last Traded Date');
+                stockAttributeRepository.SaveNewAttribute(s.Symbol, 'LastTradedDate',
+                  DateToStr(s.LastTradedDate), 'date', 'Last Traded Date');
 
-//            end);
-        end);
-    end);
+  //            end);
+          end);
+      end);
+  finally
+    actReloadData.Caption := 'Reload Data';
+    actClearAll.Enabled := true;
+    actAddFilter.Enabled := true;
+    actRun.Enabled := true;
+  end;
+
 end;
 
 procedure TStockFilterController.ExecuteRunAction(Sender: TObject);

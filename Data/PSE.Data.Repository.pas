@@ -119,7 +119,8 @@ begin
     stockAttrib.AttributeValue := aAttrValue;
     stockAttrib.AttributeType := aAttrType;
     stockAttrib.AttributeDisplayText := aAttrDisplayText;
-    PSEAlertDb.Session.Save(stockAttrib);
+
+    PSEAlertDb.Session.Insert(stockAttrib);
   finally
     stockAttrib.Free;
   end;

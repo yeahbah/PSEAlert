@@ -2,26 +2,30 @@ object frmFilterResult: TfrmFilterResult
   Left = 0
   Top = 0
   Caption = 'Filter Result'
-  ClientHeight = 300
-  ClientWidth = 635
+  ClientHeight = 375
+  ClientWidth = 794
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Height = -14
+  Font.Name = 'Segoe UI'
   Font.Style = []
   OldCreateOrder = False
   OnClose = FormClose
   DesignSize = (
-    635
-    300)
-  PixelsPerInch = 96
-  TextHeight = 13
+    794
+    375)
+  PixelsPerInch = 120
+  TextHeight = 19
   object gridResult: TStringGrid
-    Left = 8
-    Top = 8
-    Width = 619
-    Height = 284
+    Left = 10
+    Top = 10
+    Width = 774
+    Height = 355
+    Margins.Left = 4
+    Margins.Top = 4
+    Margins.Right = 4
+    Margins.Bottom = 4
     Anchors = [akLeft, akTop, akRight, akBottom]
     BorderStyle = bsNone
     ColCount = 1
