@@ -41,7 +41,6 @@ uses
   PSEAlert.Service.StockFilterService in '..\..\Service\PSEAlert.Service.StockFilterService.pas',
   PSEAlert.Service.Filter.PERatioFilter in '..\..\Service\Filter\PSEAlert.Service.Filter.PERatioFilter.pas',
   PSEAlert.Service.Controller.PERatioFilter in '..\..\Service\Controller\PSEAlert.Service.Controller.PERatioFilter.pas',
-  PSEAlert.Service.Types in '..\..\Service\PSEAlert.Service.Types.pas',
   PSEAlert.Service.Filter.StockFilterItemBase in '..\..\Service\Filter\PSEAlert.Service.Filter.StockFilterItemBase.pas',
   PSEAlert.Controller.StockFilter in '..\..\Controller\PSEAlert.Controller.StockFilter.pas',
   PSEAlert.Service.View.PERatioFilter in '..\..\Service\View\PSEAlert.Service.View.PERatioFilter.pas' {framePERatioFilter: TFrame},
