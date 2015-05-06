@@ -40,12 +40,17 @@ var
 implementation
 
 uses PSEAlert.Service.Filter.PERatioFilter,
-  Spring.Container, PSEAlert.Service.Controller.PERatioFilter;
+  Spring.Container, PSEAlert.Service.Controller.PERatioFilter,
+  PSEAlert.Service.Controller.SharePriceFilter,
+  PSEAlert.Service.Filter.SharePriceFilter;
 
 procedure RegisterStockFilters;
 begin
   StockFilterService.RegisterFilter(TPERatioFilter.Create,
     CreatePERatioFilterController);
+
+  StockFilterService.RegisterFilter(TSharePriceFilter.Create,
+    CreateSharePriceFilterController);
 end;
 
 { TStockFilterService }

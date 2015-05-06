@@ -27,17 +27,24 @@ type
     function GetStockAlerts: IList<TAlertModel>;
   end;
 
-
+  TStockAttributeRepository = class(TSimpleRepository<TStockAttribute, string>)
+  public
+    procedure SaveNewAttribute(const aSymbol: string; const aAttrKey: string;
+      const aAttrValue: string; const aAttrType: string; const aAttrDisplayText: string);
+    procedure Update(const aStockAttr: TStockAttribute);
+    procedure DeleteAll;
+  end;
 
 var
   stockRepository: TStocksRepository;
   stockAlertRepository: TStockAlertRepository;
-
+  stockAttributeRepository: TStockAttributeRepository;
 
 implementation
 
 uses
-  PSE.Data;
+  PSE.Data, Spring.Persistence.Criteria.Interfaces,
+  Spring.Persistence.Criteria.Restrictions;
 
 { TStocksRepository }
 
@@ -93,8 +100,52 @@ begin
   result := PSEAlertDb.Session.GetList<TAlertModel>('SELECT * FROM ALERTS', []);
 end;
 
+{ TStockAttributeRepository }
+
+procedure TStockAttributeRepository.DeleteAll;
+begin
+  PSEAlertDb.Session.Execute('DELETE FROM STOCK_ATTRIBUTE', []);
+end;
+
+procedure TStockAttributeRepository.SaveNewAttribute(const aSymbol, aAttrKey,
+  aAttrValue, aAttrType, aAttrDisplayText: string);
+var
+  stockAttrib: TStockAttribute;
+begin
+  stockAttrib := TStockAttribute.Create;
+  try
+    stockAttrib.Symbol := aSymbol;
+    stockAttrib.AttributeKey := aAttrKey;
+    stockAttrib.AttributeValue := aAttrValue;
+    stockAttrib.AttributeType := aAttrType;
+    stockAttrib.AttributeDisplayText := aAttrDisplayText;
+    PSEAlertDb.Session.Save(stockAttrib);
+  finally
+    stockAttrib.Free;
+  end;
+end;
+
+procedure TStockAttributeRepository.Update(
+  const aStockAttr: TStockAttribute);
+var
+  stockAttr: TStockAttribute;
+  criteria: ICriteria<TStockAttribute>;
+begin
+  criteria := PSEAlertDb.Session.CreateCriteria<TStockAttribute>;
+  criteria.Add(TRestrictions.Eq('SYMBOL', aStockAttr.Symbol));
+  criteria.Add(TRestrictions.Eq('ATTR_KEY', aStockAttr.AttributeKey));
+
+  stockAttr := criteria.ToList.SingleOrDefault(nil);
+  if stockAttr <> nil then
+  begin
+    stockAttr.AttributeValue := aStockAttr.AttributeValue;
+    PSEAlertDb.Session.Update(stockAttr);
+  end;
+end;
+
 initialization
   stockRepository := TStocksRepository.Create(PSEAlertDb.Session);
   stockAlertRepository := TStockAlertRepository.Create(PSEAlertDb.Session);
+  stockAttributeRepository := TStockAttributeRepository.Create(PSEAlertDb.Session);
 
 end.

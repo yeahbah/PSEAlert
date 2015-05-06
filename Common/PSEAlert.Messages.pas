@@ -3,7 +3,8 @@ unit PSEAlert.Messages;
 interface
 
 uses
-  Yeahbah.Messaging, PSE.Data.Model, Forms;
+  Yeahbah.Messaging, PSE.Data.Model, Forms,
+  PSEAlert.Service.Filter.StockFilterItemBase;
 
 type
   TIntradayUpdateMessage = class(TGenericMessage<TIntradayModel>)
@@ -57,7 +58,9 @@ type
 
   end;
 
+  TCloseFilterMessage = class(TStringMessage)
 
+  end;
 
 implementation
 

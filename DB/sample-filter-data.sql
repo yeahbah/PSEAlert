@@ -1,0 +1,12 @@
+insert into stock_attribute values(null, 'PX', 'PE', '10.5', 'single');
+insert into stock_attribute values(null, 'AC', 'PE', '21', 'single');
+insert into stock_attribute values(null, 'LC', 'PE', '100', 'single');
+insert into stock_attribute values(null, 'TEL', 'PE', '9.99', 'single');
+insert into stock_attribute values(null, 'PX', 'FiftyTwoWeekLow', '5', 'single');
+insert into stock_attribute values(null, 'AC', 'FiftyTwoWeekLow', '680.5', 'single');
+insert into stock_attribute values(null, 'LC', 'FiftyTwoWeekLow', '0.2', 'single');
+insert into stock_attribute values(null, 'TEL', 'FiftyTwoWeekLow', '2999', 'single');
+insert into stock_attribute values(null, 'PX', 'FiftyTwoWeekHigh', '7.1', 'single');
+insert into stock_attribute values(null, 'AC', 'FiftyTwoWeekHigh', '900', 'single');
+insert into stock_attribute values(null, 'LC', 'FiftyTwoWeekHigh', '0.5', 'single');
+insert into stock_attribute values(null, 'TEL', 'FiftyTwoWeekHigh', '3566.75', 'single');

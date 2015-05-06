@@ -164,8 +164,59 @@ begin
         begin
           TThread.Synchronize(nil,
             procedure
+            var
+              stockAttr: TStockAttribute;
             begin
               fStockDetailsController := CreateStockDetailsController(self.View as TComponent, aStock);
+              stockAttr := TStockAttribute.Create;
+              try
+                stockAttr.Symbol := aStock.Symbol;
+                stockAttr.AttributeKey := 'PE';
+                stockAttr.AttributeValue := aStock.CurrentPE.ToString;
+                stockAttributeRepository.Update(stockAttr);
+              finally
+                stockAttr.Free;
+              end;
+
+              stockAttr := TStockAttribute.Create;
+              try
+                stockAttr.Symbol := aStock.Symbol;
+                stockAttr.AttributeKey := 'FiftyTwoWeekLow';
+                stockAttr.AttributeValue := aStock.FiftyTwoWeekLow.ToString;
+                stockAttributeRepository.Update(stockAttr);
+              finally
+                stockAttr.Free;
+              end;
+
+              stockAttr := TStockAttribute.Create;
+              try
+                stockAttr.Symbol := aStock.Symbol;
+                stockAttr.AttributeKey := 'FiftyTwoWeekHigh';
+                stockAttr.AttributeValue := aStock.FiftyTwoWeekHigh.ToString;
+                stockAttributeRepository.Update(stockAttr);
+              finally
+                stockAttr.Free;
+              end;
+
+              stockAttr := TStockAttribute.Create;
+              try
+                stockAttr.Symbol := aStock.Symbol;
+                stockAttr.AttributeKey := 'LastTradedPrice';
+                stockAttr.AttributeValue := aStock.LastTradedPrice.ToString;
+                stockAttributeRepository.Update(stockAttr);
+              finally
+                stockAttr.Free;
+              end;
+
+              stockAttr := TStockAttribute.Create;
+              try
+                stockAttr.Symbol := aStock.Symbol;
+                stockAttr.AttributeKey := 'LastTradedDate';
+                stockAttr.AttributeValue := DateToStr(aStock.LastTradedDate);
+                stockAttributeRepository.Update(stockAttr);
+              finally
+                stockAttr.Free;
+              end;
             end);
         end)
     end;

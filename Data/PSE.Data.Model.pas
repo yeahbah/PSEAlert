@@ -145,7 +145,11 @@ type
     fAttributeType: string;
     fAttributeValue: string;
     fAttributeKey: string;
+    fId: integer;
+    fAttributeDisplayText: string;
   public
+    [Column('ID', [cpRequired, cpPrimaryKey])]
+    property ID: integer read fId write fId;
     [Column('SYMBOL', [cpRequired])]
     property Symbol: string read fSymbol write fSymbol;
     [Column('ATTR_KEY', [cpRequired])]
@@ -154,6 +158,8 @@ type
     property AttributeValue: string read fAttributeValue write fAttributeValue;
     [Column('ATTR_TYPE')]
     property AttributeType: string read fAttributeType write fAttributeType;
+    [Column('ATTR_DISPLAYTEXT')]
+    property AttributeDisplayText: string read fAttributeDisplayText write fAttributeDisplayText;
   end;
 
   TPriceTriggerType = (Below, Equal, Above, BelowEqual, AboveEqual);

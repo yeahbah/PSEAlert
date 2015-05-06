@@ -86,7 +86,7 @@ uses PSEAlert.Forms.StockDetails, Forms, PSEAlert.Messages, PSE.Data.Downloader,
   PSE.Data,
   Spring.Persistence.Criteria.Interfaces,
   Spring.Persistence.Criteria.Restrictions,
-  UITypes, Yeahbah.ObjectClone;
+  UITypes, Yeahbah.ObjectClone, PSE.Data.Repository;
 
 function CreateStockDetailsController(aOwner: TComponent; aModel: TStockHeaderModel): IController<TStockHeaderModel>;
 begin
@@ -156,6 +156,8 @@ begin
         begin
           TThread.Synchronize(nil,
             procedure
+            var
+              stockAttr: TStockAttribute;
             begin
               Model.Symbol := aStock.Symbol;
               Model.FiftyTwoWeekHigh := aStock.FiftyTwoWeekHigh;
@@ -172,6 +174,57 @@ begin
               Model.IntradayOpen := aStock.IntradayOpen;
               Model.AvgPrice := aStock.AvgPrice;
               Model.CurrentPE := aStock.CurrentPE;
+
+              stockAttr := TStockAttribute.Create;
+              try
+                stockAttr.Symbol := aStock.Symbol;
+                stockAttr.AttributeKey := 'PE';
+                stockAttr.AttributeValue := aStock.CurrentPE.ToString;
+                stockAttributeRepository.Update(stockAttr);
+              finally
+                stockAttr.Free;
+              end;
+
+              stockAttr := TStockAttribute.Create;
+              try
+                stockAttr.Symbol := aStock.Symbol;
+                stockAttr.AttributeKey := 'FiftyTwoWeekLow';
+                stockAttr.AttributeValue := aStock.FiftyTwoWeekLow.ToString;
+                stockAttributeRepository.Update(stockAttr);
+              finally
+                stockAttr.Free;
+              end;
+
+              stockAttr := TStockAttribute.Create;
+              try
+                stockAttr.Symbol := aStock.Symbol;
+                stockAttr.AttributeKey := 'FiftyTwoWeekHigh';
+                stockAttr.AttributeValue := aStock.FiftyTwoWeekHigh.ToString;
+                stockAttributeRepository.Update(stockAttr);
+              finally
+                stockAttr.Free;
+              end;
+
+              stockAttr := TStockAttribute.Create;
+              try
+                stockAttr.Symbol := aStock.Symbol;
+                stockAttr.AttributeKey := 'LastTradedPrice';
+                stockAttr.AttributeValue := aStock.LastTradedPrice.ToString;
+                stockAttributeRepository.Update(stockAttr);
+              finally
+                stockAttr.Free;
+              end;
+
+              stockAttr := TStockAttribute.Create;
+              try
+                stockAttr.Symbol := aStock.Symbol;
+                stockAttr.AttributeKey := 'LastTradedDate';
+                stockAttr.AttributeValue := DateToStr(aStock.LastTradedDate);
+                stockAttributeRepository.Update(stockAttr);
+              finally
+                stockAttr.Free;
+              end;
+
             end);
         end)
     end;

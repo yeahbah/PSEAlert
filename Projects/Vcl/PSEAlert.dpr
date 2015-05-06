@@ -44,7 +44,15 @@ uses
   PSEAlert.Service.Types in '..\..\Service\PSEAlert.Service.Types.pas',
   PSEAlert.Service.Filter.StockFilterItemBase in '..\..\Service\Filter\PSEAlert.Service.Filter.StockFilterItemBase.pas',
   PSEAlert.Controller.StockFilter in '..\..\Controller\PSEAlert.Controller.StockFilter.pas',
-  PSEAlert.Service.View.PERatioFilter in '..\..\Service\View\PSEAlert.Service.View.PERatioFilter.pas' {framePERatioFilter: TFrame};
+  PSEAlert.Service.View.PERatioFilter in '..\..\Service\View\PSEAlert.Service.View.PERatioFilter.pas' {framePERatioFilter: TFrame},
+  PSEAlert.Forms.FilterResult in '..\..\View\Vcl\PSEAlert.Forms.FilterResult.pas' {frmFilterResult},
+  PSEAlert.Controller.FilterResult in '..\..\Controller\PSEAlert.Controller.FilterResult.pas',
+  PSEAlert.Service.View.HighLow52Filter in '..\..\Service\View\PSEAlert.Service.View.HighLow52Filter.pas' {frameHighLow52Filter: TFrame},
+  PSEAlert.Service.Controller.HighLow52 in '..\..\Service\Controller\PSEAlert.Service.Controller.HighLow52.pas',
+  PSEAlert.Service.View.SharePriceFilter in '..\..\Service\View\PSEAlert.Service.View.SharePriceFilter.pas' {frameSharePriceFilter: TFrame},
+  PSEAlert.Service.Filter.HighLow52Filter in '..\..\Service\Filter\PSEAlert.Service.Filter.HighLow52Filter.pas',
+  PSEAlert.Service.Filter.SharePriceFilter in '..\..\Service\Filter\PSEAlert.Service.Filter.SharePriceFilter.pas',
+  PSEAlert.Service.Controller.SharePriceFilter in '..\..\Service\Controller\PSEAlert.Service.Controller.SharePriceFilter.pas';
 
 {$R *.res}
 

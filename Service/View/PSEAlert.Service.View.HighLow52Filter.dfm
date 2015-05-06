@@ -1,13 +1,12 @@
-object framePERatioFilter: TframePERatioFilter
+object frameHighLow52Filter: TframeHighLow52Filter
   Left = 0
   Top = 0
-  Width = 340
-  Height = 65
-  Anchors = [akLeft, akTop, akRight]
+  Width = 343
+  Height = 67
   TabOrder = 0
   DesignSize = (
-    340
-    65)
+    343
+    67)
   object Panel1: TPanel
     Left = 3
     Top = 3
@@ -19,33 +18,18 @@ object framePERatioFilter: TframePERatioFilter
     DesignSize = (
       334
       59)
-    object Label3: TLabel
-      Left = 139
-      Top = 30
-      Width = 16
-      Height = 13
-      Caption = 'To:'
-    end
-    object Label2: TLabel
-      Left = 35
-      Top = 30
-      Width = 28
-      Height = 13
-      Caption = 'From:'
-    end
     object lblFilterDescription: TLabel
       Left = 11
       Top = 3
-      Width = 44
+      Width = 87
       Height = 13
-      Caption = 'P/E Ratio'
+      Caption = 'Price Performance'
     end
     object btnClose: TSpeedButton
       Left = 314
       Top = 3
       Width = 16
       Height = 16
-      Action = actClose
       Anchors = [akTop, akRight]
       Flat = True
       Glyph.Data = {
@@ -76,27 +60,44 @@ object framePERatioFilter: TframePERatioFilter
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
     end
-    object edtPEFrom: TEdit
-      Left = 72
-      Top = 27
-      Width = 49
+    object Label2: TLabel
+      Left = 135
+      Top = 29
+      Width = 38
+      Height = 13
+      Caption = '% of its'
+    end
+    object Label3: TLabel
+      Left = 20
+      Top = 29
+      Width = 67
+      Height = 13
+      Caption = 'Stock is within'
+    end
+    object edPctPrice: TEdit
+      Left = 93
+      Top = 26
+      Width = 36
       Height = 21
       TabOrder = 0
-      Text = '10'
     end
-    object edtPETo: TEdit
-      Left = 176
-      Top = 27
-      Width = 49
-      Height = 21
+    object RadioButton1: TRadioButton
+      Left = 192
+      Top = 14
+      Width = 97
+      Height = 17
+      Caption = '52 Week High'
+      Checked = True
       TabOrder = 1
-      Text = '25'
+      TabStop = True
     end
-  end
-  object ActionList1: TActionList
-    Left = 243
-    Top = 19
-    object actClose: TAction
+    object RadioButton2: TRadioButton
+      Left = 192
+      Top = 37
+      Width = 113
+      Height = 17
+      Caption = '52 Week Low'
+      TabOrder = 2
     end
   end
 end

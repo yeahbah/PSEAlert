@@ -1,4 +1,4 @@
-unit PSEAlert.Service.Filter.PERatioFilter;
+unit PSEAlert.Service.Filter.SharePriceFilter;
 
 interface
 
@@ -9,39 +9,39 @@ uses
   Generics.Collections;
 
 type
-  TPERatioFilter = class(TStockFilterItemBase)
+  TSharePriceFilter = class(TStockFilterItemBase)
   private
     fToPE: single;
     fFromPE: single;
+    fToPrice: single;
+    fFromPrice: single;
     function GetDescription: string; override;
   public
     constructor Create;
     procedure Run(aResult: TList<TStockAttribute>); override;
     property Description: string read GetDescription;
-    property FromPE: single read fFromPE write fFromPE;
-    property ToPE: single read fToPE write fToPE;
+    property FromPrice: single read fFromPrice write fFromPrice;
+    property ToPrice: single read fToPrice write fToPrice;
   end;
 
 implementation
 
-{ TPERatioFilter }
+{ TSharePriceFilter }
 
-uses
-  PSE.Data, Yeahbah.GenericQuery, SysUtils;
+uses Yeahbah.GenericQuery, SysUtils;
 
-constructor TPERatioFilter.Create;
+constructor TSharePriceFilter.Create;
 begin
-  inherited Create;
-  fFromPE := 10;
-  fToPE := 25;
+  fFromPrice := 100;
+  fToPrice := 1000;
 end;
 
-function TPERatioFilter.GetDescription: string;
+function TSharePriceFilter.GetDescription: string;
 begin
-  result := 'P/E Ratio';
+  result := 'Share Price';
 end;
 
-procedure TPERatioFilter.Run(aResult: TList<TStockAttribute>);
+procedure TSharePriceFilter.Run(aResult: TList<TStockAttribute>);
 var
   stocks, tmp: TList<TStockAttribute>;
 begin
@@ -49,9 +49,9 @@ begin
     .Where(
       function(s: TStockAttribute): boolean
       begin
-        result := s.AttributeKey = 'PE';
-        result := result and (StrToFloat(s.AttributeValue) >= fFromPE);
-        result := result and (StrToFloat(s.AttributeValue) <= fToPE);
+        result := s.AttributeKey = 'LastTradedPrice';
+        result := result and (StrToFloat(s.AttributeValue) >= fFromPrice);
+        result := result and (StrToFloat(s.AttributeValue) <= fToPrice);
       end).ToList;
 
   tmp := TGenericQuery<TStockAttribute>.From(aResult)
@@ -71,7 +71,6 @@ begin
 
   stocks.Free;
   tmp.Free;
-
 end;
 
 end.

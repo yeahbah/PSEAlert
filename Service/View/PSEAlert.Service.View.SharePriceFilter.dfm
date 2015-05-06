@@ -1,4 +1,4 @@
-object framePERatioFilter: TframePERatioFilter
+object frameSharePriceFilter: TframeSharePriceFilter
   Left = 0
   Top = 0
   Width = 340
@@ -36,9 +36,9 @@ object framePERatioFilter: TframePERatioFilter
     object lblFilterDescription: TLabel
       Left = 11
       Top = 3
-      Width = 44
+      Width = 54
       Height = 13
-      Caption = 'P/E Ratio'
+      Caption = 'Share Price'
     end
     object btnClose: TSpeedButton
       Left = 314
@@ -76,7 +76,7 @@ object framePERatioFilter: TframePERatioFilter
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
     end
-    object edtPEFrom: TEdit
+    object edtFromPrice: TEdit
       Left = 72
       Top = 27
       Width = 49
@@ -84,7 +84,7 @@ object framePERatioFilter: TframePERatioFilter
       TabOrder = 0
       Text = '10'
     end
-    object edtPETo: TEdit
+    object edtToPrice: TEdit
       Left = 176
       Top = 27
       Width = 49
