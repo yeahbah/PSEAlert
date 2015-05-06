@@ -164,7 +164,6 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\..\Controller\PSEAlert.Controller.StockDetails.pas"/>
-        <DCCReference Include="..\..\Data\PSE.Data.Binding.Converters.pas"/>
         <DCCReference Include="..\..\Data\PSE.Data.Binding.DWScript.Functions.pas"/>
         <DCCReference Include="..\..\Service\PSEAlert.Service.StockFilterService.pas"/>
         <DCCReference Include="..\..\Service\Filter\PSEAlert.Service.Filter.PERatioFilter.pas"/>

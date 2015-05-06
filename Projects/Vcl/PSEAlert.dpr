@@ -36,7 +36,6 @@ uses
   PSEAlert.Frames.StockFilter in '..\..\View\Vcl\PSEAlert.Frames.StockFilter.pas' {frameStockFilter: TFrame},
   PSEAlert.Forms.StockDetails in '..\..\View\Vcl\PSEAlert.Forms.StockDetails.pas' {frmStockDetails},
   PSEAlert.Controller.StockDetails in '..\..\Controller\PSEAlert.Controller.StockDetails.pas',
-  PSE.Data.Binding.Converters in '..\..\Data\PSE.Data.Binding.Converters.pas',
   PSE.Data.Binding.DWScript.Functions in '..\..\Data\PSE.Data.Binding.DWScript.Functions.pas',
   PSEAlert.Service.StockFilterService in '..\..\Service\PSEAlert.Service.StockFilterService.pas',
   PSEAlert.Service.Filter.PERatioFilter in '..\..\Service\Filter\PSEAlert.Service.Filter.PERatioFilter.pas',

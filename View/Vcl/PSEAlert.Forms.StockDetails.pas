@@ -45,24 +45,16 @@ type
     actAddAlert: TAction;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Button2Click(Sender: TObject);
-    procedure actRefreshExecute(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
   end;
 
-//var
-//  frmStockDetails: TfrmStockDetails;
 
 implementation
 
 {$R *.dfm}
-
-procedure TfrmStockDetails.actRefreshExecute(Sender: TObject);
-begin
-//
-end;
 
 procedure TfrmStockDetails.Button2Click(Sender: TObject);
 begin

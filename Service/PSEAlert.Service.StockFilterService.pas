@@ -42,7 +42,7 @@ implementation
 uses PSEAlert.Service.Filter.PERatioFilter,
   PSEAlert.Service.Controller.PERatioFilter,
   PSEAlert.Service.Controller.SharePriceFilter,
-  PSEAlert.Service.Filter.SharePriceFilter;
+  PSEAlert.Service.Filter.SharePriceFilter, Spring.Container;
 
 procedure RegisterStockFilters;
 begin
@@ -97,8 +97,6 @@ begin
 end;
 
 initialization
- // GlobalContainer.RegisterType<TStockFilterService>.Implements<IStockFilterService>;
- // GlobalContainer.Build;
   StockFilterService := TStockFilterService.Create;
   RegisterStockFilters;
 

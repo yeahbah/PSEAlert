@@ -98,6 +98,8 @@ begin
       if Model.IndexOf(pair.Key) >= 0 then
         Exit;
       Model.Add(pair.Key);
+
+      // so the controllers don't go out of scope
       fFilterControllers.Add(pair.Value(scrollFilter, pair.Key));
       exit;
     end;

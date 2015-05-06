@@ -17,6 +17,7 @@ uses
 type
   TPERatioFilterController = class(TBaseController<TStockFilterItemBase>)
   private
+  {$HINTS OFF}
     [Bind('Description', 'Caption')]
     lblFilterDescription: TLabel;
     [Bind]
@@ -25,6 +26,7 @@ type
     edtPEFrom: TEdit;
     [Bind('ToPE', 'Text')]
     edtPETo: TEdit;
+  {$HINTS ON}
   protected
     procedure Initialize; override;
     procedure ExecuteCloseAction(Sender: TObject);

@@ -16,9 +16,6 @@ type
     { Public declarations }
   end;
 
-var
-  frmFilterResult: TfrmFilterResult;
-
 implementation
 
 {$R *.dfm}

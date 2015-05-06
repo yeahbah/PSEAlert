@@ -13,6 +13,7 @@ type
   private
     fToPE: single;
     fFromPE: single;
+  protected
     function GetDescription: string; override;
   public
     constructor Create;

@@ -11,10 +11,13 @@ uses
 type
   TSharePriceFilter = class(TStockFilterItemBase)
   private
+  {$HINTS OFF}
     fToPE: single;
     fFromPE: single;
     fToPrice: single;
     fFromPrice: single;
+  {$HINTS ON}
+  protected
     function GetDescription: string; override;
   public
     constructor Create;
