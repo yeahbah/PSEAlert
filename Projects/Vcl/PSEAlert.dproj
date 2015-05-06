@@ -5,7 +5,7 @@
         <FrameworkType>VCL</FrameworkType>
         <MainSource>PSEAlert.dpr</MainSource>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
@@ -46,6 +46,7 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
+        <DCC_UnitSearchPath>$(BDSLIB)\$(Platform)\release;$(BDSUSERDIR)\Imports;$(BDS)\Imports;$(BDSCOMMONDIR)\Dcp;$(BDS)\include;C:\Program Files (x86)\FastReports\LibD22;C:\Users\Arnold\Documents\Projects\DelphiLib\spring4d\Source\Base;C:\Users\Arnold\Documents\Projects\DelphiLib\spring4d\Source\Base\Collections;C:\Users\Arnold\Documents\Projects\DelphiLib\spring4d\Source\Base\Reflection;C:\Users\Arnold\Documents\Projects\DelphiLib\Spring4D\Source\Persistence\Core;C:\Users\Arnold\Documents\Projects\DelphiLib\Spring4D\Source\Persistence\Mapping;C:\Users\Arnold\Documents\Projects\DelphiLib\Spring4D\Source;C:\Users\Arnold\Documents\Projects\DelphiLib\JCL\jcl\source\windows;C:\Users\Arnold\Documents\Projects\DelphiLib\JCL\jcl\source\include;C:\Users\Arnold\Documents\Projects\DelphiLib\JCL\jcl\lib\d22\win32;C:\Users\Arnold\Documents\Projects\DelphiLib\Spring4D\Source\Persistence\SQL;C:\Users\Arnold\Documents\Projects\DelphiLib\Spring4D\Source\Persistence\Criteria;C:\Users\Arnold\Documents\Projects\DelphiLib\Spring4D\Marshmallow\External\SQLite3\Source;$(DELPHI_LIB_BASE)\Spring4D\Source\Persistence\Adapters;$(DELPHI_LIB_BASE)\DSharp\Source\Logging;$(DELPHI_LIB_BASE)\delphi-oop\Bindings;$(DELPHI_LIB_BASE)\delphi-oop\Persistence;$(DELPHI_LIB_BASE)\DSharp\Source\DelphiWebScript;$(DELPHI_LIB_BASE)\DWScript\Source;$(DELPHI_LIB_BASE)\DWScript\Libraries\SimpleServer;$(DELPHI_LIB_BASE)\delphi-oop\Web;$(DELPHI_LIB_BASE)\OmniThread\src;$(DELPHI_LIB_BASE)\OmniThread;$(DELPHI_LIB_BASE)\DSharp\Source\Core;$(DELPHI_LIB_BASE)\DSharp\Source\Bindings;$(DELPHI_LIB_BASE)\DSharp\Source\Collections;$(DELPHI_LIB_BASE)\DSharp\Source\ComponentModel;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
         <DCC_Define>VCLAPP;DELPHIXE6_UP;$(DCC_Define)</DCC_Define>
         <Icon_MainIcon>PSEAlert_Icon.ico</Icon_MainIcon>
         <SanitizedProjectName>PSEAlert</SanitizedProjectName>
@@ -95,9 +96,9 @@
         <DCC_DebugInformation>0</DCC_DebugInformation>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-        <VerInfo_Build>6</VerInfo_Build>
+        <VerInfo_Build>7</VerInfo_Build>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <VerInfo_Keys>CompanyName=Yeahbah! Very Good Apps.;FileDescription=;FileVersion=1.0.0.6;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=PSEAlert;ProductVersion=1.0.0.6;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=Yeahbah! Very Good Apps.;FileDescription=;FileVersion=1.0.0.7;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=PSEAlert;ProductVersion=1.0.0.7;Comments=</VerInfo_Keys>
         <DCC_MapFile>3</DCC_MapFile>
     </PropertyGroup>
     <ItemGroup>
@@ -719,13 +720,13 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
+                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
                 <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="iOSDevice32" Name="$(PROJECTNAME).app"/>
             </Deployment>
             <Platforms>
                 <Platform value="Win32">True</Platform>

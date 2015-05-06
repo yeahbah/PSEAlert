@@ -25,7 +25,7 @@ object frameStockFilter: TframeStockFilter
       TabOrder = 0
     end
     object btnClearAll: TButton
-      Left = 103
+      Left = 127
       Top = 8
       Width = 75
       Height = 25
@@ -35,7 +35,7 @@ object frameStockFilter: TframeStockFilter
     object btnReloadData: TButton
       Left = 9
       Top = 8
-      Width = 91
+      Width = 112
       Height = 25
       Action = actReloadData
       TabOrder = 2
@@ -52,20 +52,20 @@ object frameStockFilter: TframeStockFilter
     object Label1: TLabel
       Left = 9
       Top = 14
-      Width = 58
-      Height = 13
+      Width = 70
+      Height = 16
       Caption = 'Select filter:'
     end
     object cmbFilter: TComboBox
-      Left = 83
+      Left = 96
       Top = 11
       Width = 185
-      Height = 21
+      Height = 24
       Style = csDropDownList
       TabOrder = 0
     end
     object btnAdd: TButton
-      Left = 279
+      Left = 292
       Top = 10
       Width = 50
       Height = 26

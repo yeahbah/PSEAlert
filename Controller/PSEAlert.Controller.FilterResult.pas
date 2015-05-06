@@ -26,7 +26,7 @@ function CreateFilterResultController(aModel: TList<TStockAttribute>): IControll
 implementation
 
 uses PSEAlert.Forms.FilterResult, Yeahbah.GenericQuery, Classes,
-  Yeahbah.ObjectClone;
+  Yeahbah.ObjectClone, SysUtils;
 
 function CreateFilterResultController(aModel: TList<TStockAttribute>): IController<TList<TStockAttribute>>;
 begin
@@ -103,7 +103,14 @@ begin
 
     col := gridResult.Rows[0].IndexOf(stockAttr.AttributeDisplayText);
     if col >= 0 then
-      gridResult.Cells[col, row] := stockAttr.AttributeValue;
+    begin
+      if SameText(stockAttr.AttributeType, 'single') then
+      begin
+        gridResult.Cells[col, row] := FormatFloat('#,##0.####', StrToFloat(stockAttr.AttributeValue));
+      end
+      else
+        gridResult.Cells[col, row] := stockAttr.AttributeValue;
+    end;
 
   end;
   if gridResult.RowCount > 0 then
