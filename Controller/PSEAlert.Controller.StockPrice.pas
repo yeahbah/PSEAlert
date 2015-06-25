@@ -97,7 +97,6 @@ begin
       {$ELSE}
       frm.Parent := aParent;
       {$ENDIF}
-      frm.Align := {$IFDEF FMXAPP}TAlignLayout.Top{$ELSE}alTop{$ENDIF};
       frm.Name := GenerateControlName(aStockModel.Symbol);
       if aStockModel.Symbol[1] = '^' then
         frm.stockInfoPanel.Cursor := crDefault;
@@ -106,6 +105,7 @@ begin
       result.AutoFreeModel := true;
       TStockPriceController(result).UserActions := aUserActions;
       frm.Visible := true;
+      frm.Align := {$IFDEF FMXAPP}TAlignLayout.Top{$ELSE}alTop{$ENDIF};
     end);
   result := TControllerFactory<TIntradayModel>.GetInstance(TframeStockPrice);
 
@@ -149,7 +149,7 @@ begin
   begin
 
     stockModel := PSEAlertDb.Session.CreateCriteria<TStockModel>
-      .Add(TRestrictions.Eq('SYMBOL', Model.Symbol.ToUpper)).ToList.SingleOrDefault(nil);
+      .Add(Restrictions.Eq('SYMBOL', Model.Symbol.ToUpper)).ToList.SingleOrDefault(nil);
     if stockModel <> nil then
     begin
       downloader := TStockDetail_HeaderDownloader.Create(stockModel.SecurityId);

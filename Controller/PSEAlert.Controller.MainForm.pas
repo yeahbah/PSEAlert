@@ -115,7 +115,7 @@ uses {$IFDEF FMXAPP}PSEAlert.FMX.MainForm{$ELSE}PSEAlert.MainForm{$ENDIF},
   Spring.Persistence.Criteria.OrderBy,
   Spring.Persistence.Criteria.Properties, PSE.Data.Repository,
   PSE.Data.Model.JSON,
-  Classes, PSEAlert.Controller.StockFilter;
+  Classes, PSEAlert.Controller.StockFilter, PSEAlert.Service.UpgradeService;
 
 function CreateMainFormController(aModel: TObject): IController<TObject>;
 begin
@@ -156,7 +156,7 @@ begin
   //PSEStocksData.PSEStocksConnection.Close;
 
   criteria := PSEAlertDb.Session.CreateCriteria<TStockModel>;
-  stocks := criteria.Add(TRestrictions.Eq('SYMBOL', aSymbol.ToUpper)).ToList;
+  stocks := criteria.Add(Restrictions.Eq('SYMBOL', aSymbol.ToUpper)).ToList;
   stock := stocks.SingleOrDefault;
 
   if stock <> nil then
@@ -245,16 +245,16 @@ var
   asc, desc: TDelegatedComparer<TFrame>;
   f: TFrame;
 begin
-  desc := TDelegatedComparer<TFrame>.Create(
-    function (const l, r: TFrame): integer
-    begin
-      result := CompareStr(r.Name, l.Name);
-    end);
-
   asc := TDelegatedComparer<TFrame>.Create(
     function (const l, r: TFrame): integer
     begin
-      result := CompareStr(l.Name, r.Name);
+      result := CompareStr(ExtractStockSymbol(r.Name), ExtractStockSymbol(l.Name));
+    end);
+
+  desc := TDelegatedComparer<TFrame>.Create(
+    function (const l, r: TFrame): integer
+    begin
+      result := CompareStr(ExtractStockSymbol(l.Name), ExtractStockSymbol(r.Name));
     end);
 
   s := TList<TFrame>.Create;
@@ -308,8 +308,8 @@ begin
       f.Align := TAlignLayout.alTop;
       f.Visible := true;
 {$ELSE}
-      f.Align := alTop;
       f.Show;
+      f.Align := alTop;
 {$ENDIF}
     end;
 
@@ -348,7 +348,7 @@ begin
 {$IFNDEF FMXAPP}
   actRefreshMostActive.OnExecute := ExecuteRefreshMostActiveAction;
 {$ENDIF}
-  btnSort.Action := actSortAsc;
+  btnSort.Action := actSortDesc;
 end;
 
 procedure TMainFormController.InitializeForm;
@@ -380,6 +380,8 @@ var
   pseIndex: TIndexModel;
   stock: TStockModel;
   activityDownloader: TStockActivityDownloader;
+  upgradeService: IUpgradeService;
+  newVersion: string;
 begin
 
 {$IFNDEF FMXAPP}
@@ -446,7 +448,17 @@ begin
   fSettingsController := CreatePSEAlertSettingsController(PSEAlertSettings, mainView.tabAbout);
 
   fStockFilterController := CreateStockFilterController(mainView.tabStockFilter);
+  actSortAsc.Execute;
   //mainView.Refresh;
+
+  upgradeService := TUpgradeService.Create;
+  if upgradeService.CheckForNewVersion(newVersion) then
+  begin
+    if MessageDlg('There''s a new version available. Would you like to download it?', mtInformation, [mbYes, mbNo], 0) = mrYes then
+    begin
+      upgradeService.DownloadNewVersion;
+    end;
+  end;
 end;
 
 procedure TMainFormController.MainFormClose(Sender: TObject; var Action: TCloseAction);

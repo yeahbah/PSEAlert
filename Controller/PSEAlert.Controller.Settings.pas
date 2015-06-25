@@ -191,7 +191,7 @@ begin
             end;
             c1 := PSEAlertDb.Session.CreateCriteria<TIndexModel>;
 
-            l := c1.Add(TRestrictions.eq('ID', index.Id)).ToList;
+            l := c1.Add(Restrictions.eq('ID', index.Id)).ToList;
             if l.Any  then
               PSEAlertDb.Session.Update(index)
             else
@@ -219,7 +219,7 @@ begin
       end;
       c1 := PSEAlertDb.Session.CreateCriteria<TStockModel>;
 
-      l := c1.Add(TRestrictions.eq('Symbol', stock.Symbol)).ToList;
+      l := c1.Add(Restrictions.eq('Symbol', stock.Symbol)).ToList;
       if l.Any  then
         PSEAlertDb.Session.Update(stock)
       else

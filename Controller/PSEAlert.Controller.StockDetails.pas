@@ -133,7 +133,7 @@ begin
 
     stockModel := PSEAlertDb.Session.CreateCriteria<TStockModel>
       .Add(
-        TRestrictions.Eq('SYMBOL', Model.Symbol.ToUpper))
+        Restrictions.Eq('SYMBOL', Model.Symbol.ToUpper))
       .ToList.SingleOrDefault(nil);
     if stockModel <> nil then
     begin
@@ -244,7 +244,7 @@ begin
   actAddAlert.OnExecute := DoExecuteAddAlertAction;
 
   stockModel := PSEAlertDb.Session.CreateCriteria<TStockModel>
-    .Add(TRestrictions.Eq('SYMBOL', Model.Symbol.ToUpper)).ToList.SingleOrDefault(nil);
+    .Add(Restrictions.Eq('SYMBOL', Model.Symbol.ToUpper)).ToList.SingleOrDefault(nil);
   if stockModel <> nil then
 {$IFDEF FMXAPP}
     lblStockName.Text := stockModel.Description;

@@ -133,8 +133,8 @@ var
   criteria: ICriteria<TStockAttribute>;
 begin
   criteria := PSEAlertDb.Session.CreateCriteria<TStockAttribute>;
-  criteria.Add(TRestrictions.Eq('SYMBOL', aStockAttr.Symbol));
-  criteria.Add(TRestrictions.Eq('ATTR_KEY', aStockAttr.AttributeKey));
+  criteria.Add(Restrictions.Eq('SYMBOL', aStockAttr.Symbol));
+  criteria.Add(Restrictions.Eq('ATTR_KEY', aStockAttr.AttributeKey));
 
   stockAttr := criteria.ToList.SingleOrDefault(nil);
   if stockAttr <> nil then

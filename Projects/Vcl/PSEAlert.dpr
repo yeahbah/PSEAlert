@@ -50,7 +50,8 @@ uses
   PSEAlert.Service.View.SharePriceFilter in '..\..\Service\View\PSEAlert.Service.View.SharePriceFilter.pas' {frameSharePriceFilter: TFrame},
   PSEAlert.Service.Filter.HighLow52Filter in '..\..\Service\Filter\PSEAlert.Service.Filter.HighLow52Filter.pas',
   PSEAlert.Service.Filter.SharePriceFilter in '..\..\Service\Filter\PSEAlert.Service.Filter.SharePriceFilter.pas',
-  PSEAlert.Service.Controller.SharePriceFilter in '..\..\Service\Controller\PSEAlert.Service.Controller.SharePriceFilter.pas';
+  PSEAlert.Service.Controller.SharePriceFilter in '..\..\Service\Controller\PSEAlert.Service.Controller.SharePriceFilter.pas',
+  PSEAlert.Service.UpgradeService in '..\..\Service\PSEAlert.Service.UpgradeService.pas';
 
 {$R *.res}
 
