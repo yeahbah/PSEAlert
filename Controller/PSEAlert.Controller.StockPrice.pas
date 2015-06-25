@@ -20,6 +20,7 @@ uses
   StdCtrls,
   Yeahbah.Messaging,
   Classes,
+  Dialogs,
   ExtCtrls;
 
 type
@@ -52,6 +53,7 @@ type
 {$ENDIF}
 
     fUserActions: TUserActions;
+    fStock: TIntradayModel;
     procedure SetUserActions(const Value: TUserActions);
   protected
     fStockDetailsController: IController<TStockHeaderModel>;
@@ -132,7 +134,7 @@ begin
     p.Parent.RemoveControl(p);
 {$ENDIF}
     MessengerInstance.UnRegisterReceiver(self);
-    stockRepository.Unfavorite(p.Name);
+    stockRepository.Unfavorite(ExtractStockSymbol(p.Name));
   finally
     p.Free;
   end;
@@ -253,13 +255,19 @@ var
   alertModel: TAlertModel;
   isIndex: boolean;
   priceText, volumeText: string;
+  parentName: string;
 begin
   if aMessage is TIntradayUpdateMessage then
   begin
     stock := (aMessage as TIntradayUpdateMessage).Data;
-    if GenerateControlName(stock.Symbol) = (View as TframeStockPrice).Name then
+    parentName := ExtractStockSymbol((View as TframeStockPrice).Name);
+    isIndex := stock.Symbol[1] = '^';
+    fStock := stock;
+    if isIndex then
+      parentName := '^' + parentName;
+    if ExtractStockSymbol(stock.Symbol) = parentName then
     begin
-      isIndex := stock.Symbol[1] = '^';
+
       TThread.Synchronize(nil,
         procedure
         begin

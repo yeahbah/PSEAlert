@@ -8,9 +8,12 @@ uses
 function GenerateControlName(const aSuggestedName: string): string;
 function GetPollIntervalValue(const aIndex: integer): integer;
 function ConvertStringDateToSystem(const aDate: string): TDateTime;
-//function ExtractStockSymbol(const aValue: string): string;
+function ExtractStockSymbol(const aValue: string): string;
 
 implementation
+
+var
+  internalCounter: integer = 1;
 
 function ExtractStockSymbol(const aValue: string): string;
 var
@@ -21,13 +24,16 @@ begin
     result := splitResult[1]
   else
     result := aValue;
+
+  System.Delete(result, pos('-', result), 1);
 end;
 
 function GenerateControlName(const aSuggestedName: string): string;
 begin
   result := Trim(ReplaceStr(aSuggestedName, '^', string.Empty));
   System.Delete(result, pos('-', result), 1);
-  result := 'stock_' + result;
+  inc(internalCounter);
+  result := 'stock'+internalCounter.ToString+'_' + result;
 end;
 
 function GetPollIntervalValue(const aIndex: integer): integer;
