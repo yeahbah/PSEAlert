@@ -97,6 +97,7 @@ begin
       {$ELSE}
       frm.Parent := aParent;
       {$ENDIF}
+      frm.Align := {$IFDEF FMXAPP}TAlignLayout.Top{$ELSE}alTop{$ENDIF};
       frm.Name := GenerateControlName(aStockModel.Symbol);
       if aStockModel.Symbol[1] = '^' then
         frm.stockInfoPanel.Cursor := crDefault;
@@ -104,8 +105,8 @@ begin
       result := TStockPriceController.Create(aStockModel, frm);
       result.AutoFreeModel := true;
       TStockPriceController(result).UserActions := aUserActions;
-      frm.Visible := true;
-      frm.Align := {$IFDEF FMXAPP}TAlignLayout.Top{$ELSE}alTop{$ENDIF};
+      //frm.Show;
+
     end);
   result := TControllerFactory<TIntradayModel>.GetInstance(TframeStockPrice);
 

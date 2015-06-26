@@ -90,6 +90,7 @@ var
 
   i: Integer;
   lastUpdate: TDateTime;
+  formatSettings: TFormatSettings;
 begin
   aObjects.Clear;
   lastUpdate := Now;
@@ -113,7 +114,9 @@ begin
       if i = 0 then
       begin
         // first element of the array has the last update date time
-        lastUpdate := StrToDateTime(jsonStock.securityAlias);
+        formatSettings := TFormatSettings.Create('en-PH');
+        //formatSettings.ShortDateFormat := 'm/dd/yyyy'
+        lastUpdate := StrToDateTime(jsonStock.securityAlias, formatSettings);
         Continue;
       end;
 

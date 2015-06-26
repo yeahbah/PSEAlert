@@ -72,6 +72,7 @@ begin
     saveDialog.FileName := updateFile;
     if saveDialog.Execute then
     begin
+      outputStream := TMemoryStream.Create;
       httpGet := TIndyHTTPClient.Create;
       try
         httpGet.Get('http://www.absolutetraders.com/yeahbah/'+updateFile, outputStream);
@@ -83,6 +84,7 @@ begin
         end;
       finally
         httpGet.Free;
+        outputStream.Free;
       end;
     end;
   finally

@@ -480,6 +480,8 @@ begin
 end;
 
 procedure TMainFormController.Receive(const aMessage: IMessage);
+var
+  formatSettings: TFormatSettings;
 begin
   if aMessage is TPollIntervalChangedMessage then
   begin
@@ -499,7 +501,10 @@ begin
   if aMessage is TAfterDownloadMessage then
   begin
     if (aMessage as TAfterDownloadMessage).Data > 0 then
-      SetStatusText('As of ' + DateTimeToStr((aMessage as TAfterDownloadMessage).Data))
+    begin
+      formatSettings := TFormatSettings.Create;
+      SetStatusText('As of ' + DateTimeToStr((aMessage as TAfterDownloadMessage).Data, formatSettings));
+    end
     else
       SetStatusText('Market Pre-Open');
   end
