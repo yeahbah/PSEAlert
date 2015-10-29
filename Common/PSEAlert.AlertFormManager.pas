@@ -12,12 +12,15 @@ uses
   PSEAlert.AlertForm,
 {$ENDIF}
   Forms,
-  SysUtils;
+  SysUtils,
+  System.Notification;
 
 type
   TAlertFormManager = class(TInterfacedObject, IMessageReceiver)
   private
     fAlertForms: TList<TForm>;
+    fNotificationCenter: TNotificationCenter;
+    procedure NotificationReceived(Sender: TObject; ANotification: TNotification);
   public
     constructor Create;
     destructor Destroy; override;
@@ -29,9 +32,12 @@ var
 
 implementation
 
+
 { TAlertFormManager }
 
-uses PSE.Data.Model, Yeahbah.ObjectClone;
+uses PSE.Data.Model, Yeahbah.ObjectClone,
+  JclSysInfo;
+
 
 constructor TAlertFormManager.Create;
 begin
@@ -39,19 +45,31 @@ begin
   fAlertForms := TList<TForm>.Create;
   MessengerInstance.RegisterReceiver(self, TShowAlertFormMessage);
   MessengerInstance.RegisterReceiver(self, TAlertFormHasClosedMessage);
+
+  fNotificationCenter := TNotificationCenter.Create(nil);
+  fNotificationCenter.OnReceiveLocalNotification := NotificationReceived;
 end;
 
 destructor TAlertFormManager.Destroy;
 begin
   fAlertForms.Free;
   MessengerInstance.UnRegisterReceiver(self);
+  fNotificationCenter.Free;
   inherited;
+end;
+
+procedure TAlertFormManager.NotificationReceived(Sender: TObject;
+  ANotification: TNotification);
+begin
+
 end;
 
 procedure TAlertFormManager.Receive(const aMessage: IMessage);
 var
   frm: TfrmAlert;
   alertModel: TAlertModel;
+  winVersion: TWindowsVersion;
+  //notification: TNotification;
 begin
   if aMessage is TShowAlertFormMessage then
   begin
@@ -59,20 +77,39 @@ begin
     if alertModel = nil then
       Exit;
 
-    frm := TfrmAlert.Create(Application);
-{$IFDEF FMXAPP}
-    frm.Left := Screen.Size.Width - frm.Width - 20;
-{$ELSE}
-    frm.Left := Screen.Width - frm.Width - 20;
-{$ENDIF}
+//    winVersion := GetWindowsVersion;
+//    if winVersion < TWindowsVersion.wvWin10 then
+//    begin
 
-    if fAlertForms.Count > 0 then
-      frm.Top := fAlertForms.Last.Top + frm.Height + 20
-    else
-      frm.Top := 20;
-    frm.AlertModel := TObjectClone.From(alertModel);
-    frm.Show;
-    fAlertForms.Add(frm);
+      frm := TfrmAlert.Create(Application);
+  {$IFDEF FMXAPP}
+      frm.Left := Screen.Size.Width - frm.Width - 20;
+  {$ELSE}
+      frm.Left := Screen.Width - frm.Width - 20;
+  {$ENDIF}
+
+      if fAlertForms.Count > 0 then
+        frm.Top := fAlertForms.Last.Top + frm.Height + 20
+      else
+        frm.Top := 20;
+      frm.AlertModel := TObjectClone.From(alertModel);
+      frm.Show;
+      fAlertForms.Add(frm);
+//    end;
+//    else
+//    begin
+//      // windows 10 notification
+//      notification := fNotificationCenter.CreateNotification;
+//      try
+//        notification.Name := alertModel.StockSymbol;
+//        notification.Title := alertModel.StockSymbol;
+//        notification.AlertBody := alertModel.PriceTriggerDescription + ' ' + alertModel.VolumeTriggerDescription;
+//
+//        fNotificationCenter.PresentNotification(notification);
+//      finally
+//        notification.Free;
+//      end;
+//    end;
   end
   else
   if aMessage is TAlertFormHasClosedMessage then
@@ -86,5 +123,7 @@ end;
 
 initialization
   AlertFormManager := TAlertFormManager.Create;
+
+
 
 end.

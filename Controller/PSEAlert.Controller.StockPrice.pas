@@ -275,7 +275,7 @@ begin
           if isIndex then
           begin
             priceText := FormatFloat('#,##0.00', stock.Volume);
-            volumeText := Format('%f (%f%%)', [stock.PercentChange, stock.LastTradedPrice]);
+            volumeText := Format('%f (%f%%)', [stock.LastTradedPrice, stock.PercentChange]);
           end
           else
           begin

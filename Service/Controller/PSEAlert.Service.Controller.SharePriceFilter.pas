@@ -17,6 +17,7 @@ uses
 type
   TSharePriceFilterController = class(TBaseController<TStockFilterItemBase>)
   private
+{$HINTS OFF}
     [Bind('Description', 'Caption')]
     lblFilterDescription: TLabel;
     [Bind]
@@ -25,6 +26,7 @@ type
     edtFromPrice: TEdit;
     [Bind('ToPrice', 'Text')]
     edtToPrice: TEdit;
+{$HINTS ON}
   protected
     procedure Initialize; override;
     procedure ExecuteCloseAction(Sender: TObject);

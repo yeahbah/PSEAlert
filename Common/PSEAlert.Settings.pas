@@ -74,7 +74,7 @@ begin
     tmpInt := ini.ReadInteger('Default', 'FormWidth', 400);
     fFormWidth := GetProperInt(tmpInt, 400, {$IFDEF FMXAPP}Screen.Size.Width{$ELSE}Screen.Width{$ENDIF});
 
-    fSkin := ini.ReadString('Default', 'Skin', 'Metropolis UI Blue');
+    fSkin := ini.ReadString('Default', 'Skin', 'Windows10');
   finally
     ini.Free;
   end;

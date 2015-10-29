@@ -66,7 +66,6 @@ end;
 
 procedure TFilterResultController.LoadResult;
 var
-  tmpList: TStringList;
   stockAttr: TStockAttribute;
   i, colCount, rowCount, col, row: integer;
 begin

@@ -115,8 +115,8 @@ begin
       begin
         // first element of the array has the last update date time
         formatSettings := TFormatSettings.Create('en-PH');
-        //formatSettings.ShortDateFormat := 'm/dd/yyyy'
-        lastUpdate := StrToDateTime(jsonStock.securityAlias, formatSettings);
+        formatSettings.ShortDateFormat := 'm/dd/yyyy';
+        lastUpdate := StrToDateTime(jsonStock.securityAlias.Trim, formatSettings);
         Continue;
       end;
 

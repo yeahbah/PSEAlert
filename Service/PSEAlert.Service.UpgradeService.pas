@@ -61,7 +61,6 @@ end;
 procedure TUpgradeService.DownloadNewVersion;
 var
   httpGet: TIndyHTTPClient;
-  url: string;
   outputStream: TMemoryStream;
   saveDialog: TSaveDialog;
   updateFile: string;
