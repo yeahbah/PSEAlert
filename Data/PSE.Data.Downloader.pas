@@ -52,8 +52,8 @@ type
 implementation
 
 uses
-  Yeahbah.GenericQuery, PSE.Data,
-  OtlParallel, Yeahbah.Messaging, PSEAlert.Messages,
+  Yeahbah.GenericQuery, PSE.Data, System.Threading,
+  Yeahbah.Messaging, PSEAlert.Messages,
   SvHTTPClient.Indy,
   System.JSON, PSEAlert.Utils, PSE.Data.Deserializer;
 
@@ -68,101 +68,120 @@ var
   lastUpdateDateTime: TDateTime;
   downloadStream: TStringStream;
   deserializer: TDeserializer;
+  task: ITask;
+  capturedException: Pointer;
 begin
   if Assigned(aBeforeDownloadProc) then
     aBeforeDownloadProc;
 
   MessengerInstance.SendMessage(TBeforeDownloadMessage.Create);
-  Async(
+
+  task := TTask.Create(
     procedure
     begin
-      downloadStream := TStringStream.Create;
-      deserializer := TDeserializerFactory.GetDeserializer(TIntradayModel);
-      intradayList := TObjectList<TObject>.Create;
       try
-        Download('http://pse.com.ph/stockMarket/home.html?method=getSecuritiesAndIndicesForPublic&ajax=true', downloadStream);
-
-        deserializer.Deserialize(downloadstream.DataString, intradayList);
-        if intradayList.Count = 0 then
-        begin
-          if Assigned(aForEachStockProc) then
-            aForEachStockProc(nil);
-          MessengerInstance.SendMessage(TNoDataMessage<TIntradayModel>.Create);
-          Exit;
-        end;
-
-        // save stock information
-        lastUpdateDateTime := TIntradayModel(intradayList[0]).LastUpdateDateTime;
-        newList := TGenericQuery<TObject>.From(intradayList)
-          .Skip(1)
-          .Take(intradayList.Count - 9).ToList;
+        downloadStream := TStringStream.Create;
+        deserializer := TDeserializerFactory.GetDeserializer(TIntradayModel);
+        intradayList := TObjectList<TObject>.Create;
         try
-          TGenericQuery<TObject>.ForEach(newList,
-            procedure (stock: TObject)
-            begin
-              if Assigned(aForEachStockProc) then
-                aForEachStockProc(stock as TIntradayModel);
-            end);
+          Download('http://pse.com.ph/stockMarket/home.html?method=getSecuritiesAndIndicesForPublic&ajax=true', downloadStream);
+
+          deserializer.Deserialize(downloadstream.DataString, intradayList);
+          if intradayList.Count = 0 then
+          begin
+            if Assigned(aForEachStockProc) then
+              aForEachStockProc(nil);
+            MessengerInstance.SendMessage(TNoDataMessage<TIntradayModel>.Create);
+            Exit;
+          end;
+
+          // save stock information
+          lastUpdateDateTime := TIntradayModel(intradayList[0]).LastUpdateDateTime;
+          newList := TGenericQuery<TObject>.From(intradayList)
+            .Skip(1)
+            .Take(intradayList.Count - 9).ToList;
+          try
+            TGenericQuery<TObject>.ForEach(newList,
+              procedure (stock: TObject)
+              begin
+                if Assigned(aForEachStockProc) then
+                  aForEachStockProc(stock as TIntradayModel);
+              end);
+          finally
+            newList.Free;
+          end;
+
+          // rename indeces then save
+          newList := TGenericQuery<TObject>.From(intradayList)
+            .Skip(intradayList.Count - 8)
+            .ToList;
+          try
+            TGenericQuery<TObject>.ForEach(newList,
+              procedure (stock: TObject)
+              var
+                obj: TIntradayModel;
+              begin
+                obj := stock as TIntradayModel;
+                if obj.Symbol = 'PSE' then
+                  obj.Symbol := '^PSEi'
+                else
+                if obj.Symbol = 'ALL' then
+                  obj.Symbol := '^ALLSHARES'
+                else
+                if obj.Symbol = 'FIN' then
+                  obj.Symbol := '^FINANCIAL'
+                else
+                if obj.Symbol = 'IND' then
+                  obj.Symbol := '^INDUSTRIAL'
+                else
+                if obj.Symbol = 'HDG' then
+                  obj.Symbol := '^HOLDING'
+                else
+                if obj.Symbol = 'PRO' then
+                  obj.Symbol := '^PROPERTY'
+                else
+                if obj.Symbol = 'SVC' then
+                  obj.Symbol := '^SERVICE'
+                else
+                if obj.Symbol = 'M-O' then
+                  obj.Symbol := '^MINING-OIL';
+
+                if Assigned(aForEachStockProc) then
+                  aForEachStockProc(obj);
+
+              end);
+          finally
+            newList.Free;
+          end;
+
         finally
-          newList.Free;
+          downloadStream.Free;
+          deserializer.Free;
+          intradayList.Free;
         end;
-
-        // rename indeces then save
-        newList := TGenericQuery<TObject>.From(intradayList)
-          .Skip(intradayList.Count - 8)
-          .ToList;
-        try
-          TGenericQuery<TObject>.ForEach(newList,
-            procedure (stock: TObject)
-            var
-              obj: TIntradayModel;
+      except
+        capturedException := AcquireExceptionObject;
+          TThread.Queue(TThread.CurrentThread,
+            procedure
             begin
-              obj := stock as TIntradayModel;
-              if obj.Symbol = 'PSE' then
-                obj.Symbol := '^PSEi'
-              else
-              if obj.Symbol = 'ALL' then
-                obj.Symbol := '^ALLSHARES'
-              else
-              if obj.Symbol = 'FIN' then
-                obj.Symbol := '^FINANCIAL'
-              else
-              if obj.Symbol = 'IND' then
-                obj.Symbol := '^INDUSTRIAL'
-              else
-              if obj.Symbol = 'HDG' then
-                obj.Symbol := '^HOLDING'
-              else
-              if obj.Symbol = 'PRO' then
-                obj.Symbol := '^PROPERTY'
-              else
-              if obj.Symbol = 'SVC' then
-                obj.Symbol := '^SERVICE'
-              else
-              if obj.Symbol = 'M-O' then
-                obj.Symbol := '^MINING-OIL';
-
-              if Assigned(aForEachStockProc) then
-                aForEachStockProc(obj);
-
+              raise capturedException;
             end);
-        finally
-          newList.Free;
-        end;
-
-      finally
-        downloadStream.Free;
-        deserializer.Free;
-        intradayList.Free;
       end;
-  end)
-  .Await(
+    end);
+
+  task.Start;
+  task.Wait(INFINITE);
+
+//    procedure
+//    begin
+  TThread.Synchronize(nil,
     procedure
     begin
       if Assigned(aAfterDownloadProc) then
         aAfterDownloadProc;
-      MessengerInstance.SendMessage(TAfterDownloadMessage.Create(lastUpdateDateTime));
+      MessengerInstance.SendMessage(TAfterDownloadMessage.Create(lastUpdateDateTime))
     end);
+//    end);
 end;
 
 { TStockDataDownloader }
@@ -236,23 +255,29 @@ end;
 
 procedure TPSEDownloader<T>.ExecuteAsync(const aBeforeDownloadProc,
   aAfterDownloadProc: TProc; const aForEachStockProc: TProc<T>);
-
+var
+  task: ITask;
 begin
   if Assigned(aBeforeDownloadProc) then
     aBeforeDownloadProc;
 
   MessengerInstance.SendMessage(TBeforeDownloadMessage.Create);
-  Async(
+
+  task := TTask.Create(
     procedure
     begin
       Execute(aForEachStockProc);
-    end)
-  .Await(
+    end);
+
+  task.Start;
+  task.Wait(INFINITE);
+
+  TThread.Synchronize(nil,
     procedure
     begin
       if Assigned(aAfterDownloadProc) then
         aAfterDownloadProc;
-      MessengerInstance.SendMessage(TAfterDownloadMessage.Create(Now));
+      MessengerInstance.SendMessage(TAfterDownloadMessage.Create(Now))
     end);
 
 end;
