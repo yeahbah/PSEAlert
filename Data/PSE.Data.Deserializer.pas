@@ -197,7 +197,7 @@ end;
 class procedure TModelConverter.ConvertModel(const aSource: TJSONIndexModel;
   const aTarget: TIndexModel);
 begin
-  aTarget.Id := aSource.indexId;
+  aTarget.IndexId := aSource.indexId;
   aTarget.IndexSymbol := aSource.indexAbb;
   aTarget.IndexName := aSource.indexName;
   aTarget.IsSector := aSource.isSectoral;

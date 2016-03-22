@@ -69,13 +69,15 @@ var
   downloadStream: TStringStream;
   deserializer: TDeserializer;
   task: ITask;
-  capturedException: Pointer;
+  capturedException: Exception;
+  thread: TThread;
 begin
   if Assigned(aBeforeDownloadProc) then
     aBeforeDownloadProc;
 
   MessengerInstance.SendMessage(TBeforeDownloadMessage.Create);
 
+thread := TThread.CreateAnonymousThread(procedure begin
   task := TTask.Create(
     procedure
     begin
@@ -180,7 +182,11 @@ begin
       if Assigned(aAfterDownloadProc) then
         aAfterDownloadProc;
       MessengerInstance.SendMessage(TAfterDownloadMessage.Create(lastUpdateDateTime))
-    end);
+    end)
+
+end);
+
+thread.Start;
 //    end);
 end;
 
@@ -257,12 +263,14 @@ procedure TPSEDownloader<T>.ExecuteAsync(const aBeforeDownloadProc,
   aAfterDownloadProc: TProc; const aForEachStockProc: TProc<T>);
 var
   task: ITask;
+  thread: TThread;
 begin
   if Assigned(aBeforeDownloadProc) then
     aBeforeDownloadProc;
 
   MessengerInstance.SendMessage(TBeforeDownloadMessage.Create);
 
+thread := TThread.CreateAnonymousThread(procedure begin
   task := TTask.Create(
     procedure
     begin
@@ -278,7 +286,10 @@ begin
       if Assigned(aAfterDownloadProc) then
         aAfterDownloadProc;
       MessengerInstance.SendMessage(TAfterDownloadMessage.Create(Now))
-    end);
+    end)
+end);
+
+thread.Start;
 
 end;
 

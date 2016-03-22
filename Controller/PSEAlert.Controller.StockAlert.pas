@@ -65,9 +65,10 @@ function CreateStockAlertController(aAlertModel: TAlertModel;
 implementation
 
 uses
-  PSEAlert.Utils, PSEAlert.Messages, OtlTask, OtlTaskControl,
+  PSEAlert.Utils, PSEAlert.Messages, {OtlTask, OtlTaskControl,}
   PSEAlert.Settings, IOUtils, MMSystem,
-  StrUtils, PSE.Data, PSE.Data.Repository;
+  StrUtils, PSE.Data, PSE.Data.Repository,
+  System.Threading;
 
 {$R PSEAlert.res PSEAlertResource.rc}
 
@@ -208,11 +209,11 @@ end;
 
 procedure TStockAlertController.TriggerAlert(aStock: TIntradayModel);
 var
-  task: IOmniTaskControl;
+  task: ITask;// IOmniTaskControl;
   priceTriggered: boolean;
 begin
-  task := CreateTask(
-    procedure (const t: IOmniTask)
+  task := TTask.Create(
+    procedure
     begin
       case Model.PriceTriggerType of
         Below: priceTriggered := aStock.LastTradedPrice < Model.Price;
@@ -246,7 +247,7 @@ begin
       end;
 
     end);
-  task.Run;
+  task.Start;
 
 end;
 

@@ -406,40 +406,40 @@ begin
   end;
 
   // download most active
-  activityDownloader := TStockActivityDownloader.Create(TActivityDownloadType.MostActive);
-  activityDownloader.ExecuteAsync(nil, nil,
-    procedure (aStock: TJSONDailySummaryModel)
-    begin
-      TThread.Synchronize(nil,
-      procedure
-      begin
-        CreateStockPriceFrame(scrollBoxMostActive, aStock.securitySymbol, aStock.securityName, [])
-      end);
-    end);
-
-  // top gainers
-  activityDownloader := TStockActivityDownloader.Create(TActivityDownloadType.Advance);
-  activityDownloader.ExecuteAsync(nil, nil,
-    procedure (aStock: TJSONDailySummaryModel)
-    begin
-      TThread.Synchronize(nil,
-      procedure
-      begin
-        CreateStockPriceFrame(scrollBoxGainers, aStock.securitySymbol, aStock.securityName, [])
-      end);
-    end);
-
-  // top losers
-  activityDownloader := TStockActivityDownloader.Create(TActivityDownloadType.Decline);
-  activityDownloader.ExecuteAsync(nil, nil,
-    procedure (aStock: TJSONDailySummaryModel)
-    begin
-      TThread.Synchronize(nil,
-      procedure
-      begin
-        CreateStockPriceFrame(scrollBoxLosers, aStock.securitySymbol, aStock.securityName, [])
-      end);
-    end);
+//  activityDownloader := TStockActivityDownloader.Create(TActivityDownloadType.MostActive);
+//  activityDownloader.ExecuteAsync(nil, nil,
+//    procedure (aStock: TJSONDailySummaryModel)
+//    begin
+//      TThread.Synchronize(nil,
+//      procedure
+//      begin
+//        CreateStockPriceFrame(scrollBoxMostActive, aStock.securitySymbol, aStock.securityName, [])
+//      end);
+//    end);
+//
+//  // top gainers
+//  activityDownloader := TStockActivityDownloader.Create(TActivityDownloadType.Advance);
+//  activityDownloader.ExecuteAsync(nil, nil,
+//    procedure (aStock: TJSONDailySummaryModel)
+//    begin
+//      TThread.Synchronize(nil,
+//      procedure
+//      begin
+//        CreateStockPriceFrame(scrollBoxGainers, aStock.securitySymbol, aStock.securityName, [])
+//      end);
+//    end);
+//
+//  // top losers
+//  activityDownloader := TStockActivityDownloader.Create(TActivityDownloadType.Decline);
+//  activityDownloader.ExecuteAsync(nil, nil,
+//    procedure (aStock: TJSONDailySummaryModel)
+//    begin
+//      TThread.Synchronize(nil,
+//      procedure
+//      begin
+//        CreateStockPriceFrame(scrollBoxLosers, aStock.securitySymbol, aStock.securityName, [])
+//      end);
+//    end);
 
   mainView := View as TfrmMain;
 

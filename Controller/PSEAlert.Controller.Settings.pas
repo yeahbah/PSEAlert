@@ -10,12 +10,9 @@ uses
   ExtCtrls,
   PSEAlert.Settings,
   PSEAlert.Frames.Settings
-  {$IFDEF FMXAPP}
-  , FMX.Types
-  , FMX.Edit
-  , FMX.ListBox
-  , FMX.ActnList
-  {$ENDIF},
+{$IFDEF FMXAPP}
+    , FMX.Types, FMX.Edit, FMX.ListBox, FMX.ActnList
+{$ENDIF},
   Spring.Persistence.Core.Interfaces,
   Spring.Persistence.Criteria.Interfaces,
   Spring.Persistence.Criteria.Restrictions,
@@ -24,7 +21,7 @@ uses
 type
   TPSEAlertSettingsController = class(TBaseController<TPSEAlertSettings>)
   private
-    {$HINTS OFF}
+{$HINTS OFF}
     [Bind('PlaySound', {$IFDEF FMXAPP}'IsChecked'{$ELSE}'Checked'{$ENDIF})]
     chkPlaySound: TCheckBox;
     [Bind('AlertSoundFile', 'Text')]
@@ -41,14 +38,12 @@ type
     [Bind]
     btnReloadData: TButton;
 {$ENDIF}
-
     [Bind('PollInterval', 'ItemIndex')]
     cmbInterval: TComboBox;
-    {$HINTS ON}
-
+{$HINTS ON}
   protected
     procedure ReloadStockData;
-    //procedure ReloadStockMap;
+    // procedure ReloadStockMap;
     procedure Initialize; override;
     procedure DoReloadData(Sender: TObject);
     procedure DoSelectSound(Sender: TObject);
@@ -59,7 +54,8 @@ type
   end;
 
 function CreatePSEAlertSettingsController(aPSEAlertSettings: TPSEAlertSettings;
-  aParent: {$IFDEF FMXAPP}TFMXObject{$ELSE}TWinControl{$ENDIF}): IController<TPSEAlertSettings>;
+  aParent: {$IFDEF FMXAPP}TFMXObject{$ELSE}TWinControl{$ENDIF})
+  : IController<TPSEAlertSettings>;
 
 implementation
 
@@ -68,7 +64,8 @@ uses
   PSEAlert.Messages, Yeahbah.Messaging, PSEAlert.Utils, PSE.Data;
 
 function CreatePSEAlertSettingsController(aPSEAlertSettings: TPSEAlertSettings;
-  aParent: {$IFDEF FMXAPP}TFMXObject{$ELSE}TWinControl{$ENDIF}): IController<TPSEAlertSettings>;
+  aParent: {$IFDEF FMXAPP}TFMXObject{$ELSE}TWinControl{$ENDIF})
+  : IController<TPSEAlertSettings>;
 begin
   TControllerFactory<TPSEAlertSettings>.RegisterFactoryMethod(TframeSettings,
     function: IController<TPSEAlertSettings>
@@ -82,7 +79,7 @@ begin
       TPSEAlertSettingsController(result).UpdateTargets;
       frame.Visible := true;
     end);
-  result := TControllerfactory<TPSEAlertSettings>.GetInstance(TframeSettings);
+  result := TControllerFactory<TPSEAlertSettings>.GetInstance(TframeSettings);
 end;
 
 { TPSEAlertSettingsController }
@@ -111,8 +108,10 @@ begin
 
   MessengerInstance.SendMessage(TEnableDisablePollingMessage.Create(false));
   PollInterval := GetPollIntervalValue(cmbInterval.ItemIndex);
-  MessengerInstance.SendMessage(TPollIntervalChangedMessage.Create(PollInterval));
-  MessengerInstance.SendMessage(TEnableDisablePollingMessage.Create(cmbInterval.ItemIndex > 0));
+  MessengerInstance.SendMessage(TPollIntervalChangedMessage.Create
+    (PollInterval));
+  MessengerInstance.SendMessage(TEnableDisablePollingMessage.Create
+    (cmbInterval.ItemIndex > 0));
 
   UpdateSources;
 end;
@@ -120,7 +119,7 @@ end;
 procedure TPSEAlertSettingsController.DoReloadData(Sender: TObject);
 begin
   ReloadStockData;
-//  ReloadStockMap;
+  // ReloadStockMap;
 end;
 
 procedure TPSEAlertSettingsController.DoSelectSound(Sender: TObject);
@@ -144,7 +143,6 @@ procedure TPSEAlertSettingsController.Initialize;
 begin
   inherited;
 
-
 {$IFDEF FMXAPP}
   actReloadData.OnExecute := DoReloadData;
   actOpenWav.OnExecute := DoSelectSound;
@@ -167,12 +165,12 @@ begin
   stockDownloader.ExecuteAsync(
     procedure
     begin
-      {$IFDEF FMXAPP}
+{$IFDEF FMXAPP}
       actReloadData.Enabled := false;
-      {$ELSE}
+{$ELSE}
       btnReloadData.Enabled := false;
       btnReloadData.Caption := 'Busy...';
-      {$ENDIF}
+{$ENDIF}
     end,
     procedure
     var
@@ -180,47 +178,47 @@ begin
     begin
       indexDownloader := TIndexDataDownloader.Create;
       indexDownloader.Execute(
-          procedure (index: TIndexModel)
-          var
-            c1: ICriteria<TIndexModel>;
-            l: IList<TIndexModel>;
+        procedure(index: TIndexModel)
+        var
+          c1: ICriteria<TIndexModel>;
+          l: IList<TIndexModel>;
+        begin
+          if index = nil then
           begin
-            if index = nil then
-            begin
-              Exit;
-            end;
-            c1 := PSEAlertDb.Session.CreateCriteria<TIndexModel>;
+            Exit;
+          end;
+          c1 := PSEAlertDb.Session.CreateCriteria<TIndexModel>;
 
-            l := c1.Add(Restrictions.eq('ID', index.Id)).ToList;
-            if l.Any  then
-              PSEAlertDb.Session.Update(index)
-            else
-              PSEAlertDb.Session.Insert(index);
+          l := c1.Add(Restrictions.eq('ID', index.Id)).ToList;
+          if l.Any then
+            PSEAlertDb.Session.Update(index)
+          else
+            PSEAlertDb.Session.Insert(index);
 
-          end);
+        end);
 
-      {$IFDEF FMXAPP}
+{$IFDEF FMXAPP}
       actReloadData.Enabled := true;
-      {$ELSE}
+{$ELSE}
       btnReloadData.Enabled := true;
       btnReloadData.Caption := 'Reload Data';
-      {$ENDIF}
+{$ENDIF}
       MessengerInstance.SendMessage(TReloadDataMessage<TStockModel>.Create);
       MessengerInstance.SendMessage(TReloadDataMessage<TIndexModel>.Create);
     end,
-    procedure (stock: TStockModel)
+    procedure(stock: TStockModel)
     var
       c1: ICriteria<TStockModel>;
       l: IList<TStockModel>;
     begin
-      if stock = nil then
+      if not Assigned(stock) then
       begin
         Exit;
       end;
       c1 := PSEAlertDb.Session.CreateCriteria<TStockModel>;
 
       l := c1.Add(Restrictions.eq('Symbol', stock.Symbol)).ToList;
-      if l.Any  then
+      if l.Any then
         PSEAlertDb.Session.Update(stock)
       else
         PSEAlertDb.Session.Insert(stock);
@@ -229,12 +227,12 @@ begin
 
 end;
 
-//procedure TPSEAlertSettingsController.ReloadStockMap;
-//var
-//  stockMapDownloader: TStockIdMapDownloader;
-//begin
-//  stockMapDownloader := TStockIdMapDownloader.Create;
-//  stockMapDownloader.Execute;
-//end;
+// procedure TPSEAlertSettingsController.ReloadStockMap;
+// var
+// stockMapDownloader: TStockIdMapDownloader;
+// begin
+// stockMapDownloader := TStockIdMapDownloader.Create;
+// stockMapDownloader.Execute;
+// end;
 
 end.
