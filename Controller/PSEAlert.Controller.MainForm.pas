@@ -451,14 +451,14 @@ begin
   actSortAsc.Execute;
   //mainView.Refresh;
 
-  upgradeService := TUpgradeService.Create;
-  if upgradeService.CheckForNewVersion(newVersion) then
-  begin
-    if MessageDlg('There''s a new version available. Would you like to download it?', mtInformation, [mbYes, mbNo], 0) = mrYes then
-    begin
-      upgradeService.DownloadNewVersion;
-    end;
-  end;
+//  upgradeService := TUpgradeService.Create;
+//  if upgradeService.CheckForNewVersion(newVersion) then
+//  begin
+//    if MessageDlg('There''s a new version available. Would you like to download it?', mtInformation, [mbYes, mbNo], 0) = mrYes then
+//    begin
+//      upgradeService.DownloadNewVersion;
+//    end;
+//  end;
 end;
 
 procedure TMainFormController.MainFormClose(Sender: TObject; var Action: TCloseAction);

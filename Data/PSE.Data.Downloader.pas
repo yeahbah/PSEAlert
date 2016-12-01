@@ -297,7 +297,7 @@ begin
         begin
           if Assigned(aAfterDownloadProc) then
             aAfterDownloadProc;
-            raise Exception.Create('Error Message');
+            //raise Exception.Create('Error Message');
           MessengerInstance.SendMessage(TAfterDownloadMessage.Create(Now))
         end)
     end);
